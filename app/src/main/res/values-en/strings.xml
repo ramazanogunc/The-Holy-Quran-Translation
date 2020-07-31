@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Translation of the Quran</string>
+    <string name="change_resource">Change Resource</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="choice_surah">Select Surah</string>
+    <string name="read">Read</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="feedback">Feedback</string>
+    <string name="donate">Donate</string>
+    <string name="info_and_terms_of_use">Info and Terms of Use</string>
+    <string name="change">Change</string>
+    <string name="verse_number">Verse Number:</string>
+    <string name="surah_number">Surah Number:</string>
+    <string name="meal_resource">Sources of Qur\'an</string>
+    <string name="font_size">Font Size</string>
+    <string name="app_language">Application Language</string>
+    <string name="save">Save</string>
+    <string name="versicle">. Verse</string>
+    <string name="watch_ads">Watch Ads</string>
+    <string name="learn_iban">Learn Info of Bank</string>
+    <string name="developed_by">Developed by Ramazan Öğünç</string>
+    <string name="version">Version:1.0.0</string>
+    <string name="donate_description">You can support by watching ads or donating.</string>
+    <string name="terms_of_use">Terms Of Use</string>
+    <string name="info">Info</string>
+    <string name="developer">Developer</string>
+    <string name="send">Send</string>
+    <string name="error_message_hint">Error Message</string>
+    <string name="terms_of_use_description">Everyone who uses the application accepts the terms of use.  Quran resources in the application are taken from ebook.kuran.biz.  We are not responsible for any translation errors.  We are not responsible for the misunderstanding of the Qur\'an during reading and for all religious behaviors and situations that may arise from this misunderstanding.  The person himself is responsible for this situation.</string>
+    <string name="info_description">The Quran Mealler is taken from ebook.kuran.biz.  Some icons in the application are taken from flaticon.com</string>
+    <string name="developer_description">The developer of this application is Ramazan Öğünç.  Website: ramazanogunc.com Twitter: oguncramazan Email: ramazanogunc.com</string>
+    <string name="doante_mail">Automatic Message: I want to donate. Can I find your bank address?</string>
+    <string name="success">Success</string>
+    <string name="success_message">Everything is ok</string>
+    <string name="error">Error</string>
+    <string name="error_message">Something went wrong</string>
+
+</resources>

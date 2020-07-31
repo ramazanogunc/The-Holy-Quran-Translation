@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/read"
+            android:icon="@drawable/ic_book"
+            android:title="@string/read" />
+        <item
+            android:id="@+id/changeResource"
+            android:icon="@drawable/ic_change_resource"
+            android:title="@string/change_resource" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
+    </group>
+
+    <item android:title="@string/about">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/termsOfUse"
+                    android:icon="@drawable/ic_terms_of_use"
+                    android:title="@string/info_and_terms_of_use" />
+                <item
+                    android:id="@+id/feedback"
+                    android:icon="@drawable/ic_feedback"
+                    android:title="@string/feedback" />
+                <item
+                    android:id="@+id/donate"
+                    android:icon="@drawable/ic_donate"
+                    android:title="@string/donate" />
+
+            </group>
+
+        </menu>
+    </item>
+</menu>

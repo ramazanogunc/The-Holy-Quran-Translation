@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kuran Meali</string>
+    <string name="change_resource">Kaynak Değiştir</string>
+    <string name="data_not_found">Hiç veri bulunamadı</string>
+    <string name="choice_surah">Bir sure seç</string>
+    <string name="read">Oku</string>
+    <string name="settings">Ayarlar</string>
+    <string name="about">Hakkımızda</string>
+    <string name="info_and_terms_of_use">Bilgi ve Kullanım Koşulları</string>
+    <string name="feedback">Geri Bildirim</string>
+    <string name="donate">Destek Ol</string>
+    <string name="change">Değiştir</string>
+    <string name="verse_number">Ayet Sayısı:</string>
+    <string name="meal_resource">Meal Kaynakları</string>
+    <string name="font_size">Yazı boyutu</string>
+    <string name="app_language">Uygulama dili</string>
+    <string name="surah_number">Sure Numarası:</string>
+    <string name="save">Kaydet</string>
+    <string name="versicle">. Ayet</string>
+    <string name="watch_ads">Reklam İzle</string>
+    <string name="learn_iban">Banka Bilgilerini Öğren</string>
+    <string name="donate_description">Reklam izleyerek veya bağış yaparak destek olabilirsiniz.\n</string>
+    <string name="developed_by">Geliştirici: Ramazan Öğünç</string>
+    <string name="version">Sürüm:1.0.0</string>
+    <string name="info">Bilgi</string>
+    <string name="terms_of_use">Kullanım Koşulları</string>
+    <string name="developer">Geliştirici</string>
+    <string name="terms_of_use_description">Uygulamayı kullanan herkes kullanım koşullarını kabul etmiş sayılır.\n\nUygulamadaki meal kaynakları ebook.kuran.biz adresinden alınmıştır. Herhangi bir çeviri hatasından sorumlu değiliz.\nOkuma esnasınada Kuran\'ın yanlış anlaşılması ve bu yanlış anlaşılmadna doğabilecek tüm dini davranış ve durumlardan sorumlu değiliz. Bu durumdan kişinin kendisi sorumludur.</string>
+    <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar flaticon.com adresinden alınmıştır</string>
+    <string name="developer_description">Bu uygulamanın geliştiricisi Ramazan Öğünç\'tür. \n\nWebsitesi: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc.com</string>
+    <string name="send">Gönder</string>
+    <string name="error_message_hint">Hata mesajı</string>
+    <string name="doante_mail">Otomatik Mesaj: Bağış yapmak istiyorum. Banka adresinizi öğrenbilir miyim ?</string>
+    <string name="success">Başarılı</string>
+    <string name="success_message">Her şey yolunda</string>
+    <string name="error">Hata</string>
+    <string name="error_message">Bir şeyler ters gitti</string>
+
+</resources>
