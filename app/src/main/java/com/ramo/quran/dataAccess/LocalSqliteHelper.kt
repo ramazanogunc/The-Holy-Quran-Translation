@@ -18,12 +18,12 @@ class LocalSqliteHelper(
     DATABASE_VERSION
 ) {
 
-    private val currentSurahWithVersicles = "SELECT * FROM versicles WHERE resourceId=(SELECT currentResourceId FROM configs) AND nameOfSurahId=(SELECT currentSurahId FROM configs) ORDER BY versicleNo"
-    private val nameAndNumberOfSurah = "SELECT (SELECT name FROM nameOfSurahs WHERE nameOfSurahs.id=configs.currentSurahId) as nameOfSurah, (configs.currentSurahId%114) as numberOfSurah FROM configs"
-    private val nextSurah = "UPDATE configs SET currentSurahId=((SELECT currentSurahId FROM configs)+1)"
-    private val prevouseSurah = "UPDATE configs SET currentSurahId=((SELECT currentSurahId FROM configs)-1)"
+    private val currentSurahWithVersicles = "SELECT * FROM versicles WHERE resourceId=(SELECT currentResourceId FROM configs) AND surahNumber=(SELECT currentSurahNumber FROM configs) ORDER BY versicleNo"
+    private val nameAndNumberOfSurah = "SELECT name,number FROM nameOfSurahs,configs WHERE nameOfSurahs.languageId=configs.languageId AND nameOfSurahs.number=configs.currentSurahNumber"
+    private val nextSurah = "UPDATE configs SET currentSurahNumber=((SELECT currentSurahNumber FROM configs)+1)"
+    private val prevouseSurah = "UPDATE configs SET currentSurahNumber=((SELECT currentSurahNumber FROM configs)-1)"
     private val nameOfSurahs = "SELECT * FROM nameOfSurahs WHERE languageId=(SELECT languageId FROM configs)"
-    private val changeSurah = "UPDATE configs SET currentSurahId="
+    private val changeSurah = "UPDATE configs SET currentSurahNumber="
     private val getResources = "SELECT resources.id, resources.name , languages.name as languageName,(SELECT currentResourceId FROM configs) as currentResourceId FROM resources, languages WHERE languages.id=resources.language"
     private val changeResource = "UPDATE configs SET currentResourceId="
     private val getConfig = "SELECT * ,(SELECT name FROM languages WHERE id=configs.languageId) as languageName FROM configs"
@@ -39,7 +39,6 @@ class LocalSqliteHelper(
             return
         }
         val versicleMutableList : MutableList<Versicle> = mutableListOf();
-        val surahId = result.getInt(result.getColumnIndex("nameOfSurahId"))
         do {
             versicleMutableList.add(
                 Versicle(
@@ -54,9 +53,9 @@ class LocalSqliteHelper(
             sqliteResponse.onFail(dataNotFound)
             return
         }
-        val name = result.getString(result.getColumnIndex("nameOfSurah"))
-        val number = result.getInt(result.getColumnIndex("numberOfSurah"))
-        val surah: Surah = Surah(surahId,name,number,versicleMutableList.toList())
+        val name = result.getString(result.getColumnIndex("name"))
+        val number = result.getInt(result.getColumnIndex("number"))
+        val surah: Surah = Surah(0,name,number,versicleMutableList.toList())
         sqliteResponse.onSuccess(surah)
     }
 
@@ -79,7 +78,8 @@ class LocalSqliteHelper(
             nameOfSurahMutableList.add(
                 NameOfSurah(
                     id = result.getInt(result.getColumnIndex("id")),
-                    name = result.getString(result.getColumnIndex("name"))
+                    name = result.getString(result.getColumnIndex("name")),
+                    number = result.getInt(result.getColumnIndex("number"))
                 )
             )
         }while (result.moveToNext())
@@ -88,7 +88,7 @@ class LocalSqliteHelper(
     }
 
     fun changeSurah(nameOfSurah: NameOfSurah){
-        return writableDatabase.execSQL(changeSurah+nameOfSurah.id)
+        return writableDatabase.execSQL(changeSurah+nameOfSurah.number)
     }
 
     fun getResources(sqliteResponse: SqliteResponse<List<Resource>>){

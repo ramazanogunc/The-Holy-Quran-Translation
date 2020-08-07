@@ -131,7 +131,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
             it.isEnabled = true
         }
         // check first or last surah
-        if (surahNo == 0)
+        if (surahNo == 114)
             fabRight?.let {
                 it.isEnabled = false
             }
@@ -157,7 +157,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
         recyclerViewRead.adapter = ReadRecyclerAdapter(surah.versicles, fontSize)
         recyclerViewRead.layoutManager = LinearLayoutManager(activity)
         (activity as MainActivity).supportActionBar?.title = surah.name
-        surahNumber.text = if (surah.surahNo == 0) "114" else surah.surahNo.toString()
+        surahNumber.text = surah.surahNo.toString()
         versicleSize.text = surah.versicles.size.toString()
     }
 

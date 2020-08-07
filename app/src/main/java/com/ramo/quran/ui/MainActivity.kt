@@ -1,12 +1,18 @@
 package com.ramo.quran.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.navigation.NavigationView
 import com.ramo.quran.R
 import com.ramo.quran.dataAccess.LocalSqliteHelper
@@ -15,18 +21,13 @@ import com.ramo.quran.helper.*
 import com.ramo.quran.model.Config
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (isLangLoaded(this)){
-            setLangIsLoaded(this,false)
-        }
-        else{
-            setLocale()
-            setLangIsLoaded(this,true)
-        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        MobileAds.initialize(this) {} // init ads
         setSupportActionBar(toolbar)
 
         initNavigationComponenet()
@@ -45,16 +46,17 @@ class MainActivity : AppCompatActivity() {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
-    private fun setLocale() {
-        LocalSqliteHelper(this).getAllConfig(object :SqliteResponse<Config>{
+    override fun attachBaseContext(newBase: Context?) {
+        var lang = "en"
+        LocalSqliteHelper(newBase).getAllConfig(object : SqliteResponse<Config> {
             override fun onSuccess(response: Config) {
-                setLocale(this@MainActivity, if (response.language.id ==1 )"tr" else "en" )
-                this@MainActivity.recreate()
+                lang = if (response.language.id == 1 )"tr" else "en"
             }
-
             override fun onFail(failMessage: String) {
-                showError()
+                TODO("Not yet implemented")
             }
         })
+        super.attachBaseContext(LocaleWrapper.wrap(newBase!!,lang))
     }
+
 }

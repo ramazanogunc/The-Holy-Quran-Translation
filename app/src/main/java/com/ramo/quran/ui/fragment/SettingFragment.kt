@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ramo.quran.R
 import com.ramo.quran.dataAccess.LocalSqliteHelper
@@ -41,6 +40,8 @@ class SettingFragment: Fragment() {
     }
 
     private fun initUi() {
+        (activity as? MainActivity)?.supportActionBar?.title = getString(R.string.settings)
+
         buttonSave.setOnClickListener { onSaveClick() }
 
         db.getAllLanguages(object :SqliteResponse<List<Language>>{
@@ -87,7 +88,9 @@ class SettingFragment: Fragment() {
         )
 
         db.updateConfig(config)
-        activity?.recreate()
-        activity?.showSuccess()
+        activity?.let {
+            it.showSuccess()
+            (it as MainActivity).recreate()
+        }
     }
 }
