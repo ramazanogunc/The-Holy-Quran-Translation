@@ -1,31 +1,23 @@
 package com.ramo.quran.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ramo.quran.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.ramo.quran.model.Resource
 
 class ResourceRecyclerAdapter(
-    private val resourceList:List<Resource>,
-    private val  onResourceClickListener: onResourceClickListener
-): RecyclerView.Adapter<ResourceViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResourceViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_resource_item, parent, false)
-        return ResourceViewHolder(v,onResourceClickListener)
-    }
+    private val resourceOnClickEvent: (resource: Resource) -> Unit
+) : ListAdapter<Resource, ResourceViewHolder>(ResourceRecyclerCallback()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ResourceViewHolder(parent, resourceOnClickEvent)
 
-    override fun getItemCount(): Int {
-        return resourceList.size
-    }
-
-    override fun onBindViewHolder(holder: ResourceViewHolder, position: Int) {
-        holder.bind(resourceList[position])
-    }
-
-
+    override fun onBindViewHolder(holder: ResourceViewHolder, position: Int) =
+        holder.bind(getItem(position))
 }
-interface onResourceClickListener {
-    fun onResourceClick(resource:Resource)
+
+class ResourceRecyclerCallback : DiffUtil.ItemCallback<Resource>() {
+    override fun areItemsTheSame(oldItem: Resource, newItem: Resource) = oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: Resource, newItem: Resource) = oldItem.id == newItem.id
+
 }
