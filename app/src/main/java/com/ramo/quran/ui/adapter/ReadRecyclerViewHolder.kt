@@ -1,18 +1,33 @@
 package com.ramo.quran.ui.adapter
 
-import android.view.View
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ramo.quran.R
 import com.ramo.quran.model.Versicle
+import kotlinx.android.synthetic.main.recycler_read_item.view.*
 
-class ReadRecyclerViewHolder(itemView: View, private val fontSize: Int) : RecyclerView.ViewHolder(itemView) {
-    private val textViewVersicleNo = itemView.findViewById<TextView>(R.id.versicleNo)
-    private val textViewVersicle = itemView.findViewById<TextView>(R.id.versicle)
-    fun bind (versicle: Versicle){
-        textViewVersicleNo.textSize = fontSize.toFloat()+1
-        textViewVersicle.textSize = fontSize.toFloat()
-        textViewVersicleNo.text = versicle.no.toString()+ itemView.context.getString(R.string.versicle)
-        textViewVersicle.text = versicle.text
+class ReadRecyclerViewHolder(
+    container: ViewGroup,
+    private val fontSize: Int
+) : RecyclerView.ViewHolder(
+    LayoutInflater.from(container.context)
+        .inflate(
+            R.layout.recycler_read_item,
+            container,
+            false
+        )
+) {
+    fun bind(versicle: Versicle) {
+        with(itemView) {
+            versicleNo.apply {
+                textSize = fontSize.toFloat() + 1
+                text = "${versicle.no}${context.getString(R.string.versicle)}"
+            }
+            this.versicle.apply {
+                textSize = fontSize.toFloat()
+                text = versicle.text
+            }
+        }
     }
 }

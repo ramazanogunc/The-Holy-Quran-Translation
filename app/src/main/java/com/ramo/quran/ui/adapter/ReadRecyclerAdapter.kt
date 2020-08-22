@@ -1,26 +1,22 @@
 package com.ramo.quran.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ramo.quran.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.ramo.quran.model.Versicle
 
 class ReadRecyclerAdapter(
-    private val versicleList: List<Versicle>,
     private val fontSize: Int
-): RecyclerView.Adapter<ReadRecyclerViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReadRecyclerViewHolder {
-        val view = LayoutInflater.from(parent.context).
-                inflate(R.layout.recycler_read_item, parent,false)
-        return ReadRecyclerViewHolder(view, fontSize)
-    }
+) : ListAdapter<Versicle, ReadRecyclerViewHolder>(ReadRecyclerCallback()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ReadRecyclerViewHolder(parent, fontSize)
 
-    override fun getItemCount(): Int {
-        return versicleList.size
-    }
+    override fun onBindViewHolder(holder: ReadRecyclerViewHolder, position: Int) =
+        holder.bind(getItem(position))
+}
 
-    override fun onBindViewHolder(holder: ReadRecyclerViewHolder, position: Int) {
-        holder.bind(versicleList.get(position))
-    }
+class ReadRecyclerCallback : DiffUtil.ItemCallback<Versicle>() {
+    override fun areItemsTheSame(oldItem: Versicle, newItem: Versicle) = oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: Versicle, newItem: Versicle) = oldItem.id == newItem.id
 }
