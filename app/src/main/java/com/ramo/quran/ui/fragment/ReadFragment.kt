@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.quran.R
@@ -55,7 +54,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
             db = LocalSqliteHelper(it)
         }
 
-        initUi();
+        initUi()
 
     }
 
@@ -154,8 +153,12 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
     }
 
     private fun prepareView(surah: Surah) {
-        recyclerViewRead.adapter = ReadRecyclerAdapter(surah.versicles, fontSize)
-        recyclerViewRead.layoutManager = LinearLayoutManager(activity)
+        recyclerViewRead.apply {
+            adapter = ReadRecyclerAdapter(fontSize)
+            layoutManager = LinearLayoutManager(activity)
+        }
+        (recyclerViewRead.adapter as ReadRecyclerAdapter).submitList(surah.versicles)
+
         (activity as MainActivity).supportActionBar?.title = surah.name
         surahNumber.text = surah.surahNo.toString()
         versicleSize.text = surah.versicles.size.toString()
