@@ -8,9 +8,10 @@
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="feedback">Feedback</string>
-    <string name="donate">Donate</string>
+    <string name="donate">Donation to Student (Donate)</string>
+    <string name="donate_ads">Donation to Student (Watch Ads)</string>
     <string name="info_and_terms_of_use">Info and Terms of Use</string>
-    <string name="change">Change</string>
+    <string name="change">Index</string>
     <string name="surah_number">Surah Number:</string>
     <string name="verse_number">Verse Number:</string>
     <string name="meal_resource">Sources of Qur\'an</string>

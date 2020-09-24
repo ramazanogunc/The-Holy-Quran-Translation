@@ -9,8 +9,8 @@
     <string name="about">Hakkımızda</string>
     <string name="info_and_terms_of_use">Bilgi ve Kullanım Koşulları</string>
     <string name="feedback">Geri Bildirim</string>
-    <string name="donate">Destek Ol</string>
-    <string name="change">Değiştir</string>
+    <string name="donate">Öğrenciye Yardım (Bağış)</string>
+    <string name="change">İndeks</string>
     <string name="verse_number">Ayet Sayısı:</string>
     <string name="meal_resource">Meal Kaynakları</string>
     <string name="font_size">Yazı boyutu</string>
@@ -36,5 +36,6 @@
     <string name="success_message">Her şey yolunda</string>
     <string name="error">Hata</string>
     <string name="error_message">Bir şeyler ters gitti</string>
+    <string name="donate_ads">Öğrenciye Yardım (Reklam İzle)</string>
 
 </resources>
