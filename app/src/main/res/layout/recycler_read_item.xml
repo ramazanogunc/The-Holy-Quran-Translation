@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_divider" />
+
     <TextView
         android:id="@+id/versicleNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textStyle="bold"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="10dp"
         android:text="1. Ayet"
         android:textColor="@color/primaryDarkColor"
-        android:textSize="18sp"
-        android:background="@color/gray"
-        />
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/versicle"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="17dp"/>
+        android:padding="10dp"
+        android:textSize="17dp" />
 </LinearLayout>
