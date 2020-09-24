@@ -19,10 +19,6 @@
         android:name="com.ramo.quran.ui.fragment.TermsOfUseFragment"
         android:label="@string/info_and_terms_of_use" />
     <fragment
-        android:id="@+id/feedback"
-        android:name="com.ramo.quran.ui.fragment.FeedBackFragment"
-        android:label="@string/feedback" />
-    <fragment
         android:id="@+id/donate"
         android:name="com.ramo.quran.ui.fragment.DonateFragment"
         android:label="@string/donate" />

@@ -22,10 +22,6 @@
                     android:id="@+id/termsOfUse"
                     android:icon="@drawable/ic_terms_of_use"
                     android:title="@string/info_and_terms_of_use" />
-                <item
-                    android:id="@+id/feedback"
-                    android:icon="@drawable/ic_feedback"
-                    android:title="@string/feedback" />
             </group>
         </menu>
     </item>
