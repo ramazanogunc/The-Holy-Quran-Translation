@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
@@ -57,6 +58,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
         super.attachBaseContext(LocaleWrapper.wrap(newBase!!,lang))
+    }
+
+    override fun onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.close()
+        else
+            super.onBackPressed()
     }
 
 }
