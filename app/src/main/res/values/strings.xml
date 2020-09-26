@@ -37,4 +37,5 @@
     <string name="error_message">Something went wrong</string>
     <string name="donate_description">Hi muslim brother.\nI am a Software Engineering student who makes this application for the sake of Allah.\nDo you want to contribute to my education even if it is small?\n\nZirratBank\nRamazan Öğünç\nTR 0900 0100 2504 7437 1127 5002\n7 EYLÜL-TURGUTLU/MANİSA-TURKEY</string>
     <string name="donate_to_student">Donation to Student</string>
+    <string name="thanks_for_watch_ads">Thank you for watching ads</string>
 </resources>

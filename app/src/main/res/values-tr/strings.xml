@@ -37,5 +37,6 @@
     <string name="error">Hata</string>
     <string name="error_message">Bir şeyler ters gitti</string>
     <string name="donate_to_student">Öğrenciye Yardım</string>
+    <string name="thanks_for_watch_ads">Reklam izlediğiniz için teşekkür ederim.</string>
 
 </resources>
