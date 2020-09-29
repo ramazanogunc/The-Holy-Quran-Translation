@@ -1,7 +1,6 @@
 package com.ramo.quran.ui.fragment
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -18,7 +17,7 @@ import com.ramo.quran.ui.adapter.ReadRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment : Fragment(), SqliteResponse<Surah> {
-    private lateinit var db: LocalSqliteHelper
+    private val db: LocalSqliteHelper by lazy { LocalSqliteHelper(requireActivity()) }
     private lateinit var surahDialog: AlertDialog
     private var fontSize = 15
 
@@ -50,12 +49,8 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity?.let {
-            db = LocalSqliteHelper(it)
-        }
 
         initUi()
-
     }
 
     private fun initUi() {
@@ -63,11 +58,10 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
         db.getSurah(this)
 
         // fab on clicks
-        fabRight.setOnClickListener { onRightFabClick(it) }
-        fabLeft.setOnClickListener { onLeftFabClick(it) }
+        fabRight.setOnClickListener { onRightFabClick() }
+        fabLeft.setOnClickListener { onLeftFabClick() }
 
         initSurahDialog()
-
 
     }
 
@@ -94,15 +88,15 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
             }
 
             override fun onFail(failMessage: String) {
-                surahArray = arrayOf<NameOfSurah>(NameOfSurah(name = failMessage))
+                surahArray = arrayOf(NameOfSurah(name = failMessage))
             }
         })
         val stringArray: List<String> = surahArray.map { it.name }
         builder.setItems(
-            stringArray.toTypedArray(),
-            DialogInterface.OnClickListener { dialog, which ->
-                changeSurah(surahArray[which])
-            })
+            stringArray.toTypedArray()
+        ) { _, which ->
+            changeSurah(surahArray[which])
+        }
 
         surahDialog = builder.create()
     }
@@ -112,12 +106,12 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
         db.getSurah(this)
     }
 
-    fun onLeftFabClick(v: View) {
+    private fun onLeftFabClick() {
         db.prevouseSurah()
         db.getSurah(this)
     }
 
-    fun onRightFabClick(v: View) {
+    private fun onRightFabClick() {
         db.nextSurah()
         db.getSurah(this)
     }
@@ -155,12 +149,12 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
 
         (activity as MainActivity).supportActionBar?.title = surah.name
         surahNumber.text = surah.surahNo.toString()
-        versicleSize.text = "${getString(R.string.verse_number)}${(surah.versicles.size - 1)}"
+        versicleSize.text = getString(R.string.verse_number) + (surah.versicles.size - 1).toString()
         previousSurahName.text = surah.previousSurahName.let {
-            if(it.length < 15) it else it.subSequence(0,12).toString()+"..."
+            if (it.length < 15) it else it.subSequence(0, 12).toString() + "..."
         }
         nextSurahName.text = surah.nextSurahName.let {
-            if(it.length < 15) it else it.subSequence(0,12).toString()+"..."
+            if (it.length < 15) it else it.subSequence(0, 12).toString() + "..."
         }
     }
 
