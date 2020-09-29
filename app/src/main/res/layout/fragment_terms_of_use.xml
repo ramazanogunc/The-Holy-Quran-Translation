@@ -78,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:autoLink="all"
                     android:text="@string/info_description"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -115,6 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:autoLink="all"
                     android:text="@string/developer_description"
                     android:textSize="16sp" />
             </LinearLayout>
