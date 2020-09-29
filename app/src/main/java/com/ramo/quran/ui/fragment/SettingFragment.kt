@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import com.ramo.quran.R
 import com.ramo.quran.dataAccess.LocalSqliteHelper
 import com.ramo.quran.dataAccess.abstr.SqliteResponse
+import com.ramo.quran.helper.LocaleHelper
 import com.ramo.quran.helper.showError
 import com.ramo.quran.helper.showSuccess
 import com.ramo.quran.model.Config
 import com.ramo.quran.model.Language
 import com.ramo.quran.ui.MainActivity
+import com.yariksoffice.lingver.Lingver
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingFragment: Fragment() {
@@ -82,12 +84,15 @@ class SettingFragment: Fragment() {
     }
 
     private fun onSaveClick() {
+        val language = languageList[spinnerLanguage.selectedItemPosition]
         val config = Config (
             textSize = spinnerTextSize.selectedItem.toString().toInt(),
-            language = languageList[spinnerLanguage.selectedItemPosition]
+            language = language
         )
 
         db.updateConfig(config)
+        db.changeResourceByLanguageId()
+        Lingver.getInstance().setLocale(requireContext(),LocaleHelper().getLocaleTag(language.id))
         activity?.let {
             it.showSuccess()
             (it as MainActivity).recreate()

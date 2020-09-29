@@ -1,6 +1,7 @@
 package com.ramo.quran.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ramo.quran.R
@@ -20,10 +21,14 @@ class ReadRecyclerViewHolder(
 ) {
     fun bind(versicle: Versicle) {
         with(itemView) {
+            // first versicle
+            if (versicle.no == 0) versicleNo.visibility = View.GONE
+
             versicleNo.apply {
                 textSize = fontSize.toFloat() + 1
                 text = "${versicle.no}${context.getString(R.string.versicle)}"
             }
+
             this.versicle.apply {
                 textSize = fontSize.toFloat()
                 text = versicle.text

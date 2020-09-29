@@ -43,4 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //for locale
+    implementation "com.github.YarikSOffice:lingver:1.3.0"
+
 }

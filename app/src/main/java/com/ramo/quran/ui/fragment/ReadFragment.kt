@@ -72,7 +72,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
     }
 
     private fun getFontSize() {
-        db.getAllConfig(object :SqliteResponse<Config>{
+        db.getAllConfig(object : SqliteResponse<Config> {
             override fun onSuccess(response: Config) {
                 fontSize = response.textSize
             }
@@ -123,21 +123,15 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
     }
 
     private fun prepareFabButton(surahNo: Int) {
-        fabRight?.let {
-            it.isEnabled = true
-        }
-        fabLeft?.let {
-            it.isEnabled = true
-        }
+        bottom_left.visibility = View.VISIBLE
+        bottom_center.visibility = View.VISIBLE
+        bottom_right.visibility = View.VISIBLE
+
         // check first or last surah
         if (surahNo == 114)
-            fabRight?.let {
-                it.isEnabled = false
-            }
+            bottom_right.visibility = View.GONE
         else if (surahNo == 1)
-            fabLeft?.let {
-                it.isEnabled = false
-            }
+            bottom_left.visibility = View.GONE
 
     }
 
@@ -161,7 +155,13 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
 
         (activity as MainActivity).supportActionBar?.title = surah.name
         surahNumber.text = surah.surahNo.toString()
-        versicleSize.text = surah.versicles.size.toString()
+        versicleSize.text = "${getString(R.string.verse_number)}${(surah.versicles.size - 1)}"
+        previousSurahName.text = surah.previousSurahName.let {
+            if(it.length < 15) it else it.subSequence(0,12).toString()+"..."
+        }
+        nextSurahName.text = surah.nextSurahName.let {
+            if(it.length < 15) it else it.subSequence(0,12).toString()+"..."
+        }
     }
 
 }

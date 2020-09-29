@@ -1,6 +1,5 @@
 package com.ramo.quran.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.NonNull
@@ -21,13 +20,9 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.material.navigation.NavigationView
 import com.ramo.quran.R
-import com.ramo.quran.dataAccess.LocalSqliteHelper
-import com.ramo.quran.dataAccess.abstr.SqliteResponse
-import com.ramo.quran.helper.LocaleWrapper
 import com.ramo.quran.helper.setProgressDialog
 import com.ramo.quran.helper.showError
 import com.ramo.quran.helper.showInfo
-import com.ramo.quran.model.Config
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -96,19 +91,6 @@ class MainActivity : AppCompatActivity() {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        var lang = "en"
-        LocalSqliteHelper(newBase).getAllConfig(object : SqliteResponse<Config> {
-            override fun onSuccess(response: Config) {
-                lang = if (response.language.id == 1) "tr" else "en"
-            }
-
-            override fun onFail(failMessage: String) {
-
-            }
-        })
-        super.attachBaseContext(LocaleWrapper.wrap(newBase!!, lang))
-    }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
