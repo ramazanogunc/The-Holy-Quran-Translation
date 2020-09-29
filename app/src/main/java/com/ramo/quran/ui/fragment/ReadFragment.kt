@@ -72,7 +72,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
             }
 
             override fun onFail(failMessage: String) {
-                activity?.showError()
+                requireActivity().showError()
             }
         })
     }
@@ -137,7 +137,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
 
     // surah response
     override fun onFail(failMessage: String) {
-        activity?.showError()
+        requireActivity().showError()
     }
 
     private fun prepareView(surah: Surah) {
