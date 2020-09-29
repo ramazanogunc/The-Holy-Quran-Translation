@@ -8,6 +8,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item>
     </style>
 
     <!-- SplashScreen theme. -->
