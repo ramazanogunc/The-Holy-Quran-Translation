@@ -26,19 +26,4 @@
         </menu>
     </item>
 
-    <item android:title="@string/donate_to_student">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/donate"
-                    android:icon="@drawable/ic_donate"
-                    android:title="@string/pocket_money" />
-                <item
-                    android:id="@+id/watch_ads"
-                    android:icon="@drawable/ic_donate"
-                    android:title="@string/watch_ads" />
-            </group>
-
-        </menu>
-    </item>
 </menu>
