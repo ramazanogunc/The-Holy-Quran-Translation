@@ -29,13 +29,9 @@
     <string name="error_message_hint">Error Message</string>
     <string name="terms_of_use_description">Everyone who uses the application accepts the terms of use.\nThe developer is not responsible for all errors.\nQuran resources in the application are taken from ebook.kuran.biz.\nWe are not responsible for any translation errors.\nWe are not responsible for the misunderstanding of the Qur\'an during reading and for all religious behaviors and situations that may arise from this misunderstanding.\nThe person himself is responsible for this situation.</string>
     <string name="info_description">The Quran Translations are taken from ebook.kuran.biz. \nSome icons in the application are taken from flaticon.com</string>
-    <string name="developer_description">I am Ramazan Öğünç. I am from Turkey. I am a software engineering student.\nWebsite: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
+    <string name="developer_description">I am Ramazan Öğünç. I am from Turkey. I am a software engineering student.\nWebsite: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com\nBuy me a coffee:</string>
     <string name="success">Success</string>
     <string name="success_message">Everything is ok</string>
     <string name="error">Error</string>
     <string name="error_message">Something went wrong</string>
-    <string name="donate_description">Hi muslim brother.\nI am a Software Engineering student who makes this application for the sake of Allah.\nDo you want to contribute to my education even if it is small?\n\nZiraatBank\nRamazan Öğünç\nTR 0900 0100 2504 7437 1127 5002\n7 EYLÜL-TURGUTLU/MANİSA-TURKEY</string>
-    <string name="donate_to_student">Donation to Education</string>
-    <string name="pocket_money">Pocket Money</string>
-    <string name="thanks_for_watch_ads">Thank you for watching ads</string>
 </resources>
