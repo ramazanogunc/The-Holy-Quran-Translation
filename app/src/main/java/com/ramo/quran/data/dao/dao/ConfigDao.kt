@@ -12,4 +12,7 @@ interface ConfigDao {
 
     @Query("UPDATE configs SET currentResourceId=:resourceId WHERE id=1")
     fun updateCurrentResource(resourceId: Int)
+
+    @Query("UPDATE configs SET languageId=:languageId, currentResourceId=(SELECT id FROM resources WHERE language=:languageId)")
+    fun changeLocaleWithResource(languageId: Int)
 }

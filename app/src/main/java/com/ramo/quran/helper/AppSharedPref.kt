@@ -18,7 +18,6 @@ class AppSharedPref(context: Context) {
         getEditor().putInt("currentSurah", surahNumber).also { it.apply() }
     }
 
-
     fun getFontSize(): Float {
         val number = sharedPreferences.getFloat("fontSize", 0f)
         return if (number != 0f) number else 15f
@@ -26,6 +25,11 @@ class AppSharedPref(context: Context) {
 
     fun changeFontSize(fontSize: Int) {
         getEditor().putInt("fontSize", fontSize).also { it.apply() }
+    }
+
+    fun isFirstLogin(): Boolean = sharedPreferences.getBoolean("isFirstLogin", true)
+    fun setIsFirstLogin(firstLogin: Boolean) {
+        getEditor().putBoolean("isFirstLogin", firstLogin).also { it.apply() }
     }
 
     private fun getEditor() = sharedPreferences.edit()
