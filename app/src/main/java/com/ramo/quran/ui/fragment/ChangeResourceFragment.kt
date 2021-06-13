@@ -67,7 +67,6 @@ class ChangeResourceFragment : HasDatabaseFragment() {
     }
 
     private fun refreshDataAndUi() {
-        val resourceList = appDatabase.resourceDao.getAllResourcesWithLanguage()
         config = appDatabase.configDao.getConfig()
         sweetRecyclerAdapter.notifyDataSetChanged()
     }
