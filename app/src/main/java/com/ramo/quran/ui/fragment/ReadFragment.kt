@@ -3,23 +3,25 @@ package com.ramo.quran.ui.fragment
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.quran.R
-import com.ramo.quran.dataAccess.LocalSqliteHelper
-import com.ramo.quran.dataAccess.abstr.SqliteResponse
-import com.ramo.quran.helper.showError
-import com.ramo.quran.model.Config
-import com.ramo.quran.model.NameOfSurah
-import com.ramo.quran.model.Surah
+import com.ramo.quran.data.AppDatabase
+import com.ramo.quran.helper.AppSharedPref
+import com.ramo.quran.helper.hide
+import com.ramo.quran.helper.invisible
+import com.ramo.quran.helper.show
+import com.ramo.quran.model.SurahName
+import com.ramo.quran.model.Verse
 import com.ramo.quran.ui.MainActivity
-import com.ramo.quran.ui.adapter.ReadRecyclerAdapter
+import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_read.*
 
-class ReadFragment : Fragment(), SqliteResponse<Surah> {
-    private val db: LocalSqliteHelper by lazy { LocalSqliteHelper(requireActivity()) }
+class ReadFragment : Fragment() {
+
     private lateinit var surahDialog: AlertDialog
-    private var fontSize = 15
+    private val appDatabase by lazy { AppDatabase.getDatabase(requireContext()) }
+    private val pref by lazy { AppSharedPref(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +38,7 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.changeSurah -> {
-                activity?.let {
-                    surahDialog.show()
-                }
-
-            }
+            R.id.changeSurah -> surahDialog.show()
         }
         return true
     }
@@ -54,108 +51,88 @@ class ReadFragment : Fragment(), SqliteResponse<Surah> {
     }
 
     private fun initUi() {
-        getFontSize()
-        db.getSurah(this)
+        val fontSize = pref.getFontSize()
+        // init recycler view adapter
+        val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
+        sweetRecyclerAdapter.addHolder(R.layout.recycler_read_item) { view, item ->
+            val txtVerseNo = view.findViewById<TextView>(R.id.verseNo)
+            val txtVerse = view.findViewById<TextView>(R.id.verse)
+
+            if (item.verseNo == 0) txtVerseNo.hide()
+
+            txtVerse.textSize = fontSize
+            txtVerseNo.textSize = fontSize
+
+            txtVerseNo.text = item.verseNo.toString() + getString(R.string.versicle)
+            txtVerse.text = item.verse
+        }
+        recyclerViewRead.adapter = sweetRecyclerAdapter
+
+        prepareData()
 
         // fab on clicks
         fabRight.setOnClickListener { onRightFabClick() }
         fabLeft.setOnClickListener { onLeftFabClick() }
 
         initSurahDialog()
-
     }
 
-    private fun getFontSize() {
-        db.getAllConfig(object : SqliteResponse<Config> {
-            override fun onSuccess(response: Config) {
-                fontSize = response.textSize
-            }
+    private fun prepareData() {
+        val currentSurahNumber = pref.getCurrentSurah()
+        val surahName = appDatabase.surahNameDao.getCurrentSurahName(currentSurahNumber)
+        val surahVerses = appDatabase.verseDao.getCurrentSurahVerses(currentSurahNumber)
 
-            override fun onFail(failMessage: String) {
-                requireActivity().showError()
-            }
-        })
+        (recyclerViewRead.adapter as SweetRecyclerAdapter<Verse>).submitList(surahVerses)
+        prepareSurahName(surahName, surahVerses.size)
+        prepareFabButton(surahName.number)
     }
 
     private fun initSurahDialog() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.choice_surah))
-        lateinit var surahArray: Array<NameOfSurah>
-
-        db.getNameOfSurahs(object : SqliteResponse<List<NameOfSurah>> {
-            override fun onSuccess(response: List<NameOfSurah>) {
-                surahArray = response.toTypedArray()
-            }
-
-            override fun onFail(failMessage: String) {
-                surahArray = arrayOf(NameOfSurah(name = failMessage))
-            }
-        })
+        val surahArray = appDatabase.surahNameDao.getAllSurahName()
         val stringArray: List<String> = surahArray.map { it.name }
         builder.setItems(
             stringArray.toTypedArray()
         ) { _, which ->
             changeSurah(surahArray[which])
         }
-
         surahDialog = builder.create()
     }
 
-    private fun changeSurah(nameOfSurah: NameOfSurah) {
-        db.changeSurah(nameOfSurah)
-        db.getSurah(this)
+    private fun changeSurah(nameOfSurah: SurahName) {
+        pref.changeCurrentSurah(nameOfSurah.number)
+        prepareData()
     }
 
     private fun onLeftFabClick() {
-        db.prevouseSurah()
-        db.getSurah(this)
+        pref.changeCurrentSurah(pref.getCurrentSurah() - 1)
+        prepareData()
     }
 
     private fun onRightFabClick() {
-        db.nextSurah()
-        db.getSurah(this)
+        pref.changeCurrentSurah(pref.getCurrentSurah() + 1)
+        prepareData()
     }
 
     private fun prepareFabButton(surahNo: Int) {
-        bottom_left.visibility = View.VISIBLE
-        bottom_center.visibility = View.VISIBLE
-        bottom_right.visibility = View.VISIBLE
+        bottom_left.show()
+        bottom_center.show()
+        bottom_right.show()
 
         // check first or last surah
         if (surahNo == 114)
-            bottom_right.visibility = View.GONE
+            bottom_right.invisible()
         else if (surahNo == 1)
-            bottom_left.visibility = View.GONE
+            bottom_left.invisible()
 
     }
 
-    // surah response
-    override fun onSuccess(response: Surah) {
-        prepareView(response)
-        prepareFabButton(response.surahNo)
+    private fun prepareSurahName(surahName: SurahName, versesSize: Int) {
+        (activity as MainActivity).supportActionBar?.title = surahName.name
+        surahNumber.text = surahName.number.toString()
+        versicleSize.text = getString(R.string.verse_number) + versesSize.toString()
+        previousSurahName.text = "aa"
+        nextSurahName.text = "bbb"
     }
-
-    // surah response
-    override fun onFail(failMessage: String) {
-        requireActivity().showError()
-    }
-
-    private fun prepareView(surah: Surah) {
-        recyclerViewRead.apply {
-            adapter = ReadRecyclerAdapter(fontSize)
-            layoutManager = LinearLayoutManager(activity)
-        }
-        (recyclerViewRead.adapter as ReadRecyclerAdapter).submitList(surah.versicles)
-
-        (activity as MainActivity).supportActionBar?.title = surah.name
-        surahNumber.text = surah.surahNo.toString()
-        versicleSize.text = getString(R.string.verse_number) + (surah.versicles.size - 1).toString()
-        previousSurahName.text = surah.previousSurahName.let {
-            if (it.length < 15) it else it.subSequence(0, 12).toString() + "..."
-        }
-        nextSurahName.text = surah.nextSurahName.let {
-            if (it.length < 15) it else it.subSequence(0, 12).toString() + "..."
-        }
-    }
-
 }

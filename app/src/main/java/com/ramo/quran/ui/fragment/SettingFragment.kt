@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.ramo.quran.R
-import com.ramo.quran.dataAccess.LocalSqliteHelper
-import com.ramo.quran.dataAccess.abstr.SqliteResponse
 import com.ramo.quran.helper.LocaleHelper
-import com.ramo.quran.helper.showError
 import com.ramo.quran.helper.showSuccess
 import com.ramo.quran.model.Config
 import com.ramo.quran.model.Language
@@ -21,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingFragment: Fragment() {
 
-    private lateinit var db: LocalSqliteHelper
     private lateinit var languageList: List<Language>
     private lateinit var config: Config
 
@@ -35,9 +30,6 @@ class SettingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.let {
-            db = LocalSqliteHelper(it)
-        }
         initUi()
     }
 
@@ -46,6 +38,7 @@ class SettingFragment: Fragment() {
 
         buttonSave.setOnClickListener { onSaveClick() }
 
+        /*
         db.getAllLanguages(object :SqliteResponse<List<Language>>{
             override fun onSuccess(response: List<Language>) {
                 languageList = response
@@ -62,6 +55,7 @@ class SettingFragment: Fragment() {
             }
         })
 
+
         db.getAllConfig(object: SqliteResponse<Config>{
             override fun onSuccess(response: Config) {
                 spinnerSetSelected(spinnerTextSize, response.textSize.toString())
@@ -71,6 +65,8 @@ class SettingFragment: Fragment() {
                 activity?.showError()
             }
         })
+
+         */
 
     }
 
@@ -85,14 +81,17 @@ class SettingFragment: Fragment() {
 
     private fun onSaveClick() {
         val language = languageList[spinnerLanguage.selectedItemPosition]
+        /*
         val config = Config (
             textSize = spinnerTextSize.selectedItem.toString().toInt(),
             language = language
         )
+         */
 
-        db.updateConfig(config)
-        db.changeResourceByLanguageId()
-        Lingver.getInstance().setLocale(requireContext(),LocaleHelper().getLocaleTag(language.id))
+        //db.updateConfig(config)
+        //db.changeResourceByLanguageId()
+        Lingver.getInstance()
+            .setLocale(requireContext(), LocaleHelper().getLocaleTag(language.id!!))
         activity?.let {
             it.showSuccess()
             (it as MainActivity).recreate()

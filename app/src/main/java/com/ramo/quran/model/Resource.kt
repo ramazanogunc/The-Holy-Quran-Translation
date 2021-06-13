@@ -1,8 +1,23 @@
 package com.ramo.quran.model
 
-data class Resource (
-    val id:Int,
-    val name: String,
-    val language:Language,
-    val isActive: Boolean
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
+
+@Entity(
+    tableName = "resources",
+    foreignKeys = [
+        ForeignKey(
+            entity = Language::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("language")
+        )
+    ]
 )
+data class Resource(
+    val name: String,
+    val language: Int
+) {
+    @PrimaryKey
+    var id: Int? = null
+}
