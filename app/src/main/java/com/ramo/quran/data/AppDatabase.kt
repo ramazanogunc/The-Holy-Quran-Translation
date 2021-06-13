@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ramo.quran.data.dao.ConfigDao
-import com.ramo.quran.data.dao.ResourceDao
-import com.ramo.quran.data.dao.SurahNameDao
-import com.ramo.quran.data.dao.VerseDao
+import com.ramo.quran.data.dao.*
 import com.ramo.quran.model.*
 
 @Database(
@@ -28,6 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val verseDao: VerseDao
     abstract val resourceDao: ResourceDao
     abstract val configDao: ConfigDao
+    abstract val languageDao: LanguageDao
 
     companion object {
         @Volatile

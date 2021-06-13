@@ -23,8 +23,8 @@ class AppSharedPref(context: Context) {
         return if (number != 0f) number else 15f
     }
 
-    fun changeFontSize(fontSize: Int) {
-        getEditor().putInt("fontSize", fontSize).also { it.apply() }
+    fun changeFontSize(fontSize: Float) {
+        getEditor().putFloat("fontSize", fontSize).also { it.apply() }
     }
 
     fun isFirstLogin(): Boolean = sharedPreferences.getBoolean("isFirstLogin", true)

@@ -4,21 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
-import androidx.fragment.app.Fragment
+import android.widget.PopupMenu
 import com.ramo.quran.R
-import com.ramo.quran.helper.LocaleHelper
+import com.ramo.quran.helper.AppSharedPref
 import com.ramo.quran.helper.showSuccess
-import com.ramo.quran.model.Config
 import com.ramo.quran.model.Language
 import com.ramo.quran.ui.MainActivity
 import com.yariksoffice.lingver.Lingver
 import kotlinx.android.synthetic.main.fragment_settings.*
 
-class SettingFragment: Fragment() {
+class SettingFragment : HasDatabaseFragment() {
 
     private lateinit var languageList: List<Language>
-    private lateinit var config: Config
+    private val pref by lazy { AppSharedPref(requireContext()) }
+    private val fontSizeArray = arrayOf("14", "16", "18", "20", "22", "24", "26")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,71 +29,59 @@ class SettingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        languageList = appDatabase.languageDao.getAllLanguages()
         initUi()
     }
 
     private fun initUi() {
         (activity as? MainActivity)?.supportActionBar?.title = getString(R.string.settings)
 
-        buttonSave.setOnClickListener { onSaveClick() }
+        btnFontSize.setOnClickListener { onFontSizeClick(it) }
+        btnLanguage.setOnClickListener { onLanguageClick(it) }
 
-        /*
-        db.getAllLanguages(object :SqliteResponse<List<Language>>{
-            override fun onSuccess(response: List<Language>) {
-                languageList = response
-                activity?.let {
-                    val arrayAdapter = ArrayAdapter(it,android.R.layout.simple_spinner_dropdown_item,
-                        response.map { it.name }.toTypedArray()
-                    )
-                    spinnerLanguage.adapter = arrayAdapter
-                }
-            }
-
-            override fun onFail(failMessage: String) {
-                activity?.showError()
-            }
-        })
-
-
-        db.getAllConfig(object: SqliteResponse<Config>{
-            override fun onSuccess(response: Config) {
-                spinnerSetSelected(spinnerTextSize, response.textSize.toString())
-                spinnerSetSelected(spinnerLanguage, response.language.name)
-            }
-            override fun onFail(failMessage: String) {
-                activity?.showError()
-            }
-        })
-
-         */
-
+        initSavedConfig()
     }
 
-    private fun spinnerSetSelected(spinner: Spinner, item:String){
-        for (i in 0 until spinner.count) {
-            if (spinner.getItemAtPosition(i).equals(item)) {
-                spinner.setSelection(i)
-                break
-            }
+    private fun initSavedConfig() {
+        setFontSize()
+        setLanguage()
+    }
+
+    private fun setLanguage() {
+        btnLanguage.text = appDatabase.languageDao.getCurrentLanguage().name
+    }
+
+    private fun onFontSizeClick(v: View) {
+        val menu = PopupMenu(requireContext(), v)
+        fontSizeArray.forEach { menu.menu.add(it) }
+        menu.setOnMenuItemClickListener {
+            val fontSize = it.title.toString().toFloat()
+            pref.changeFontSize(fontSize)
+            requireActivity().showSuccess()
+            setFontSize()
+            return@setOnMenuItemClickListener true
         }
+        menu.show()
     }
 
-    private fun onSaveClick() {
-        val language = languageList[spinnerLanguage.selectedItemPosition]
-        /*
-        val config = Config (
-            textSize = spinnerTextSize.selectedItem.toString().toInt(),
-            language = language
-        )
-         */
-
-        //db.updateConfig(config)
-        //db.changeResourceByLanguageId()
-        Lingver.getInstance()
-            .setLocale(requireContext(), LocaleHelper().getLocaleTag(language.id!!))
-        activity?.let {
-            it.showSuccess()
-            (it as MainActivity).recreate()
+    private fun onLanguageClick(v: View) {
+        val menu = PopupMenu(requireContext(), v)
+        languageList.forEach { menu.menu.add(it.name) }
+        menu.setOnMenuItemClickListener { menuItem ->
+            val selectedLang = languageList.filter { it.name == menuItem.title }.first()
+            appDatabase.configDao.changeLocaleWithResource(selectedLang.id!!)
+            Lingver.getInstance()
+                .setLocale(requireContext(), selectedLang.key)
+            requireActivity().recreate()
+            return@setOnMenuItemClickListener true
         }
+        menu.show()
     }
+
+    private fun setFontSize() {
+        val fontSize = pref.getFontSize()
+        btnFontSize.text = fontSize.toString()
+        textViewExample.textSize = fontSize
+    }
+
 }
