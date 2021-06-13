@@ -12,7 +12,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.ramo.quran.BuildConfig
 import com.ramo.quran.R
 import com.ramo.quran.helper.showError
-import com.ramo.quran.ui.MainActivity
 
 class TermsOfUseFragment : Fragment() {
 
@@ -25,24 +24,25 @@ class TermsOfUseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.buttonSend).setOnClickListener { onSendClick() }
+        requireView().findViewById<Button>(R.id.buttonSend).setOnClickListener { onSendClick() }
     }
 
     private fun onSendClick() {
-        view?.let {
-            val input = it.findViewById<TextInputEditText>(R.id.textInputErrorMessage)
-            if (input.text.isNullOrEmpty()) {
-                activity?.showError()
-            } else {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "plain/text"
-                intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>("ramazanogunc@hotmail.com"))
-                intent.putExtra(Intent.EXTRA_SUBJECT, "FeedBack - Kuran Meali")
-                intent.putExtra(Intent.EXTRA_TEXT, input.text.toString()
-                +"\nVersion:"+BuildConfig.VERSION_NAME+"\nAndroid Version:"+Build.VERSION.SDK_INT)
+        val input = requireView().findViewById<TextInputEditText>(R.id.textInputErrorMessage)
+        if (input.text.isNullOrEmpty()) {
+            requireActivity().showError()
+        } else {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "plain/text"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>("ramazanogunc@hotmail.com"))
+            intent.putExtra(Intent.EXTRA_SUBJECT, "FeedBack - Kuran Meali")
+            intent.putExtra(Intent.EXTRA_TEXT, input.text.toString() + getMetaInfo())
 
-                startActivity(Intent.createChooser(intent, "Send"))
-            }
+            startActivity(Intent.createChooser(intent, "Send"))
         }
+    }
+
+    private fun getMetaInfo(): String {
+        return "\n\nVersion:" + BuildConfig.VERSION_NAME + "\nAndroid Version:" + Build.VERSION.BASE_OS
     }
 }
