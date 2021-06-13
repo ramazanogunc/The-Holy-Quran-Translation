@@ -56,4 +56,7 @@ dependencies {
 
     implementation 'com.github.ramazanogunc:Android-Sweet-Recycler-Adapter:2.0.1'
 
+    // for fonts
+    implementation("com.android.support:support-compat:28.0.0")
+
 }

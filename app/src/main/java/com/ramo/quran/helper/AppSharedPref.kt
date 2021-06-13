@@ -2,6 +2,7 @@ package com.ramo.quran.helper
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.ramo.quran.R
 
 class AppSharedPref(context: Context) {
 
@@ -32,5 +33,18 @@ class AppSharedPref(context: Context) {
         getEditor().putBoolean("isFirstLogin", firstLogin).also { it.apply() }
     }
 
+    fun changeSelectedFont(fontName: String, fontResourceId: Int) {
+        getEditor().putInt("fontResourceId", fontResourceId).also { it.apply() }
+        getEditor().putString("fontName", fontName).also { it.apply() }
+    }
+
+    fun getCurrentFontName() = sharedPreferences.getString("fontName", "roboto")
+    fun getCurrentFontResourceId(): Int {
+        val number = sharedPreferences.getInt("fontResourceId", 0)
+        return if (number != 0) number else R.font.roboto
+    }
+
     private fun getEditor() = sharedPreferences.edit()
+
+
 }

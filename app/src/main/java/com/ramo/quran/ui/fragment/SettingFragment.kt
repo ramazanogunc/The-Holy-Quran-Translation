@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import com.ramo.quran.R
 import com.ramo.quran.helper.AppSharedPref
+import com.ramo.quran.helper.getFontTypeFace
 import com.ramo.quran.helper.showSuccess
 import com.ramo.quran.model.Language
 import com.ramo.quran.ui.MainActivity
@@ -36,6 +37,7 @@ class SettingFragment : HasDatabaseFragment() {
     private fun initUi() {
         (activity as? MainActivity)?.supportActionBar?.title = getString(R.string.settings)
 
+        btnFontFamily.setOnClickListener { onFontFamilyClick(it) }
         btnFontSize.setOnClickListener { onFontSizeClick(it) }
         btnLanguage.setOnClickListener { onLanguageClick(it) }
 
@@ -43,12 +45,26 @@ class SettingFragment : HasDatabaseFragment() {
     }
 
     private fun initSavedConfig() {
-        setFontSize()
+        setFontInfo()
         setLanguage()
     }
 
     private fun setLanguage() {
         btnLanguage.text = appDatabase.languageDao.getCurrentLanguage().name
+    }
+
+    private fun onFontFamilyClick(v: View) {
+        val fontFields = R.font::class.java.fields
+        val menu = PopupMenu(requireContext(), v)
+        fontFields.forEach { menu.menu.add(it.name) }
+        menu.setOnMenuItemClickListener { menuItem ->
+            val selectedFont = fontFields.first { it.name == menuItem.title }
+            pref.changeSelectedFont(selectedFont.name, selectedFont.getInt(selectedFont))
+            setFontInfo()
+            return@setOnMenuItemClickListener true
+        }
+        menu.show()
+
     }
 
     private fun onFontSizeClick(v: View) {
@@ -58,7 +74,7 @@ class SettingFragment : HasDatabaseFragment() {
             val fontSize = it.title.toString().toFloat()
             pref.changeFontSize(fontSize)
             requireActivity().showSuccess()
-            setFontSize()
+            setFontInfo()
             return@setOnMenuItemClickListener true
         }
         menu.show()
@@ -68,7 +84,7 @@ class SettingFragment : HasDatabaseFragment() {
         val menu = PopupMenu(requireContext(), v)
         languageList.forEach { menu.menu.add(it.name) }
         menu.setOnMenuItemClickListener { menuItem ->
-            val selectedLang = languageList.filter { it.name == menuItem.title }.first()
+            val selectedLang = languageList.first { it.name == menuItem.title }
             appDatabase.configDao.changeLocaleWithResource(selectedLang.id!!)
             Lingver.getInstance()
                 .setLocale(requireContext(), selectedLang.key)
@@ -78,10 +94,13 @@ class SettingFragment : HasDatabaseFragment() {
         menu.show()
     }
 
-    private fun setFontSize() {
+    private fun setFontInfo() {
         val fontSize = pref.getFontSize()
         btnFontSize.text = fontSize.toString()
         textViewExample.textSize = fontSize
+        btnFontFamily.text = pref.getCurrentFontName()
+        textViewExample.typeface =
+            getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
     }
 
 }

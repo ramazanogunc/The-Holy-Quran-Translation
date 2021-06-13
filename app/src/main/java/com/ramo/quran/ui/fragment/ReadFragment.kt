@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import com.ramo.quran.R
-import com.ramo.quran.helper.AppSharedPref
-import com.ramo.quran.helper.hide
-import com.ramo.quran.helper.invisible
-import com.ramo.quran.helper.show
+import com.ramo.quran.helper.*
 import com.ramo.quran.model.SurahName
 import com.ramo.quran.model.Verse
 import com.ramo.quran.ui.MainActivity
@@ -54,6 +51,9 @@ class ReadFragment : HasDatabaseFragment() {
         sweetRecyclerAdapter.addHolder(R.layout.recycler_read_item) { view, item ->
             val txtVerseNo = view.findViewById<TextView>(R.id.verseNo)
             val txtVerse = view.findViewById<TextView>(R.id.verse)
+
+            txtVerseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+            txtVerse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
 
             if (item.verseNo == 0) txtVerseNo.hide()
 
