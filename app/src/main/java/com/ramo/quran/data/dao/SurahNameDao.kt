@@ -1,4 +1,4 @@
-package com.ramo.quran.data.dao.dao
+package com.ramo.quran.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query

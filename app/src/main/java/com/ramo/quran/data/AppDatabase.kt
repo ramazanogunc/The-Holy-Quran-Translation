@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ramo.quran.data.dao.dao.ConfigDao
-import com.ramo.quran.data.dao.dao.ResourceDao
-import com.ramo.quran.data.dao.dao.SurahNameDao
-import com.ramo.quran.data.dao.dao.VerseDao
+import com.ramo.quran.data.dao.ConfigDao
+import com.ramo.quran.data.dao.ResourceDao
+import com.ramo.quran.data.dao.SurahNameDao
+import com.ramo.quran.data.dao.VerseDao
 import com.ramo.quran.model.*
 
 @Database(
