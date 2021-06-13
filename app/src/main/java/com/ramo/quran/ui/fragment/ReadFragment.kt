@@ -4,9 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import com.ramo.quran.R
-import com.ramo.quran.data.AppDatabase
 import com.ramo.quran.helper.AppSharedPref
 import com.ramo.quran.helper.hide
 import com.ramo.quran.helper.invisible
@@ -17,10 +15,9 @@ import com.ramo.quran.ui.MainActivity
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_read.*
 
-class ReadFragment : Fragment() {
+class ReadFragment : HasDatabaseFragment() {
 
     private lateinit var surahDialog: AlertDialog
-    private val appDatabase by lazy { AppDatabase.getDatabase(requireContext()) }
     private val pref by lazy { AppSharedPref(requireContext()) }
 
     override fun onCreateView(

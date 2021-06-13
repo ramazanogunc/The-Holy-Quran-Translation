@@ -4,13 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.ImageView
+import android.widget.TextView
 import com.ramo.quran.R
-import com.ramo.quran.model.Resource
+import com.ramo.quran.helper.invisible
+import com.ramo.quran.helper.show
+import com.ramo.quran.helper.showSuccess
+import com.ramo.quran.model.Config
+import com.ramo.quran.model.ResourceWithLanguage
 import com.ramo.quran.ui.MainActivity
+import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
+import kotlinx.android.synthetic.main.fragment_change_resource.*
 
-class ChangeResourceFragment : Fragment() {
+class ChangeResourceFragment : HasDatabaseFragment() {
 
+    private val sweetRecyclerAdapter = SweetRecyclerAdapter<ResourceWithLanguage>()
+    private var config: Config? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,34 +38,37 @@ class ChangeResourceFragment : Fragment() {
     }
 
     private fun getData() {
-        /*
-        db.getResources(object : SqliteResponse<List<Resource>> {
-            override fun onSuccess(response: List<Resource>) {
-                prepareUi(response)
-            }
-
-            override fun onFail(failMessage: String) {
-                activity?.showError()
-            }
-        })
-
-         */
+        val resourceList = appDatabase.resourceDao.getAllResourcesWithLanguage()
+        config = appDatabase.configDao.getConfig()
+        prepareUi(resourceList)
     }
 
-    private fun prepareUi(listResource: List<Resource>) {
-        /*
-        recyclerViewResource.apply {
-            adapter = ResourceRecyclerAdapter {
-                //onClick event with higher order and this return parameter from bind function in the view holder
-                //db.changeResource(it)
-                getData()
-                requireActivity().showSuccess()
-            }
-            //you can set layout manager in xml with 'layoutManager' attr
-            layoutManager = LinearLayoutManager(activity)
-        }
-        (recyclerViewResource.adapter as ResourceRecyclerAdapter).submitList(listResource)
+    private fun prepareUi(resourceList: List<ResourceWithLanguage>) {
+        sweetRecyclerAdapter.addHolder(R.layout.recycler_resource_item) { v, item ->
+            val resourceLanguage = v.findViewById<TextView>(R.id.resourceLanguage)
+            val resource = v.findViewById<TextView>(R.id.resource)
+            val isCheck = v.findViewById<ImageView>(R.id.isCheck)
 
-         */
+            resourceLanguage.text = item.language.name
+            resource.text = item.resource.name
+            if (config?.currentResourceId == item.resource.id)
+                isCheck.show()
+            else
+                isCheck.invisible()
+        }
+        sweetRecyclerAdapter.setOnItemClickListener { v, item ->
+            sweetRecyclerAdapter.notifyDataSetChanged()
+            appDatabase.configDao.updateCurrentResource(item.resource.id!!)
+            requireActivity().showSuccess()
+            refreshDataAndUi()
+        }
+        recyclerViewResource.adapter = sweetRecyclerAdapter
+        sweetRecyclerAdapter.submitList(resourceList)
+    }
+
+    private fun refreshDataAndUi() {
+        val resourceList = appDatabase.resourceDao.getAllResourcesWithLanguage()
+        config = appDatabase.configDao.getConfig()
+        sweetRecyclerAdapter.notifyDataSetChanged()
     }
 }

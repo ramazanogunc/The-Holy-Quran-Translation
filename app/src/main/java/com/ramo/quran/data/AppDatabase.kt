@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ramo.quran.data.dao.dao.ConfigDao
+import com.ramo.quran.data.dao.dao.ResourceDao
 import com.ramo.quran.data.dao.dao.SurahNameDao
 import com.ramo.quran.data.dao.dao.VerseDao
 import com.ramo.quran.model.*
@@ -24,6 +26,8 @@ abstract class AppDatabase : RoomDatabase() {
     // todo: daolar eklenecek
     abstract val surahNameDao: SurahNameDao
     abstract val verseDao: VerseDao
+    abstract val resourceDao: ResourceDao
+    abstract val configDao: ConfigDao
 
     companion object {
         @Volatile
