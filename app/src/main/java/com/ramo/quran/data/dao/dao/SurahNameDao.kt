@@ -7,9 +7,9 @@ import com.ramo.quran.model.SurahName
 @Dao
 interface SurahNameDao {
 
-    @Query("SELECT * FROM surahNames WHERE languageId=(SELECT languageId FROM configs) AND number=:surahNumber")
+    @Query("SELECT * FROM surahNames WHERE languageId=(SELECT language FROM configs, resources as r WHERE r.id=currentResourceId) AND number=:surahNumber")
     fun getCurrentSurahName(surahNumber: Int): SurahName
 
-    @Query("SELECT * FROM surahNames WHERE languageId=(SELECT languageId FROM configs)")
+    @Query("SELECT * FROM surahNames WHERE languageId=(SELECT language FROM configs, resources as r WHERE r.id=currentResourceId)")
     fun getAllSurahName(): List<SurahName>
 }
