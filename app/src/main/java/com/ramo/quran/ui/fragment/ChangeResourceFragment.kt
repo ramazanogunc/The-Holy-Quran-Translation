@@ -34,7 +34,6 @@ class ChangeResourceFragment : HasDatabaseFragment() {
         setHasOptionsMenu(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.change_resource)
         getData()
-
     }
 
     private fun getData() {

@@ -16,6 +16,7 @@ class ReadFragment : HasDatabaseFragment() {
 
     private lateinit var surahDialog: AlertDialog
     private val pref by lazy { AppSharedPref(requireContext()) }
+    private val fontSize by lazy { pref.getFontSize() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,24 +46,10 @@ class ReadFragment : HasDatabaseFragment() {
     }
 
     private fun initUi() {
-        val fontSize = pref.getFontSize()
+
         // init recycler view adapter
         val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
-        sweetRecyclerAdapter.addHolder(R.layout.recycler_read_item) { view, item ->
-            val txtVerseNo = view.findViewById<TextView>(R.id.verseNo)
-            val txtVerse = view.findViewById<TextView>(R.id.verse)
-
-            txtVerseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
-            txtVerse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
-
-            if (item.verseNo == 0) txtVerseNo.hide()
-
-            txtVerse.textSize = fontSize
-            txtVerseNo.textSize = fontSize
-
-            txtVerseNo.text = item.verseNo.toString() + getString(R.string.versicle)
-            txtVerse.text = item.verse
-        }
+        sweetRecyclerAdapter.addHolder(R.layout.recycler_read_item, ::bindReadItem)
         recyclerViewRead.adapter = sweetRecyclerAdapter
 
         prepareData()
@@ -72,6 +59,22 @@ class ReadFragment : HasDatabaseFragment() {
         fabLeft.setOnClickListener { onLeftFabClick() }
 
         initSurahDialog()
+    }
+
+    private fun bindReadItem(view: View, item: Verse) {
+        val txtVerseNo = view.findViewById<TextView>(R.id.verseNo)
+        val txtVerse = view.findViewById<TextView>(R.id.verse)
+
+        txtVerseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+        txtVerse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+
+        if (item.verseNo == 0) txtVerseNo.hide()
+
+        txtVerse.textSize = fontSize
+        txtVerseNo.textSize = fontSize
+
+        txtVerseNo.text = item.verseNo.toString() + getString(R.string.versicle)
+        txtVerse.text = item.verse
     }
 
     private fun prepareData() {
@@ -113,15 +116,15 @@ class ReadFragment : HasDatabaseFragment() {
     }
 
     private fun prepareFabButton(surahNo: Int) {
-        bottom_left.show()
+        fabLeft.show()
         bottom_center.show()
-        bottom_right.show()
+        fabRight.show()
 
         // check first or last surah
         if (surahNo == 114)
-            bottom_right.invisible()
+            fabRight.invisible()
         else if (surahNo == 1)
-            bottom_left.invisible()
+            fabLeft.invisible()
 
     }
 
@@ -129,7 +132,5 @@ class ReadFragment : HasDatabaseFragment() {
         (activity as MainActivity).supportActionBar?.title = surahName.name
         surahNumber.text = surahName.number.toString()
         versicleSize.text = getString(R.string.verse_number) + versesSize.toString()
-        previousSurahName.text = "aa"
-        nextSurahName.text = "bbb"
     }
 }

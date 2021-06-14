@@ -9,7 +9,6 @@ class AppSharedPref(context: Context) {
     private var sharedPreferences: SharedPreferences =
         context.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
-
     fun getCurrentSurah(): Int {
         val number = sharedPreferences.getInt("currentSurah", 0)
         return if (number != 0) number else 1
@@ -45,6 +44,4 @@ class AppSharedPref(context: Context) {
     }
 
     private fun getEditor() = sharedPreferences.edit()
-
-
 }

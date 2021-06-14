@@ -20,7 +20,6 @@ import com.ramo.quran.model.*
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    // todo: daolar eklenecek
     abstract val surahNameDao: SurahNameDao
     abstract val verseDao: VerseDao
     abstract val resourceDao: ResourceDao

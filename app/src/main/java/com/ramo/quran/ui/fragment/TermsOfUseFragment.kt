@@ -21,7 +21,6 @@ class TermsOfUseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_terms_of_use, container, false)
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireView().findViewById<Button>(R.id.buttonSend).setOnClickListener { onSendClick() }
