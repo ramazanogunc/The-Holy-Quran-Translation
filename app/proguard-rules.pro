@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+# for R file for fonts
+-keepattributes InnerClasses
+ -keep class **.R
+ -keep class **.R$* {
+    <fields>;
+}
