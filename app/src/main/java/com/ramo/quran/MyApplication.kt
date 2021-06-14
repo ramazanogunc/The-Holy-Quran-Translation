@@ -1,22 +1,21 @@
 package com.ramo.quran
 
 import android.app.Application
-import android.content.Context
-import com.ramo.quran.dataAccess.LocalSqliteHelper
+import com.ramo.quran.data.AppDatabase
+import com.ramo.quran.helper.AppSharedPref
 import com.ramo.quran.helper.LocaleHelper
 import com.yariksoffice.lingver.Lingver
 import java.util.*
 
-class MyApplication: Application() {
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val sharedPreference = getSharedPreferences("settings",Context.MODE_PRIVATE)
-        val isFirstLogin = sharedPreference.getBoolean("isFirstLogin",true)
-        if (isFirstLogin){
+        val pref = AppSharedPref(this)
+        if (pref.isFirstLogin()) {
             val localeId = LocaleHelper().getLocaleId(Locale.getDefault().language)
-            LocalSqliteHelper(this).changeLocaleWithResource(localeId)
-            sharedPreference.edit().putBoolean("isFirstLogin",false).also { it.apply() }
+            AppDatabase.getDatabase(this).configDao.changeLocaleWithResource(localeId)
+            pref.setIsFirstLogin(false)
         }
         Lingver.init(this)
     }

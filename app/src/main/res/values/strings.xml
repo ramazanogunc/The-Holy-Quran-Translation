@@ -29,9 +29,10 @@
     <string name="error_message_hint">Error Message</string>
     <string name="terms_of_use_description">Everyone who uses the application accepts the terms of use.\nThe developer is not responsible for all errors.\nQuran resources in the application are taken from ebook.kuran.biz.\nWe are not responsible for any translation errors.\nWe are not responsible for the misunderstanding of the Qur\'an during reading and for all religious behaviors and situations that may arise from this misunderstanding.\nThe person himself is responsible for this situation.</string>
     <string name="info_description">The Quran Translations are taken from ebook.kuran.biz. \nSome icons in the application are taken from flaticon.com</string>
-    <string name="developer_description">I am Ramazan Öğünç. I am from Turkey. I am a software engineering student.\nWebsite: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com\nBuy me a coffee:</string>
+    <string name="developer_description">I am Ramazan Öğünç. I am from Turkey. I am a software engineering student.\nWebsite: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
     <string name="success">Success</string>
     <string name="success_message">Everything is ok</string>
     <string name="error">Error</string>
     <string name="error_message">Something went wrong</string>
+    <string name="font_famiy">Font Family</string>
 </resources>

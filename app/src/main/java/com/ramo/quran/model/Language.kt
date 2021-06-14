@@ -1,6 +1,15 @@
 package com.ramo.quran.model
 
-data class Language (
-    val id: Int,
-    val name: String
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(
+    tableName = "languages"
 )
+data class Language(
+    val name: String,
+    val key: String
+) {
+    @PrimaryKey
+    var id: Int? = null
+}

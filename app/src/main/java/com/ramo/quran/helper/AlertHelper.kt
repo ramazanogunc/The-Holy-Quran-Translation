@@ -18,9 +18,3 @@ fun Activity.showError(){
         .setMessage(getString(R.string.error_message))
         .sneakError()
 }
-
-fun Activity.showInfo(text: String){
-    Sneaker.with(this) // Activity, Fragment or ViewGroup
-        .setMessage(text)
-        .sneakSuccess()
-}
