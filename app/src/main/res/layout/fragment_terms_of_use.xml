@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="5dp"
+            app:cardCornerRadius="15dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -51,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="5dp"
+            app:cardCornerRadius="15dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -89,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="5dp"
+            app:cardCornerRadius="15dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -125,6 +128,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
             app:cardUseCompatPadding="true">
 
@@ -151,7 +155,8 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textInputErrorMessage"
@@ -161,7 +166,7 @@
                         android:layout_marginTop="20dp"
                         android:gravity="start"
                         android:minLines="4"
-                        android:inputType="textMultiLine"/>
+                        android:inputType="textMultiLine" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <Button
                     android:id="@+id/buttonSend"
@@ -169,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/send"
                     android:layout_marginVertical="10dp"
-                    android:background="@color/secondaryColor"
+                    android:background="@drawable/button_settings_background"
                     android:textColor="@color/primaryTextColor"/>
             </LinearLayout>
 

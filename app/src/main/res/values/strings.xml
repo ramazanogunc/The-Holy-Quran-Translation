@@ -21,7 +21,7 @@
     <string name="versicle">. Verse</string>
     <string name="learn_iban">Learn Info of Bank</string>
     <string name="developed_by">Developed by Ramazan Öğünç</string>
-    <string name="version">Version:1.1.0</string>
+    <string name="version">Version:1.2.0</string>
     <string name="terms_of_use">Terms Of Use</string>
     <string name="info">Info</string>
     <string name="developer">Developer</string>
@@ -34,8 +34,5 @@
     <string name="success_message">Everything is ok</string>
     <string name="error">Error</string>
     <string name="error_message">Something went wrong</string>
-    <string name="donate_description">Hi muslim brother.\nI am a Software Engineering student who makes this application for the sake of Allah.\nDo you want to contribute to my education even if it is small?\n\nZiraatBank\nRamazan Öğünç\nTR 0900 0100 2504 7437 1127 5002\n7 EYLÜL-TURGUTLU/MANİSA-TURKEY</string>
-    <string name="donate_to_student">Donation to Education</string>
-    <string name="pocket_money">Pocket Money</string>
-    <string name="thanks_for_watch_ads">Thank you for watching ads</string>
+    <string name="font_famiy">Font Family</string>
 </resources>

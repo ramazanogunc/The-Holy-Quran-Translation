@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph.xml"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
     app:startDestination="@id/read">
 
     <fragment
@@ -8,7 +9,7 @@
         android:name="com.ramo.quran.ui.fragment.ReadFragment" />
     <fragment
         android:id="@+id/changeResource"
-        android:name="conextSurahm.ramo.quran.ui.fragment.ChangeResourceFragment"
+        android:name="com.ramo.quran.ui.fragment.ChangeResourceFragment"
         android:label="@string/change_resource" />
     <fragment
         android:id="@+id/settings"
@@ -18,8 +19,4 @@
         android:id="@+id/termsOfUse"
         android:name="com.ramo.quran.ui.fragment.TermsOfUseFragment"
         android:label="@string/info_and_terms_of_use" />
-    <fragment
-        android:id="@+id/donate"
-        android:name="com.ramo.quran.ui.fragment.DonateFragment"
-        android:label="@string/donate" />
 </navigation>

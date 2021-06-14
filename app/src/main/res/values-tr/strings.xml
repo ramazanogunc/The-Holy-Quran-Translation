@@ -20,23 +20,19 @@
     <string name="versicle">. Ayet</string>
     <string name="watch_ads">Reklam İzle</string>
     <string name="learn_iban">Banka Bilgilerini Öğren</string>
-    <string name="donate_description">Selam Aleyküm Mümin kardeşim.\nAllah Rızası için bu uygulamayı yapan Yazılım Mühendisliği öğrenciyim. Eğitimime küçük miktarda da olsa katkıda bulunmak ister misin?\n\nZiraatBank\nRamazan Öğünç\nTR 0900 0100 2504 7437 1127 5002\n7 EYLÜL-TURGUTLU/MANİSA ŞUBESİ</string>
     <string name="developed_by">Geliştirici: Ramazan Öğünç</string>
-    <string name="version">Sürüm:1.0.0</string>
+    <string name="version">Sürüm:1.2.0</string>
     <string name="info">Bilgi</string>
     <string name="terms_of_use">Kullanım Koşulları</string>
     <string name="developer">Geliştirici</string>
     <string name="terms_of_use_description">Uygulamayı kullanan herkes kullanım koşullarını kabul etmiş sayılır.\nGeliştirici, tüm hatalardan sorumlu değildir.\nUygulamadaki meal kaynakları ebook.kuran.biz adresinden alınmıştır. Herhangi bir çeviri hatasından sorumlu değiliz.\nOkuma esnasınada Kuran\'ın yanlış anlaşılması ve bu yanlış anlaşılmadan doğabilecek tüm dini davranış ve durumlardan sorumlu değiliz. Bu durumdan kişinin kendisi sorumludur.</string>
     <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar flaticon.com adresinden alınmıştır</string>
-    <string name="developer_description">Ben Ramazan Öğünç. Yazılım Mühendisi Öğrencisiyim.\n\nWebsitesi: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
+    <string name="developer_description">Ben Ramazan Öğünç. Yazılım Mühendisi Öğrencisiyim.\nWebsitesi: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
     <string name="send">Gönder</string>
     <string name="error_message_hint">Hata mesajı</string>
     <string name="success">Başarılı</string>
     <string name="success_message">Her şey yolunda</string>
     <string name="error">Hata</string>
     <string name="error_message">Bir şeyler ters gitti</string>
-    <string name="donate_to_student">Öğrenciye Yardım</string>
-    <string name="thanks_for_watch_ads">Reklam izlediğiniz için teşekkür ederim.</string>
-    <string name="pocket_money">Harçlık</string>
-
+    <string name="font_famiy">Yazı Tipi</string>
 </resources>
