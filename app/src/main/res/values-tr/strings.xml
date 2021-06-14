@@ -34,5 +34,5 @@
     <string name="success_message">Her şey yolunda</string>
     <string name="error">Hata</string>
     <string name="error_message">Bir şeyler ters gitti</string>
-
+    <string name="font_famiy">Yazı Tipi</string>
 </resources>
