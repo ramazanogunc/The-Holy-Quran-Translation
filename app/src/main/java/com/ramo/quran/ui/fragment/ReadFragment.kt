@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.quran.R
 import com.ramo.quran.helper.*
 import com.ramo.quran.model.SurahName
@@ -17,6 +18,7 @@ class ReadFragment : HasDatabaseFragment() {
     private lateinit var surahDialog: AlertDialog
     private val pref by lazy { AppSharedPref(requireContext()) }
     private val fontSize by lazy { pref.getFontSize() }
+    private val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +35,7 @@ class ReadFragment : HasDatabaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.changeSurah -> surahDialog.show()
+            R.id.changeSurah -> initSurahDialog()
         }
         return true
     }
@@ -45,20 +47,22 @@ class ReadFragment : HasDatabaseFragment() {
         initUi()
     }
 
-    private fun initUi() {
+    override fun onPause() {
+        super.onPause()
+        val position =
+            (recyclerViewRead.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+        pref.setReadPosition(position)
+    }
 
-        // init recycler view adapter
-        val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
+    private fun initUi() {
         sweetRecyclerAdapter.addHolder(R.layout.recycler_read_item, ::bindReadItem)
         recyclerViewRead.adapter = sweetRecyclerAdapter
-
-        prepareData()
 
         // fab on clicks
         fabRight.setOnClickListener { onRightFabClick() }
         fabLeft.setOnClickListener { onLeftFabClick() }
 
-        initSurahDialog()
+        prepareData()
     }
 
     private fun bindReadItem(view: View, item: Verse) {
@@ -69,6 +73,7 @@ class ReadFragment : HasDatabaseFragment() {
         txtVerse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
 
         if (item.verseNo == 0) txtVerseNo.hide()
+        else txtVerseNo.show()
 
         txtVerse.textSize = fontSize
         txtVerseNo.textSize = fontSize
@@ -85,6 +90,7 @@ class ReadFragment : HasDatabaseFragment() {
         (recyclerViewRead.adapter as SweetRecyclerAdapter<Verse>).submitList(surahVerses)
         prepareSurahName(surahName, surahVerses.size)
         prepareFabButton(surahName.number)
+        recyclerViewRead.scrollToPosition(pref.getReadPosition())
     }
 
     private fun initSurahDialog() {
@@ -98,6 +104,7 @@ class ReadFragment : HasDatabaseFragment() {
             changeSurah(surahArray[which])
         }
         surahDialog = builder.create()
+        surahDialog.show()
     }
 
     private fun changeSurah(nameOfSurah: SurahName) {
@@ -106,11 +113,13 @@ class ReadFragment : HasDatabaseFragment() {
     }
 
     private fun onLeftFabClick() {
+        pref.setReadPosition(0)
         pref.changeCurrentSurah(pref.getCurrentSurah() - 1)
         prepareData()
     }
 
     private fun onRightFabClick() {
+        pref.setReadPosition(0)
         pref.changeCurrentSurah(pref.getCurrentSurah() + 1)
         prepareData()
     }
@@ -129,7 +138,7 @@ class ReadFragment : HasDatabaseFragment() {
     }
 
     private fun prepareSurahName(surahName: SurahName, versesSize: Int) {
-        (activity as MainActivity).supportActionBar?.title = surahName.name
+        (activity as MainActivity).title = surahName.name
         surahNumber.text = surahName.number.toString()
         versicleSize.text = getString(R.string.verse_number) + versesSize.toString()
     }

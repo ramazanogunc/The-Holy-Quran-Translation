@@ -43,5 +43,10 @@ class AppSharedPref(context: Context) {
         return if (number != 0) number else R.font.roboto
     }
 
+    fun getReadPosition(): Int = sharedPreferences.getInt("readVersePosition", 0)
+    fun setReadPosition(position: Int) {
+        getEditor().putInt("readVersePosition", position).also { it.apply() }
+    }
+
     private fun getEditor() = sharedPreferences.edit()
 }
