@@ -24,9 +24,26 @@ android {
     }
 
     buildTypes {
-        release {
+
+        debug {
+            debuggable true
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "@string/app_name_dev"
+        }
+
+        stage {
+            debuggable false
+            resValue "string", "app_name", "@string/app_name_stage"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_name", "@string/app_name_production"
         }
     }
 }
