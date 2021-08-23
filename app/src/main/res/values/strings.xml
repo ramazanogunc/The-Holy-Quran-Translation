@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Translation of the Quran</string>
+    <string name="app_name_production">Translation of the Quran</string>
+    <string name="app_name_stage">Translation of the Quran - Stage</string>
+    <string name="app_name_dev">Translation of the Quran - Dev</string>
     <string name="change_resource">Change Resource</string>
     <string name="data_not_found">Data not found</string>
     <string name="choice_surah">Select Surah</string>
