@@ -39,6 +39,7 @@ class SettingFragment : HasDatabaseFragment() {
 
         btnFontFamily.setOnClickListener { onFontFamilyClick(it) }
         btnFontSize.setOnClickListener { onFontSizeClick(it) }
+        btnKeepScreenOn.setOnClickListener { onKeepScreenOnClick(it) }
         btnLanguage.setOnClickListener { onLanguageClick(it) }
 
         initSavedConfig()
@@ -47,10 +48,16 @@ class SettingFragment : HasDatabaseFragment() {
     private fun initSavedConfig() {
         setFontInfo()
         setLanguage()
+        setKeepOnScreen()
     }
 
     private fun setLanguage() {
         btnLanguage.text = appDatabase.languageDao.getCurrentLanguage().name
+    }
+
+    private fun setKeepOnScreen() {
+        val isKeepOnScreen = pref.isKeepScreenOn()
+        btnKeepScreenOn.text = getText(if (isKeepOnScreen) R.string.yes else R.string.no)
     }
 
     private fun onFontFamilyClick(v: View) {
@@ -75,6 +82,19 @@ class SettingFragment : HasDatabaseFragment() {
             pref.changeFontSize(fontSize)
             requireActivity().showSuccess()
             setFontInfo()
+            return@setOnMenuItemClickListener true
+        }
+        menu.show()
+    }
+
+    private fun onKeepScreenOnClick(v: View) {
+        val menu = PopupMenu(requireContext(), v)
+        val yesNoValues = arrayOf(getString(R.string.yes), getString(R.string.no))
+        yesNoValues.forEach { menu.menu.add(it) }
+        menu.setOnMenuItemClickListener { menuItem ->
+            val selectedIsKeepScreenOn = menuItem.title == getString(R.string.yes)
+            pref.setIsKeepOnScreen(selectedIsKeepScreenOn)
+            requireActivity().recreate()
             return@setOnMenuItemClickListener true
         }
         menu.show()

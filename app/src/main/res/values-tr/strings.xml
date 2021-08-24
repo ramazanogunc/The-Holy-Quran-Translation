@@ -37,4 +37,7 @@
     <string name="error">Hata</string>
     <string name="error_message">Bir şeyler ters gitti</string>
     <string name="font_famiy">Yazı Tipi</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="keep_screen_on">Ekranı açık tut</string>
 </resources>

@@ -30,7 +30,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text="@string/font_famiy"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnFontFamily"
@@ -59,7 +59,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text="@string/font_size"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnFontSize"
@@ -105,8 +105,44 @@
                 android:layout_gravity="center"
                 android:layout_marginVertical="@dimen/settings_item_margin"
                 android:layout_weight="1"
+                android:text="@string/keep_screen_on"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnKeepScreenOn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_settings_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:paddingRight="5dp"
+                android:text="Açık"
+                android:textAllCaps="false"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/settings_item_margin"
+                android:layout_weight="1"
                 android:text="@string/app_language"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnLanguage"
@@ -130,6 +166,6 @@
         android:gravity="center"
         android:text="@string/version"
         android:textColor="@android:color/darker_gray"
-        android:textSize="17dp" />
+        android:textSize="17sp" />
 
 </LinearLayout>
