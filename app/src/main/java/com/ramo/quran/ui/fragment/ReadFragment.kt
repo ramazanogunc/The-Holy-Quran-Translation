@@ -138,7 +138,9 @@ class ReadFragment : HasDatabaseFragment() {
     }
 
     private fun prepareSurahName(surahName: SurahName, versesSize: Int) {
-        (activity as MainActivity).title = surahName.name
+        // there is two set title because. There is a bug when first run.
+        (requireActivity() as MainActivity).supportActionBar?.title = surahName.name
+        (requireActivity() as MainActivity).title = surahName.name
         surahNumber.text = surahName.number.toString()
         versicleSize.text = getString(R.string.verse_number) + versesSize.toString()
     }
