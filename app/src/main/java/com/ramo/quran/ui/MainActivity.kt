@@ -2,6 +2,7 @@ package com.ramo.quran.ui
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -10,6 +11,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.ramo.quran.R
+import com.ramo.quran.helper.AppSharedPref
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -22,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         initNavigationComponent()
+        setKeepScreenOn()
+    }
+
+    private fun setKeepScreenOn() {
+        val isKeepScreenOn = AppSharedPref(this).isKeepScreenOn()
+        if (isKeepScreenOn) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun initNavigationComponent() {

@@ -48,5 +48,12 @@ class AppSharedPref(context: Context) {
         getEditor().putInt("readVersePosition", position).also { it.apply() }
     }
 
+    fun isKeepScreenOn(): Boolean = sharedPreferences.getBoolean("isKeepOnScreen", false)
+    fun setIsKeepOnScreen(isKeepScreenOn: Boolean) {
+        getEditor().putBoolean("isKeepOnScreen", isKeepScreenOn).also { it.apply() }
+    }
+
     private fun getEditor() = sharedPreferences.edit()
+
+
 }

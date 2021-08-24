@@ -37,4 +37,7 @@
     <string name="error">Error</string>
     <string name="error_message">Something went wrong</string>
     <string name="font_famiy">Font Family</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="keep_screen_on">Keep screen on</string>
 </resources>
