@@ -8,5 +8,5 @@ import com.ramo.quran.model.Verse
 interface VerseDao {
 
     @Query("SELECT * FROM verses WHERE resourceId=(SELECT currentResourceId FROM configs) AND surahNumber=:surahNumber")
-    fun getCurrentSurahVerses(surahNumber: Int): List<Verse>
+    suspend fun getCurrentSurahVerses(surahNumber: Int): List<Verse>
 }

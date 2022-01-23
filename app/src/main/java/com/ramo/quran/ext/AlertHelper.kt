@@ -1,4 +1,4 @@
-package com.ramo.quran.helper
+package com.ramo.quran.ext
 
 import android.app.Activity
 import com.irozon.sneaker.Sneaker

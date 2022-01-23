@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import com.ramo.quran.R
-import com.ramo.quran.helper.AppSharedPref
-import com.ramo.quran.helper.getFontTypeFace
-import com.ramo.quran.helper.showSuccess
+import com.ramo.quran.ext.AppSharedPref
+import com.ramo.quran.utils.getFontTypeFace
+import com.ramo.quran.ext.showSuccess
 import com.ramo.quran.model.Language
 import com.ramo.quran.ui.MainActivity
 import com.yariksoffice.lingver.Lingver

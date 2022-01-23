@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.ramo.quran.BuildConfig
 import com.ramo.quran.R
-import com.ramo.quran.helper.showError
+import com.ramo.quran.ext.showError
 
 class TermsOfUseFragment : Fragment() {
 

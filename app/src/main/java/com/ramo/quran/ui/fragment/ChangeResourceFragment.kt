@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.ramo.quran.R
-import com.ramo.quran.helper.invisible
-import com.ramo.quran.helper.show
-import com.ramo.quran.helper.showSuccess
+import com.ramo.quran.ext.invisible
+import com.ramo.quran.ext.showSuccess
+import com.ramo.quran.ext.visible
 import com.ramo.quran.model.Config
 import com.ramo.quran.model.ResourceWithLanguage
 import com.ramo.quran.ui.MainActivity
@@ -51,7 +51,7 @@ class ChangeResourceFragment : HasDatabaseFragment() {
             resourceLanguage.text = item.language.name
             resource.text = item.resource.name
             if (config?.currentResourceId == item.resource.id)
-                isCheck.show()
+                isCheck.visible()
             else
                 isCheck.invisible()
         }

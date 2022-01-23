@@ -2,11 +2,13 @@ package com.ramo.quran
 
 import android.app.Application
 import com.ramo.quran.data.AppDatabase
-import com.ramo.quran.helper.AppSharedPref
-import com.ramo.quran.helper.LocaleHelper
+import com.ramo.quran.ext.AppSharedPref
+import com.ramo.quran.utils.LocaleHelper
 import com.yariksoffice.lingver.Lingver
+import dagger.hilt.android.HiltAndroidApp
 import java.util.*
 
+@HiltAndroidApp
 class MyApplication : Application() {
 
     override fun onCreate() {

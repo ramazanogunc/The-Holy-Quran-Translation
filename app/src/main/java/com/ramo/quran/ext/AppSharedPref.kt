@@ -1,10 +1,14 @@
-package com.ramo.quran.helper
+package com.ramo.quran.ext
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.ramo.quran.R
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppSharedPref(context: Context) {
+@Singleton
+class AppSharedPref @Inject constructor(@ApplicationContext private val context: Context) {
 
     private var sharedPreferences: SharedPreferences =
         context.getSharedPreferences("settings", Context.MODE_PRIVATE)

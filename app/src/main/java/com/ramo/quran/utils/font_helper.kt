@@ -1,4 +1,4 @@
-package com.ramo.quran.helper
+package com.ramo.quran.utils
 
 import android.content.Context
 import android.graphics.Typeface
