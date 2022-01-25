@@ -4,7 +4,6 @@ import android.content.Context
 import com.ramo.quran.data.AppDatabase
 import com.ramo.quran.data.dao.*
 import com.ramo.quran.data.repository.VerseRepository
-import com.ramo.quran.ext.AppSharedPref
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,16 +1,11 @@
-package com.ramo.quran.ui.fragment.read_fragment
+package com.ramo.quran.ui.read_fragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.ramo.quran.core.BaseViewModel
-import com.ramo.quran.data.AppDatabase
-import com.ramo.quran.data.dao.VerseDao
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.model.Verse
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

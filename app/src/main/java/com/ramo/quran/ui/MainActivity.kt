@@ -11,8 +11,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.ramo.quran.R
 import com.ramo.quran.core.SimpleBaseActivity
+import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.ActivityMainBinding
-import com.ramo.quran.ext.AppSharedPref
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class MainActivity : SimpleBaseActivity<ActivityMainBinding>() {
     }
 
     private fun setKeepScreenOn() {
-        val isKeepScreenOn = AppSharedPref(this).isKeepScreenOn()
+        val isKeepScreenOn = AppSharedPref(this).isKeepScreenOn
         if (isKeepScreenOn) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 

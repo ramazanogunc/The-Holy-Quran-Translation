@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.ramo.quran.core.common.ext.findGenericWithType
+import com.ramo.quran.core.ext.findGenericWithType
 import java.lang.reflect.Method
 
 abstract class SimpleBaseActivity<VB : ViewBinding> : AppCompatActivity() {

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.ramo.quran.core.common.ext.findGenericWithType
+import com.ramo.quran.core.ext.findGenericWithType
 import java.lang.reflect.Method
 
 abstract class SimpleBaseFragment<VB : ViewBinding> : Fragment() {

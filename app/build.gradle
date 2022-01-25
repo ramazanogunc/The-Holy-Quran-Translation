@@ -99,5 +99,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+    // Gson for json convert
+    implementation 'com.google.code.gson:gson:2.8.9'
+
 }
 

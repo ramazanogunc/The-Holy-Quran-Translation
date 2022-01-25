@@ -1,8 +1,8 @@
-package com.ramo.quran.ext
+package com.ramo.quran.core.ext
 
 import android.view.View
 
-fun View.hide() {
+fun View.gone() {
     this.visibility = View.GONE
 }
 

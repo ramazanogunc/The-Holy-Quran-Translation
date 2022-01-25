@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/read"
-        android:name="com.ramo.quran.ui.fragment.read_fragment.ReadFragment" />
+        android:name="com.ramo.quran.ui.read_fragment.ReadFragment" />
     <fragment
         android:id="@+id/changeResource"
         android:name="com.ramo.quran.ui.fragment.ChangeResourceFragment"

@@ -1,4 +1,4 @@
-package com.ramo.quran.ui.fragment.read_fragment
+package com.ramo.quran.ui.read_fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,9 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
+import com.ramo.quran.core.ext.gone
+import com.ramo.quran.core.ext.invisible
+import com.ramo.quran.core.ext.visible
 import com.ramo.quran.data.AppDatabase
+import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentReadBinding
-import com.ramo.quran.ext.*
+import com.ramo.quran.ext.observe
 import com.ramo.quran.model.SurahName
 import com.ramo.quran.model.Verse
 import com.ramo.quran.ui.MainActivity
@@ -25,7 +29,7 @@ import javax.inject.Inject
 class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
     private lateinit var surahDialog: AlertDialog
-    private val fontSize by lazy { pref.getFontSize() }
+    private val fontSize by lazy { pref.fontSize }
     private val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
 
     @Inject
@@ -57,7 +61,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
         withVB {
             val position =
                 (recyclerViewRead.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-            pref.setReadPosition(position)
+            pref.readPosition = position
         }
     }
 
@@ -81,7 +85,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
         txtVerseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
         txtVerse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
 
-        if (item.verseNo == 0) txtVerseNo.hide()
+        if (item.verseNo == 0) txtVerseNo.gone()
         else txtVerseNo.visible()
 
         txtVerse.textSize = fontSize
@@ -92,7 +96,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
     }
 
     private fun prepareData() {
-        val currentSurahNumber = pref.getCurrentSurah()
+        val currentSurahNumber = pref.currentSurah
         val surahName = appDatabase.surahNameDao.getCurrentSurahName(currentSurahNumber)
         // val surahVerses = appDatabase.verseDao.getCurrentSurahVerses(currentSurahNumber)
         viewModel.getVerses(currentSurahNumber)
@@ -101,7 +105,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
                 (recyclerViewRead.adapter as SweetRecyclerAdapter<Verse>).submitList(surahVerses)
                 prepareSurahName(surahName, surahVerses.size)
                 prepareFabButton(surahName.number)
-                recyclerViewRead.scrollToPosition(pref.getReadPosition())
+                recyclerViewRead.scrollToPosition(pref.readPosition)
             }
         }
     }
@@ -121,19 +125,19 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
     }
 
     private fun changeSurah(nameOfSurah: SurahName) {
-        pref.changeCurrentSurah(nameOfSurah.number)
+        pref.currentSurah = nameOfSurah.number
         prepareData()
     }
 
     private fun onLeftFabClick() {
-        pref.setReadPosition(0)
-        pref.changeCurrentSurah(pref.getCurrentSurah() - 1)
+        pref.readPosition = 0
+        pref.currentSurah = pref.currentSurah - 1
         prepareData()
     }
 
     private fun onRightFabClick() {
-        pref.setReadPosition(0)
-        pref.changeCurrentSurah(pref.getCurrentSurah() + 1)
+        pref.readPosition = 0
+        pref.currentSurah = pref.currentSurah + 1
         prepareData()
     }
 

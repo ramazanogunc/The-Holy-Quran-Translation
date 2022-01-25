@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import com.ramo.quran.R
-import com.ramo.quran.ext.AppSharedPref
-import com.ramo.quran.utils.getFontTypeFace
+import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.ext.showSuccess
 import com.ramo.quran.model.Language
 import com.ramo.quran.ui.MainActivity
+import com.ramo.quran.utils.getFontTypeFace
 import com.yariksoffice.lingver.Lingver
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -56,7 +56,7 @@ class SettingFragment : HasDatabaseFragment() {
     }
 
     private fun setKeepOnScreen() {
-        val isKeepOnScreen = pref.isKeepScreenOn()
+        val isKeepOnScreen = pref.isKeepScreenOn
         btnKeepScreenOn.text = getText(if (isKeepOnScreen) R.string.yes else R.string.no)
     }
 
@@ -79,7 +79,7 @@ class SettingFragment : HasDatabaseFragment() {
         fontSizeArray.forEach { menu.menu.add(it) }
         menu.setOnMenuItemClickListener {
             val fontSize = it.title.toString().toFloat()
-            pref.changeFontSize(fontSize)
+            pref.fontSize = fontSize
             requireActivity().showSuccess()
             setFontInfo()
             return@setOnMenuItemClickListener true
@@ -93,7 +93,7 @@ class SettingFragment : HasDatabaseFragment() {
         yesNoValues.forEach { menu.menu.add(it) }
         menu.setOnMenuItemClickListener { menuItem ->
             val selectedIsKeepScreenOn = menuItem.title == getString(R.string.yes)
-            pref.setIsKeepOnScreen(selectedIsKeepScreenOn)
+            pref.isKeepScreenOn = selectedIsKeepScreenOn
             requireActivity().recreate()
             return@setOnMenuItemClickListener true
         }
@@ -115,7 +115,7 @@ class SettingFragment : HasDatabaseFragment() {
     }
 
     private fun setFontInfo() {
-        val fontSize = pref.getFontSize()
+        val fontSize = pref.fontSize
         btnFontSize.text = fontSize.toString()
         textViewExample.textSize = fontSize
         btnFontFamily.text = pref.getCurrentFontName()

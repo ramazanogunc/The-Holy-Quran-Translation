@@ -1,4 +1,4 @@
-package com.ramo.quran.core.common.ext
+package com.ramo.quran.core.ext
 
 import java.lang.reflect.ParameterizedType
 

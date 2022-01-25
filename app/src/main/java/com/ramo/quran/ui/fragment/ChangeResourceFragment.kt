@@ -6,11 +6,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.ramo.quran.R
 import com.ramo.quran.core.SimpleBaseFragment
+import com.ramo.quran.core.ext.invisible
+import com.ramo.quran.core.ext.visible
 import com.ramo.quran.data.AppDatabase
 import com.ramo.quran.databinding.FragmentChangeResourceBinding
-import com.ramo.quran.ext.invisible
 import com.ramo.quran.ext.showSuccess
-import com.ramo.quran.ext.visible
 import com.ramo.quran.model.Config
 import com.ramo.quran.model.ResourceWithLanguage
 import com.ramo.quran.ui.MainActivity
