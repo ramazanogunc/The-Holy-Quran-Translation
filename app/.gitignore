@@ -349,3 +349,6 @@ Thumbs.db
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio,gradle,intellij,kotlin,java
+
+# Google services file for Firebase
+google-services.json
