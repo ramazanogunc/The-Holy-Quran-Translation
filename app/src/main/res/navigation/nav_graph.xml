@@ -9,7 +9,7 @@
         android:name="com.ramo.quran.ui.read_fragment.ReadFragment" />
     <fragment
         android:id="@+id/changeResource"
-        android:name="com.ramo.quran.ui.fragment.ChangeResourceFragment"
+        android:name="com.ramo.quran.ui.change_resource_fragment.ChangeResourceFragment"
         android:label="@string/change_resource" />
     <fragment
         android:id="@+id/settings"

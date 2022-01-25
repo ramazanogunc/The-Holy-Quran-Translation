@@ -8,5 +8,5 @@ import com.ramo.quran.model.ResourceWithLanguage
 interface ResourceDao {
 
     @Query("SELECT * FROM resources")
-    fun getAllResourcesWithLanguage(): List<ResourceWithLanguage>
+    suspend fun getAllResourcesWithLanguage(): List<ResourceWithLanguage>
 }

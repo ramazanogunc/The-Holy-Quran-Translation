@@ -1,7 +1,11 @@
 package com.ramo.quran.di
 
+import com.ramo.quran.data.dao.ConfigDao
+import com.ramo.quran.data.dao.ResourceDao
 import com.ramo.quran.data.dao.SurahNameDao
 import com.ramo.quran.data.dao.VerseDao
+import com.ramo.quran.data.repository.ConfigRepository
+import com.ramo.quran.data.repository.ResourceRepository
 import com.ramo.quran.data.repository.SurahNameRepository
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.data.shared_pref.AppSharedPref
@@ -21,5 +25,11 @@ object RepositoryModule {
     @Provides
     fun provideSurahNameRepository(surahNameDao: SurahNameDao, sharedPref: AppSharedPref) =
         SurahNameRepository(surahNameDao, sharedPref)
+
+    @Provides
+    fun provideResourceRepository(resourceDao: ResourceDao) = ResourceRepository(resourceDao)
+
+    @Provides
+    fun provideConfigRepository(configDao: ConfigDao) = ConfigRepository(configDao)
 
 }
