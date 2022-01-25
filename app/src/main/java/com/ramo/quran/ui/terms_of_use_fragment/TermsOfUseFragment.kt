@@ -1,4 +1,4 @@
-package com.ramo.quran.ui.fragment
+package com.ramo.quran.ui.terms_of_use_fragment
 
 import android.content.Intent
 import android.os.Build

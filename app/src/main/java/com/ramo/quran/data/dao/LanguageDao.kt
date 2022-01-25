@@ -8,9 +8,9 @@ import com.ramo.quran.model.Language
 interface LanguageDao {
 
     @Query("SELECT * FROM languages")
-    fun getAllLanguages(): List<Language>
+    suspend fun getAllLanguages(): List<Language>
 
     @Query("SELECT * FROM languages WHERE id=(SELECT languageId FROM configs)")
-    fun getCurrentLanguage(): Language
+    suspend fun getCurrentLanguage(): Language
 
 }

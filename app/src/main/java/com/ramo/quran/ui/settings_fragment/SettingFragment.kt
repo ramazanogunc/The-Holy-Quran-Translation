@@ -1,37 +1,33 @@
-package com.ramo.quran.ui.fragment
+package com.ramo.quran.ui.settings_fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.PopupMenu
 import com.ramo.quran.R
+import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.data.shared_pref.AppSharedPref
+import com.ramo.quran.databinding.FragmentSettingsBinding
+import com.ramo.quran.ext.observe
 import com.ramo.quran.ext.showSuccess
-import com.ramo.quran.model.Language
 import com.ramo.quran.ui.MainActivity
 import com.ramo.quran.utils.getFontTypeFace
 import com.yariksoffice.lingver.Lingver
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_settings.*
+import javax.inject.Inject
 
-class SettingFragment : HasDatabaseFragment() {
+@AndroidEntryPoint
+class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
 
-    private lateinit var languageList: List<Language>
-    private val pref by lazy { AppSharedPref(requireContext()) }
-    private val fontSizeArray = arrayOf("14", "16", "18", "20", "22", "24", "26")
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
+    @Inject
+    lateinit var pref: AppSharedPref
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        languageList = appDatabase.languageDao.getAllLanguages()
         initUi()
+        initObserver()
+        viewModel.getAllLanguage()
+        viewModel.getCurrentLanguage()
     }
 
     private fun initUi() {
@@ -45,14 +41,15 @@ class SettingFragment : HasDatabaseFragment() {
         initSavedConfig()
     }
 
-    private fun initSavedConfig() {
-        setFontInfo()
-        setLanguage()
-        setKeepOnScreen()
+    private fun initObserver() {
+        observe(viewModel.currentLanguage) {
+            btnLanguage.text = it.name
+        }
     }
 
-    private fun setLanguage() {
-        btnLanguage.text = appDatabase.languageDao.getCurrentLanguage().name
+    private fun initSavedConfig() {
+        setFontInfo()
+        setKeepOnScreen()
     }
 
     private fun setKeepOnScreen() {
@@ -76,7 +73,7 @@ class SettingFragment : HasDatabaseFragment() {
 
     private fun onFontSizeClick(v: View) {
         val menu = PopupMenu(requireContext(), v)
-        fontSizeArray.forEach { menu.menu.add(it) }
+        viewModel.fontSizeArray.forEach { menu.menu.add(it) }
         menu.setOnMenuItemClickListener {
             val fontSize = it.title.toString().toFloat()
             pref.fontSize = fontSize
@@ -101,17 +98,20 @@ class SettingFragment : HasDatabaseFragment() {
     }
 
     private fun onLanguageClick(v: View) {
-        val menu = PopupMenu(requireContext(), v)
-        languageList.forEach { menu.menu.add(it.name) }
-        menu.setOnMenuItemClickListener { menuItem ->
-            val selectedLang = languageList.first { it.name == menuItem.title }
-            appDatabase.configDao.changeLocaleWithResource(selectedLang.id!!)
-            Lingver.getInstance()
-                .setLocale(requireContext(), selectedLang.key)
-            requireActivity().recreate()
-            return@setOnMenuItemClickListener true
+        viewModel.languageList?.let { itLanguageList ->
+            val menu = PopupMenu(requireContext(), v)
+            itLanguageList.forEach { menu.menu.add(it.name) }
+            menu.setOnMenuItemClickListener { menuItem ->
+                val selectedLang = itLanguageList.first { it.name == menuItem.title }
+                viewModel.changeLanguage(selectedLang) {
+                    Lingver.getInstance()
+                        .setLocale(requireContext(), selectedLang.key)
+                    requireActivity().recreate()
+                }
+                return@setOnMenuItemClickListener true
+            }
+            menu.show()
         }
-        menu.show()
     }
 
     private fun setFontInfo() {

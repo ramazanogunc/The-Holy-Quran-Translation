@@ -13,10 +13,10 @@
         android:label="@string/change_resource" />
     <fragment
         android:id="@+id/settings"
-        android:name="com.ramo.quran.ui.fragment.SettingFragment"
+        android:name="com.ramo.quran.ui.settings_fragment.SettingFragment"
         android:label="@string/settings" />
     <fragment
         android:id="@+id/termsOfUse"
-        android:name="com.ramo.quran.ui.fragment.TermsOfUseFragment"
+        android:name="com.ramo.quran.ui.terms_of_use_fragment.TermsOfUseFragment"
         android:label="@string/info_and_terms_of_use" />
 </navigation>
