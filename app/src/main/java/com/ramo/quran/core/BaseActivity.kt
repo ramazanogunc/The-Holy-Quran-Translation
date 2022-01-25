@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.ramo.quran.core.common.ext.findGenericWithType
 
-abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : SimpleBaseFragment<VB>() {
+abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : SimpleBaseActivity<VB>() {
 
     protected lateinit var viewModel: VM
-
-    open val isSharedViewModel: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,10 +17,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : SimpleBaseFragme
 
     private fun initViewModel() {
         val vmClass = javaClass.findGenericWithType<VM>(1)
-        viewModel = ViewModelProvider(
-            if (isSharedViewModel) requireActivity()
-            else this
-        )[vmClass]
+        viewModel = ViewModelProvider(this)[vmClass]
     }
-
 }

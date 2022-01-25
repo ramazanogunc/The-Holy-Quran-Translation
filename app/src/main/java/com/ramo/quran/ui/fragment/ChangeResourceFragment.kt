@@ -1,12 +1,13 @@
 package com.ramo.quran.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.ramo.quran.R
+import com.ramo.quran.core.SimpleBaseFragment
+import com.ramo.quran.data.AppDatabase
+import com.ramo.quran.databinding.FragmentChangeResourceBinding
 import com.ramo.quran.ext.invisible
 import com.ramo.quran.ext.showSuccess
 import com.ramo.quran.ext.visible
@@ -14,20 +15,17 @@ import com.ramo.quran.model.Config
 import com.ramo.quran.model.ResourceWithLanguage
 import com.ramo.quran.ui.MainActivity
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_change_resource.*
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class ChangeResourceFragment : HasDatabaseFragment() {
+@AndroidEntryPoint
+class ChangeResourceFragment : SimpleBaseFragment<FragmentChangeResourceBinding>() {
+
+    @Inject
+    lateinit var appDatabase: AppDatabase
 
     private val sweetRecyclerAdapter = SweetRecyclerAdapter<ResourceWithLanguage>()
     private var config: Config? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_change_resource, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,13 +53,15 @@ class ChangeResourceFragment : HasDatabaseFragment() {
             else
                 isCheck.invisible()
         }
-        sweetRecyclerAdapter.setOnItemClickListener { v, item ->
+        sweetRecyclerAdapter.setOnItemClickListener { _, item ->
             sweetRecyclerAdapter.notifyDataSetChanged()
             appDatabase.configDao.updateCurrentResource(item.resource.id!!)
             requireActivity().showSuccess()
             refreshDataAndUi()
         }
-        recyclerViewResource.adapter = sweetRecyclerAdapter
+        withVB {
+            recyclerViewResource.adapter = sweetRecyclerAdapter
+        }
         sweetRecyclerAdapter.submitList(resourceList)
     }
 
