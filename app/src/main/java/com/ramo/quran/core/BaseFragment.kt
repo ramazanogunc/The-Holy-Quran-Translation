@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.ramo.quran.databinding.FragmentReadBinding
+import com.ramo.quran.core.common.ext.findGenericWithType
 import java.lang.reflect.Method
-import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
@@ -19,7 +18,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     protected lateinit var viewModel: VM
 
-    open fun isSharedViewModel(): Boolean = false
+    open val isSharedViewModel: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,19 +26,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val foundInflater = findInflateMethod()
-        _binding = foundInflater.invoke(null, layoutInflater, container, false) as VB
+        @Suppress("UNCHECKED_CAST")
+        _binding = foundInflater.invoke(null, inflater, container, false) as VB
         return _binding!!.root
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(
-            if (isSharedViewModel()) requireActivity()
-            else this
-        )[getViewModelClass()]
-
-
+        initViewModel()
     }
 
     override fun onDestroyView() {
@@ -49,10 +44,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     protected fun withVB(block: VB.() -> Unit) = with(binding, block)
 
-
     private fun findInflateMethod(): Method {
-        val type = javaClass.genericSuperclass
-        val clazz = (type as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val clazz = javaClass.findGenericWithType<VB>(0)
         return clazz.getMethod(
             "inflate",
             LayoutInflater::class.java,
@@ -61,8 +54,12 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
         )
     }
 
-    private fun getViewModelClass(): Class<VM> {
-        val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1]
-        return type as Class<VM>
+    private fun initViewModel() {
+        val vmClass = javaClass.findGenericWithType<VM>(1)
+        viewModel = ViewModelProvider(
+            if (isSharedViewModel) requireActivity()
+            else this
+        )[vmClass]
     }
+
 }
