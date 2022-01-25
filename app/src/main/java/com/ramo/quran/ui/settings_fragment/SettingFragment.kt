@@ -13,7 +13,6 @@ import com.ramo.quran.ui.MainActivity
 import com.ramo.quran.utils.getFontTypeFace
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_settings.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,17 +32,19 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
     private fun initUi() {
         (activity as? MainActivity)?.supportActionBar?.title = getString(R.string.settings)
 
-        btnFontFamily.setOnClickListener { onFontFamilyClick(it) }
-        btnFontSize.setOnClickListener { onFontSizeClick(it) }
-        btnKeepScreenOn.setOnClickListener { onKeepScreenOnClick(it) }
-        btnLanguage.setOnClickListener { onLanguageClick(it) }
+        withVB {
+            btnFontFamily.setOnClickListener { onFontFamilyClick(it) }
+            btnFontSize.setOnClickListener { onFontSizeClick(it) }
+            btnKeepScreenOn.setOnClickListener { onKeepScreenOnClick(it) }
+            btnLanguage.setOnClickListener { onLanguageClick(it) }
+        }
 
         initSavedConfig()
     }
 
     private fun initObserver() {
         observe(viewModel.currentLanguage) {
-            btnLanguage.text = it.name
+            binding.btnLanguage.text = it.name
         }
     }
 
@@ -54,7 +55,7 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
 
     private fun setKeepOnScreen() {
         val isKeepOnScreen = pref.isKeepScreenOn
-        btnKeepScreenOn.text = getText(if (isKeepOnScreen) R.string.yes else R.string.no)
+        binding.btnKeepScreenOn.text = getText(if (isKeepOnScreen) R.string.yes else R.string.no)
     }
 
     private fun onFontFamilyClick(v: View) {
@@ -116,11 +117,13 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
 
     private fun setFontInfo() {
         val fontSize = pref.fontSize
-        btnFontSize.text = fontSize.toString()
-        textViewExample.textSize = fontSize
-        btnFontFamily.text = pref.getCurrentFontName()
-        textViewExample.typeface =
-            getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+        withVB {
+            btnFontSize.text = fontSize.toString()
+            textViewExample.textSize = fontSize
+            btnFontFamily.text = pref.getCurrentFontName()
+            textViewExample.typeface =
+                getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+        }
     }
 
 }
