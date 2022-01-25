@@ -14,13 +14,13 @@
     <string name="watch_ads">Watch Ads</string>
     <string name="info_and_terms_of_use">Info and Terms of Use</string>
     <string name="change">Index</string>
-    <string name="surah_number">Surah Number:</string>
-    <string name="verse_number">Verse Number:</string>
+    <string name="surah_number">Surah Number: %1$d</string>
+    <string name="verse_number">Verse Number: %1$d</string>
     <string name="meal_resource">Sources of Qur\'an</string>
     <string name="font_size">Font Size</string>
     <string name="app_language">Application Language</string>
     <string name="save">Save</string>
-    <string name="versicle">. Verse</string>
+    <string name="versicle">%1$d. Verse</string>
     <string name="learn_iban">Learn Info of Bank</string>
     <string name="developed_by">Developed by Ramazan Öğünç</string>
     <string name="version">Version:1.2.0</string>
@@ -33,7 +33,7 @@
     <string name="info_description">The Quran Translations are taken from ebook.kuran.biz. \nSome icons in the application are taken from flaticon.com</string>
     <string name="developer_description">I am Ramazan Öğünç. I am from Turkey. I am a software engineering student.\nWebsite: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
     <string name="success">Success</string>
-    <string name="success_message">Everything is ok</string>
+    <string name="success_message">Everything is OK</string>
     <string name="error">Error</string>
     <string name="error_message">Something went wrong</string>
     <string name="font_famiy">Font Family</string>

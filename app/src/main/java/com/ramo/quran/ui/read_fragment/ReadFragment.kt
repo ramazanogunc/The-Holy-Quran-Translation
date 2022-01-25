@@ -1,25 +1,25 @@
 package com.ramo.quran.ui.read_fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.core.ext.gone
 import com.ramo.quran.core.ext.invisible
+import com.ramo.quran.core.ext.safeContext
 import com.ramo.quran.core.ext.visible
-import com.ramo.quran.data.AppDatabase
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentReadBinding
+import com.ramo.quran.databinding.RecyclerReadItemBinding
 import com.ramo.quran.ext.observe
 import com.ramo.quran.model.SurahName
 import com.ramo.quran.model.Verse
 import com.ramo.quran.ui.MainActivity
+import com.ramo.quran.utils.CustomDialogs
 import com.ramo.quran.utils.getFontTypeFace
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,14 +28,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
-    private lateinit var surahDialog: AlertDialog
     private val fontSize by lazy { pref.fontSize }
     private val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
 
     @Inject
     lateinit var pref: AppSharedPref
 
-    private val appDatabase by lazy { AppDatabase.getDatabase(requireContext()) }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -44,7 +42,8 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.changeSurah -> initSurahDialog()
+            R.id.changeSurah -> viewModel.getAllSurahForSelect()
+            else -> return super.onOptionsItemSelected(item)
         }
         return true
     }
@@ -52,15 +51,15 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-
         initUi()
+        initObserver()
     }
 
     override fun onPause() {
         super.onPause()
         withVB {
-            val position =
-                (recyclerViewRead.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+            val layoutManager = (recyclerViewRead.layoutManager as LinearLayoutManager)
+            val position = layoutManager.findFirstVisibleItemPosition()
             pref.readPosition = position
         }
     }
@@ -72,96 +71,68 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
             recyclerViewRead.adapter = sweetRecyclerAdapter
 
             // fab on clicks
-            fabRight.setOnClickListener { onRightFabClick() }
-            fabLeft.setOnClickListener { onLeftFabClick() }
+            fabRight.setOnClickListener { viewModel.nextSurah() }
+            fabLeft.setOnClickListener { viewModel.previousSurah() }
         }
-        prepareData()
+        viewModel.getData()
     }
 
-    private fun bindReadItem(view: View, item: Verse) {
-        val txtVerseNo = view.findViewById<TextView>(R.id.verseNo)
-        val txtVerse = view.findViewById<TextView>(R.id.verse)
-
-        txtVerseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
-        txtVerse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
-
-        if (item.verseNo == 0) txtVerseNo.gone()
-        else txtVerseNo.visible()
-
-        txtVerse.textSize = fontSize
-        txtVerseNo.textSize = fontSize
-
-        txtVerseNo.text = item.verseNo.toString() + getString(R.string.versicle)
-        txtVerse.text = item.verse
-    }
-
-    private fun prepareData() {
-        val currentSurahNumber = pref.currentSurah
-        val surahName = appDatabase.surahNameDao.getCurrentSurahName(currentSurahNumber)
-        // val surahVerses = appDatabase.verseDao.getCurrentSurahVerses(currentSurahNumber)
-        viewModel.getVerses(currentSurahNumber)
+    private fun initObserver() {
+        observe(viewModel.surahName) { surahName ->
+            prepareFabButton(surahName.number)
+            prepareSurahName(surahName)
+        }
         observe(viewModel.verses) { surahVerses ->
             withVB {
-                (recyclerViewRead.adapter as SweetRecyclerAdapter<Verse>).submitList(surahVerses)
-                prepareSurahName(surahName, surahVerses.size)
-                prepareFabButton(surahName.number)
+                sweetRecyclerAdapter.submitList(surahVerses)
                 recyclerViewRead.scrollToPosition(pref.readPosition)
+                versicleSize.text = getString(R.string.verse_number, surahVerses.size)
+            }
+        }
+        observe(viewModel.allSurahName) { allSurahName ->
+            val stringAllSurahName: List<String> = allSurahName.map { it.name }
+            safeContext {
+                CustomDialogs.changeSurah(it, stringAllSurahName) { selectedPosition ->
+                    viewModel.changeSurah(allSurahName[selectedPosition])
+                }
             }
         }
     }
 
-    private fun initSurahDialog() {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.choice_surah))
-        val surahArray = appDatabase.surahNameDao.getAllSurahName()
-        val stringArray: List<String> = surahArray.map { it.name }
-        builder.setItems(
-            stringArray.toTypedArray()
-        ) { _, which ->
-            changeSurah(surahArray[which])
+    private fun prepareSurahName(surahName: SurahName) {
+        // there is two set title because. There is a bug when first run.
+        (requireActivity() as MainActivity).supportActionBar?.title = surahName.name
+        (requireActivity() as MainActivity).title = surahName.name
+        binding.surahNumber.text = surahName.number.toString()
+    }
+
+    private fun bindReadItem(view: View, item: Verse) {
+        val binding = RecyclerReadItemBinding.bind(view)
+
+        with(binding) {
+            verseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+            verse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+
+            if (item.verseNo == 0) verseNo.gone()
+            else verseNo.visible()
+
+            verse.textSize = fontSize
+            verseNo.textSize = fontSize
+
+            verseNo.text = getString(R.string.versicle, item.verseNo)
+            verse.text = item.verse
         }
-        surahDialog = builder.create()
-        surahDialog.show()
-    }
-
-    private fun changeSurah(nameOfSurah: SurahName) {
-        pref.currentSurah = nameOfSurah.number
-        prepareData()
-    }
-
-    private fun onLeftFabClick() {
-        pref.readPosition = 0
-        pref.currentSurah = pref.currentSurah - 1
-        prepareData()
-    }
-
-    private fun onRightFabClick() {
-        pref.readPosition = 0
-        pref.currentSurah = pref.currentSurah + 1
-        prepareData()
     }
 
     private fun prepareFabButton(surahNo: Int) {
         withVB {
             fabLeft.visible()
-            bottomCenter.visible()
             fabRight.visible()
 
-            // check first or last surah
             if (surahNo == 114)
                 fabRight.invisible()
             else if (surahNo == 1)
                 fabLeft.invisible()
-        }
-    }
-
-    private fun prepareSurahName(surahName: SurahName, versesSize: Int) {
-        // there is two set title because. There is a bug when first run.
-        (requireActivity() as MainActivity).supportActionBar?.title = surahName.name
-        (requireActivity() as MainActivity).title = surahName.name
-        withVB {
-            surahNumber.text = surahName.number.toString()
-            versicleSize.text = getString(R.string.verse_number) + versesSize.toString()
         }
     }
 }

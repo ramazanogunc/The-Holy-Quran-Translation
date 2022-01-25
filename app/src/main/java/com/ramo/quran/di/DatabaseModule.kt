@@ -3,7 +3,6 @@ package com.ramo.quran.di
 import android.content.Context
 import com.ramo.quran.data.AppDatabase
 import com.ramo.quran.data.dao.*
-import com.ramo.quran.data.repository.VerseRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,9 +41,5 @@ object DatabaseModule {
 
     @Provides
     fun provideVerseDao(appDatabase: AppDatabase): VerseDao = appDatabase.verseDao
-
-
-    @Provides
-    fun provideVerseRepository(verseDao: VerseDao) = VerseRepository(verseDao)
 
 }

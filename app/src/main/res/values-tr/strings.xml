@@ -13,13 +13,13 @@
     <string name="feedback">Geri Bildirim</string>
     <string name="donate">Bağış</string>
     <string name="change">İndeks</string>
-    <string name="verse_number">Ayet Sayısı:</string>
+    <string name="verse_number">Ayet Sayısı: %1$d</string>
     <string name="meal_resource">Meal Kaynakları</string>
     <string name="font_size">Yazı boyutu</string>
     <string name="app_language">Uygulama dili</string>
-    <string name="surah_number">Sure Numarası:</string>
+    <string name="surah_number">Sure Numarası: %1$d</string>
     <string name="save">Kaydet</string>
-    <string name="versicle">. Ayet</string>
+    <string name="versicle">%1$d. Ayet</string>
     <string name="watch_ads">Reklam İzle</string>
     <string name="learn_iban">Banka Bilgilerini Öğren</string>
     <string name="developed_by">Geliştirici: Ramazan Öğünç</string>
