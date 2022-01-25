@@ -5,9 +5,9 @@ import android.view.View
 import android.widget.PopupMenu
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
+import com.ramo.quran.core.ext.observe
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSettingsBinding
-import com.ramo.quran.ext.observe
 import com.ramo.quran.ext.showSuccess
 import com.ramo.quran.ui.MainActivity
 import com.ramo.quran.utils.getFontTypeFace

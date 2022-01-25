@@ -8,14 +8,10 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
-import com.ramo.quran.core.ext.gone
-import com.ramo.quran.core.ext.invisible
-import com.ramo.quran.core.ext.safeContext
-import com.ramo.quran.core.ext.visible
+import com.ramo.quran.core.ext.*
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentReadBinding
 import com.ramo.quran.databinding.RecyclerReadItemBinding
-import com.ramo.quran.ext.observe
 import com.ramo.quran.model.SurahName
 import com.ramo.quran.model.Verse
 import com.ramo.quran.ui.MainActivity

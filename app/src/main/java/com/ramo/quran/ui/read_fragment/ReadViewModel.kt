@@ -60,6 +60,7 @@ class ReadViewModel @Inject constructor(
         pref.readPosition = 0
         pref.currentSurah = surahName.number
         getData()
+        _allSurahName.value = null
     }
 
     fun previousSurah() {
