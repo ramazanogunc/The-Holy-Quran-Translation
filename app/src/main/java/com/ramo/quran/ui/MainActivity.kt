@@ -3,12 +3,11 @@ package com.ramo.quran.ui
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
-import androidx.appcompat.widget.Toolbar
+import androidx.annotation.DrawableRes
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
 import com.ramo.quran.R
 import com.ramo.quran.core.SimpleBaseActivity
 import com.ramo.quran.data.shared_pref.AppSharedPref
@@ -35,13 +34,21 @@ class MainActivity : SimpleBaseActivity<ActivityMainBinding>() {
 
     private fun initNavigationComponent() {
         val navController = findNavController(R.id.navHostFragment)
-        findViewById<NavigationView>(R.id.nav_view)
-            .setupWithNavController(navController)
         withVB {
-            // toolbar
-            findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController, drawerLayout)
+            navView.setupWithNavController(navController)
+            setSupportActionBar(toolbar)
+            toolbar.setupWithNavController(navController, drawerLayout)
+        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.read -> changeToolbarIcon(R.drawable.ic_navigation)
+                else -> changeToolbarIcon(R.drawable.ic_back)
+            }
         }
     }
+
+    private fun changeToolbarIcon(@DrawableRes iconId: Int) =
+        binding.toolbar.setNavigationIcon(iconId)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.navHostFragment)

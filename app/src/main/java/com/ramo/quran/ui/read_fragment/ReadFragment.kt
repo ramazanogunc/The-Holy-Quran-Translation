@@ -1,5 +1,6 @@
 package com.ramo.quran.ui.read_fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -106,11 +107,20 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
         val binding = RecyclerReadItemBinding.bind(view)
 
         with(binding) {
-            verseNo.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
-            verse.typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+            val typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+            typeface?.let { itTypeface ->
+                verseNo.setTypeface(itTypeface, Typeface.BOLD)
+                verse.typeface = itTypeface
+            }
 
-            if (item.verseNo == 0) verseNo.gone()
-            else verseNo.visible()
+
+            if (item.verseNo == 0) {
+                divider.gone()
+                verseNo.gone()
+            } else {
+                divider.visible()
+                verseNo.visible()
+            }
 
             verse.textSize = fontSize
             verseNo.textSize = fontSize
