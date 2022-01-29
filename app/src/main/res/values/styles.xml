@@ -10,7 +10,10 @@
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="fontFamily">@font/roboto</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
     </style>
+
 
     <!-- SplashScreen theme. -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -22,12 +25,13 @@
         <item name="background">@color/white</item>
         <item name="backgroundColor">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
     </style>
 
     <style name="ToolbarTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
 
 </resources>

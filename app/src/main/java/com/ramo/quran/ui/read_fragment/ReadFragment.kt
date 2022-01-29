@@ -2,6 +2,7 @@ package com.ramo.quran.ui.read_fragment
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -31,6 +32,8 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
     @Inject
     lateinit var pref: AppSharedPref
 
+    private var rvState: Parcelable? = null
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -58,7 +61,13 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
             val layoutManager = (recyclerViewRead.layoutManager as LinearLayoutManager)
             val position = layoutManager.findFirstVisibleItemPosition()
             pref.readPosition = position
+            rvState = layoutManager.onSaveInstanceState()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.recyclerViewRead.layoutManager?.onRestoreInstanceState(rvState)
     }
 
     private fun initUi() {

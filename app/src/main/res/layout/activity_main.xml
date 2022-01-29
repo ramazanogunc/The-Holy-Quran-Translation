@@ -22,13 +22,15 @@
                 style="@style/Widget.Material3.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/bg_gradient_primary"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:menu="@menu/read_menu"
                 app:navigationIcon="@drawable/ic_navigation"
-                app:navigationIconTint="@color/primaryColor"
+                app:navigationIconTint="@color/white"
                 app:title="Deneme"
                 app:titleCentered="true"
-                app:titleTextAppearance="@style/ToolbarTitle" />
+                app:titleTextAppearance="@style/ToolbarTitle"
+                app:titleTextColor="@color/white" />
 
 
             <View
@@ -46,8 +48,8 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:defaultNavHost="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:navGraph="@navigation/nav_graph" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
