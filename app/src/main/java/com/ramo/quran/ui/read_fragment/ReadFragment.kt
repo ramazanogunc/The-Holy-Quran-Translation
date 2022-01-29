@@ -92,7 +92,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
             withVB {
                 sweetRecyclerAdapter.submitList(surahVerses)
                 recyclerViewRead.scrollToPosition(pref.readPosition)
-                versicleSize.text = getString(R.string.verse_number, surahVerses.size)
+                versicleSize.text = getString(R.string.verse_number, surahVerses.size - 1)
             }
         }
         observe(viewModel.allSurahName) { allSurahName ->
