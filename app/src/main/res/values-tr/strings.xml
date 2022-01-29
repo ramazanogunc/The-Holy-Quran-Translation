@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name_production">Kuran Meali</string>
-    <string name="app_name_stage">Kuran Meali - Stage</string>
-    <string name="app_name_dev">Kuran Meali - Dev</string>
+    <string name="app_name_stage">[Stage] Kuran Meali</string>
+    <string name="app_name_dev">[Dev] Kuran Meali</string>
     <string name="change_resource">Kaynak Değiştir</string>
     <string name="data_not_found">Hiç veri bulunamadı</string>
     <string name="choice_surah">Bir sure seç</string>
+    <string name="change_surah">SURE DEĞİŞTİR</string>
     <string name="read">Oku</string>
     <string name="settings">Ayarlar</string>
     <string name="about">Hakkımızda</string>
@@ -40,4 +41,6 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="keep_screen_on">Ekranı açık tut</string>
+    <string name="please_select_read_surah">Okumak istediğiniz sureyi seçiniz</string>
+    <string name="cancel">İptal</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.ramo.quran.ui.read_fragment
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ramo.quran.core.BaseViewModel
@@ -60,6 +61,12 @@ class ReadViewModel @Inject constructor(
         pref.readPosition = 0
         pref.currentSurah = surahName.number
         getData()
+        deleteSurahs()
+    }
+
+
+    @SuppressLint("NullSafeMutableLiveData")
+    fun deleteSurahs() {
         _allSurahName.value = null
     }
 

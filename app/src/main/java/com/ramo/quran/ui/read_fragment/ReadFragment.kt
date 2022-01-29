@@ -96,11 +96,16 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
             }
         }
         observe(viewModel.allSurahName) { allSurahName ->
-            val stringAllSurahName: List<String> = allSurahName.map { it.name }
             safeContext {
-                CustomDialogs.changeSurah(it, stringAllSurahName) { selectedPosition ->
-                    viewModel.changeSurah(allSurahName[selectedPosition])
-                }
+                CustomDialogs.changeSurah(
+                    context = it,
+                    surahNames = allSurahName,
+                    onSelect = { selectedSurah ->
+                        viewModel.changeSurah(selectedSurah)
+                    },
+                    onDismiss = {
+                        viewModel.deleteSurahs()
+                    })
             }
         }
     }
