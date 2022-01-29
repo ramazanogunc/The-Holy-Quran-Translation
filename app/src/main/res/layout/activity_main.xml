@@ -26,11 +26,11 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:menu="@menu/read_menu"
                 app:navigationIcon="@drawable/ic_navigation"
-                app:navigationIconTint="@color/white"
+                app:navigationIconTint="@color/const_white"
                 app:title="Deneme"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/ToolbarTitle"
-                app:titleTextColor="@color/white" />
+                app:titleTextColor="@color/const_white" />
 
 
             <View

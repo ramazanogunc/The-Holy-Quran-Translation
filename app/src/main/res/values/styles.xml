@@ -1,17 +1,19 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="fontFamily">@font/roboto</item>
-        <item name="actionMenuTextColor">@color/white</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/const_white</item>
+        <item name="android:actionMenuTextColor">@color/const_white</item>
     </style>
 
 
@@ -22,11 +24,8 @@
 
     <style name="Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="iconTint">@color/primaryColor</item>
-        <item name="background">@color/white</item>
-        <item name="backgroundColor">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="actionMenuTextColor">@color/white</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="colorOnPrimary">@color/const_white</item>
+
     </style>
 
     <style name="ToolbarTitle">

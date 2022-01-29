@@ -9,11 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/line"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/line"
@@ -28,8 +28,8 @@
         android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/white"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -40,12 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:minWidth="100dp"
             android:src="@drawable/ic_left"
+            app:backgroundTint="@color/secondaryColor"
             app:fabSize="mini"
-            app:maxImageSize="40dp"
-            android:layout_marginLeft="5dp" />
+            app:maxImageSize="40dp" />
 
         <LinearLayout
             android:id="@+id/bottom_center"
@@ -86,6 +87,7 @@
             android:clickable="true"
             android:minWidth="100dp"
             android:src="@drawable/ic_right"
+            app:backgroundTint="@color/secondaryColor"
             app:fabSize="mini"
             app:maxImageSize="40dp" />
 
