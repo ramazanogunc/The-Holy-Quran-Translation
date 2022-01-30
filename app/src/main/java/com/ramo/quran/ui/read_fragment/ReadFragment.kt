@@ -17,7 +17,8 @@ import com.ramo.quran.databinding.RecyclerReadItemBinding
 import com.ramo.quran.model.SurahName
 import com.ramo.quran.model.Verse
 import com.ramo.quran.ui.MainActivity
-import com.ramo.quran.utils.CustomDialogs
+import com.ramo.quran.utils.CommonDialogs
+import com.ramo.quran.utils.SelectDialogModel
 import com.ramo.quran.utils.getFontTypeFace
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -96,16 +97,21 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
             }
         }
         observe(viewModel.allSurahName) { allSurahName ->
-            safeContext {
-                CustomDialogs.changeSurah(
-                    context = it,
-                    surahNames = allSurahName,
+            safeContext { context ->
+                CommonDialogs.selectDialog(
+                    context = context,
+                    model = SelectDialogModel(
+                        title = getString(R.string.change_surah),
+                        description = getString(R.string.please_select_read_surah),
+                        items = allSurahName.map { it.name }
+                    ),
                     onSelect = { selectedSurah ->
-                        viewModel.changeSurah(selectedSurah)
+                        viewModel.changeSurah(allSurahName[selectedSurah])
                     },
                     onDismiss = {
                         viewModel.deleteSurahs()
-                    })
+                    }
+                )
             }
         }
     }

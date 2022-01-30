@@ -10,6 +10,8 @@ import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSettingsBinding
 import com.ramo.quran.ext.showSuccess
 import com.ramo.quran.ui.MainActivity
+import com.ramo.quran.utils.CommonDialogs
+import com.ramo.quran.utils.SelectDialogModel
 import com.ramo.quran.utils.getFontTypeFace
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,16 +62,21 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
 
     private fun onFontFamilyClick(v: View) {
         val fontFields = R.font::class.java.fields
-        val menu = PopupMenu(requireContext(), v)
-        fontFields.forEach { menu.menu.add(it.name) }
-        menu.setOnMenuItemClickListener { menuItem ->
-            val selectedFont = fontFields.first { it.name == menuItem.title }
-            pref.changeSelectedFont(selectedFont.name, selectedFont.getInt(selectedFont))
-            setFontInfo()
-            return@setOnMenuItemClickListener true
-        }
-        menu.show()
-
+        val fontNames = fontFields.map { it.name }
+        val context = context ?: return
+        CommonDialogs.selectDialog(
+            context = context,
+            model = SelectDialogModel(
+                title = "Font Seç",
+                description = "Okumak istediğiniz fontu seçiniz",
+                items = fontNames
+            ),
+            onSelect = { position ->
+                val selectedFont = fontFields[position]
+                pref.changeSelectedFont(selectedFont.name, selectedFont.getInt(selectedFont))
+                setFontInfo()
+            }
+        )
     }
 
     private fun onFontSizeClick(v: View) {
