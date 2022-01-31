@@ -10,6 +10,7 @@
     <color name="secondaryTextColor">#000000</color>
 
     <color name="gray">#E1E1E1</color>
+    <color name="darkGray">#707070</color>
     <color name="white">#FFFFFF</color>
 
     <color name="const_white">#FFFFFF</color>

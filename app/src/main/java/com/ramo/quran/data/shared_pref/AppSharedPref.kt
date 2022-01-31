@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.ramo.quran.R
 import com.ramo.quran.core.ext.get
 import com.ramo.quran.core.ext.set
+import com.ramo.quran.model.AppTheme
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,6 +24,7 @@ class AppSharedPref @Inject constructor(@ApplicationContext private val context:
         private const val FONT_NAME = "fontName"
         private const val READ_VERSE_POSITION = "readVersePosition"
         private const val IS_KEEP_SCREEN_ON = "isKeepOnScreen"
+        private const val THEME = "theme"
     }
 
 
@@ -55,6 +57,10 @@ class AppSharedPref @Inject constructor(@ApplicationContext private val context:
     var isKeepScreenOn: Boolean
         get() = sharedPreferences.get<Boolean>(IS_KEEP_SCREEN_ON) ?: false
         set(value) = sharedPreferences.set(IS_KEEP_SCREEN_ON, value)
+
+    var appTheme: AppTheme
+        get() = sharedPreferences.get<AppTheme>(THEME) ?: AppTheme.SYSTEM_DEFAULT
+        set(value) = sharedPreferences.set(THEME, value)
 
 
 }

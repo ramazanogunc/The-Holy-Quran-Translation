@@ -43,4 +43,13 @@
     <string name="keep_screen_on">Ekranı açık tut</string>
     <string name="please_select_read_surah">Okumak istediğiniz sureyi seçiniz</string>
     <string name="cancel">İptal</string>
+    <string name="font_preview">Font Önizleme</string>
+    <string name="please_select_font">Okumak istediğiniz fontu seçiniz</string>
+    <string name="please_select_font_size">Font boyutunu seçiniz</string>
+    <string name="please_select_language">Uygulama dilini seçiniz</string>
+    <string name="theme">Tema</string>
+    <string name="system_default">Sistem Varsayılan</string>
+    <string name="dark">Koyu</string>
+    <string name="light">Açık</string>
+    <string name="please_select_app_theme">Uygulama temasını seçiniz</string>
 </resources>

@@ -2,16 +2,16 @@ package com.ramo.quran.ui.settings_fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.PopupMenu
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.core.ext.observe
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSettingsBinding
-import com.ramo.quran.ext.showSuccess
+import com.ramo.quran.model.AppTheme
 import com.ramo.quran.ui.MainActivity
 import com.ramo.quran.utils.CommonDialogs
 import com.ramo.quran.utils.SelectDialogModel
+import com.ramo.quran.utils.ThemeHelper
 import com.ramo.quran.utils.getFontTypeFace
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,10 +35,13 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
         (activity as? MainActivity)?.supportActionBar?.title = getString(R.string.settings)
 
         withVB {
-            btnFontFamily.setOnClickListener { onFontFamilyClick(it) }
-            btnFontSize.setOnClickListener { onFontSizeClick(it) }
-            btnKeepScreenOn.setOnClickListener { onKeepScreenOnClick(it) }
-            btnLanguage.setOnClickListener { onLanguageClick(it) }
+            menuFont.setOnClickListener { onFontFamilyClick() }
+            menuFontSize.setOnClickListener { onFontSizeClick() }
+            menuLanguage.setOnClickListener { onLanguageClick() }
+            menuTheme.setOnClickListener { onThemeClick() }
+            switchKeepScreen.setOnCheckedChangeListener { _, isChecked ->
+                pref.isKeepScreenOn = isChecked
+            }
         }
 
         initSavedConfig()
@@ -46,29 +49,25 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
 
     private fun initObserver() {
         observe(viewModel.currentLanguage) {
-            binding.btnLanguage.text = it.name
+            binding.languageDescription.text = it.name
         }
     }
 
     private fun initSavedConfig() {
         setFontInfo()
-        setKeepOnScreen()
+        binding.switchKeepScreen.isChecked = pref.isKeepScreenOn
+        setAppThemeString()
     }
 
-    private fun setKeepOnScreen() {
-        val isKeepOnScreen = pref.isKeepScreenOn
-        binding.btnKeepScreenOn.text = getText(if (isKeepOnScreen) R.string.yes else R.string.no)
-    }
-
-    private fun onFontFamilyClick(v: View) {
+    private fun onFontFamilyClick() {
         val fontFields = R.font::class.java.fields
         val fontNames = fontFields.map { it.name }
         val context = context ?: return
         CommonDialogs.selectDialog(
             context = context,
             model = SelectDialogModel(
-                title = "Font Seç",
-                description = "Okumak istediğiniz fontu seçiniz",
+                title = getString(R.string.font_famiy),
+                description = getString(R.string.please_select_font),
                 items = fontNames
             ),
             onSelect = { position ->
@@ -79,55 +78,89 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
         )
     }
 
-    private fun onFontSizeClick(v: View) {
-        val menu = PopupMenu(requireContext(), v)
-        viewModel.fontSizeArray.forEach { menu.menu.add(it) }
-        menu.setOnMenuItemClickListener {
-            val fontSize = it.title.toString().toFloat()
-            pref.fontSize = fontSize
-            requireActivity().showSuccess()
-            setFontInfo()
-            return@setOnMenuItemClickListener true
-        }
-        menu.show()
-    }
-
-    private fun onKeepScreenOnClick(v: View) {
-        val menu = PopupMenu(requireContext(), v)
-        val yesNoValues = arrayOf(getString(R.string.yes), getString(R.string.no))
-        yesNoValues.forEach { menu.menu.add(it) }
-        menu.setOnMenuItemClickListener { menuItem ->
-            val selectedIsKeepScreenOn = menuItem.title == getString(R.string.yes)
-            pref.isKeepScreenOn = selectedIsKeepScreenOn
-            requireActivity().recreate()
-            return@setOnMenuItemClickListener true
-        }
-        menu.show()
-    }
-
-    private fun onLanguageClick(v: View) {
-        viewModel.languageList?.let { itLanguageList ->
-            val menu = PopupMenu(requireContext(), v)
-            itLanguageList.forEach { menu.menu.add(it.name) }
-            menu.setOnMenuItemClickListener { menuItem ->
-                val selectedLang = itLanguageList.first { it.name == menuItem.title }
-                viewModel.changeLanguage(selectedLang) {
-                    Lingver.getInstance()
-                        .setLocale(requireContext(), selectedLang.key)
-                    requireActivity().recreate()
-                }
-                return@setOnMenuItemClickListener true
+    private fun onFontSizeClick() {
+        val context = context ?: return
+        CommonDialogs.selectDialog(
+            context = context,
+            model = SelectDialogModel(
+                title = getString(R.string.font_size),
+                description = getString(R.string.please_select_font_size),
+                items = viewModel.fontSizeArray.toList()
+            ),
+            onSelect = { position ->
+                val selectedFontSize = viewModel.fontSizeArray[position]
+                pref.fontSize = selectedFontSize.toFloat()
+                setFontInfo()
             }
-            menu.show()
+        )
+    }
+
+    private fun onLanguageClick() {
+        val context = context ?: return
+        viewModel.languageList?.let { itLanguageList ->
+            CommonDialogs.selectDialog(
+                context = context,
+                model = SelectDialogModel(
+                    title = getString(R.string.app_language),
+                    description = getString(R.string.please_select_language),
+                    items = itLanguageList.map { it.name }
+                ),
+                onSelect = { position ->
+                    val selectedLang = itLanguageList[position]
+                    viewModel.changeLanguage(selectedLang) {
+                        Lingver.getInstance()
+                            .setLocale(requireContext(), selectedLang.key)
+                        requireActivity().recreate()
+                    }
+                })
         }
+    }
+
+    private fun onThemeClick() {
+        val context = context ?: return
+        val themes = listOf<String>(
+            getString(R.string.system_default),
+            getString(R.string.dark),
+            getString(R.string.light)
+        )
+        CommonDialogs.selectDialog(
+            context = context,
+            model = SelectDialogModel(
+                title = getString(R.string.theme),
+                description = getString(R.string.please_select_app_theme),
+                items = themes
+            ),
+            onSelect = { position ->
+                val appTheme: AppTheme = when (position) {
+                    0 -> AppTheme.SYSTEM_DEFAULT
+                    1 -> AppTheme.DARK
+                    2 -> AppTheme.LIGHT
+                    else -> AppTheme.SYSTEM_DEFAULT
+                }
+                pref.appTheme = appTheme
+                setAppThemeString()
+                ThemeHelper.setThemeMode(appTheme)
+            })
+
+
+    }
+
+    private fun setAppThemeString() {
+        binding.themeDescription.text = getString(
+            when (pref.appTheme) {
+                AppTheme.SYSTEM_DEFAULT -> R.string.system_default
+                AppTheme.DARK -> R.string.dark
+                AppTheme.LIGHT -> R.string.light
+            }
+        )
     }
 
     private fun setFontInfo() {
         val fontSize = pref.fontSize
         withVB {
-            btnFontSize.text = fontSize.toString()
+            fontSizeDescription.text = fontSize.toString()
             textViewExample.textSize = fontSize
-            btnFontFamily.text = pref.getCurrentFontName()
+            fontDescription.text = pref.getCurrentFontName()
             textViewExample.typeface =
                 getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
         }

@@ -27,7 +27,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
-    private val fontSize by lazy { pref.fontSize }
+    private var fontSize: Float? = null
     private val sweetRecyclerAdapter = SweetRecyclerAdapter<Verse>()
 
     @Inject
@@ -72,6 +72,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
     }
 
     private fun initUi() {
+        fontSize = pref.fontSize
         sweetRecyclerAdapter.addHolder(R.layout.recycler_read_item, ::bindReadItem)
 
         withVB {
@@ -142,8 +143,8 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
                 verseNo.visible()
             }
 
-            verse.textSize = fontSize
-            verseNo.textSize = fontSize
+            verse.textSize = fontSize!!
+            verseNo.textSize = fontSize!!
 
             verseNo.text = getString(R.string.versicle, item.verseNo)
             verse.text = item.verse
