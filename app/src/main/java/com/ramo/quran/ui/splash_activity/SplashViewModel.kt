@@ -19,7 +19,7 @@ class SplashViewModel @Inject constructor(
     fun detectLanguageInFirstOpen() {
         viewModelScope.launch {
             if (pref.isFirstLogin) {
-                val localeId = LocaleHelper().getLocaleId(Locale.getDefault().language)
+                val localeId = LocaleHelper.getLocaleId(Locale.getDefault().language)
                 configRepository.changeLocaleWithResource(localeId)
                 pref.isFirstLogin = false
             }
