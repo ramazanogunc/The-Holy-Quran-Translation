@@ -10,9 +10,9 @@ fun Fragment.safeContext(func: (Context) -> Unit) {
 }
 
 fun <T> Fragment.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(viewLifecycleOwner, { it?.let { t -> observer(t) } })
+    liveData.observe(viewLifecycleOwner) { it?.let { t -> observer(t) } }
 }
 
 fun <T> Fragment.observe(liveData: MutableLiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(viewLifecycleOwner, { it?.let { t -> observer(t) } })
+    liveData.observe(viewLifecycleOwner) { it?.let { t -> observer(t) } }
 }
