@@ -3,24 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
+        android:layout_marginHorizontal="24sp"
+        android:layout_marginTop="28dp"
         android:text="@string/meal_resource"
-        android:textColor="@color/secondaryTextColor"
-        android:textSize="25dp"
+        android:textColor="@color/primaryColor"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewResource"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/recycler_resource_item"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
 
 </LinearLayout>
