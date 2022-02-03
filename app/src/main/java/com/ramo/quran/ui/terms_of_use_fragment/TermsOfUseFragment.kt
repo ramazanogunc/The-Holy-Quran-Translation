@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.ramo.quran.BuildConfig
 import com.ramo.quran.R
-import com.ramo.quran.ext.showError
+import com.ramo.quran.core.ext.safeContext
 
 class TermsOfUseFragment : Fragment() {
 
@@ -29,7 +30,9 @@ class TermsOfUseFragment : Fragment() {
     private fun onSendClick() {
         val input = requireView().findViewById<TextInputEditText>(R.id.textInputErrorMessage)
         if (input.text.isNullOrEmpty()) {
-            requireActivity().showError()
+            safeContext {
+                Toast.makeText(it, getString(R.string.feedback_warning), Toast.LENGTH_SHORT).show()
+            }
         } else {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "plain/text"

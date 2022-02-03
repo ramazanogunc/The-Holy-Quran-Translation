@@ -9,7 +9,6 @@ import com.ramo.quran.core.ext.observe
 import com.ramo.quran.core.ext.visible
 import com.ramo.quran.databinding.FragmentChangeResourceBinding
 import com.ramo.quran.databinding.RecyclerResourceItemBinding
-import com.ramo.quran.ext.showSuccess
 import com.ramo.quran.model.ResourceWithLanguage
 import com.ramo.quran.ui.MainActivity
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
@@ -46,7 +45,6 @@ class ChangeResourceFragment :
         sweetRecyclerAdapter.setOnItemClickListener { _, item ->
             sweetRecyclerAdapter.notifyDataSetChanged()
             viewModel.updateCurrentResource(item.resource.id!!)
-            requireActivity().showSuccess()
         }
         binding.recyclerViewResource.adapter = sweetRecyclerAdapter
     }

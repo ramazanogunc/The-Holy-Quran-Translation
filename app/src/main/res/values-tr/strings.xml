@@ -52,4 +52,5 @@
     <string name="dark">Koyu</string>
     <string name="light">Açık</string>
     <string name="please_select_app_theme">Uygulama temasını seçiniz</string>
+    <string name="feedback_warning">Geri bildirim boş olamaz</string>
 </resources>
