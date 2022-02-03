@@ -42,6 +42,12 @@ class TermsOfUseFragment : Fragment() {
     }
 
     private fun getMetaInfo(): String {
-        return "\n\nVersion:" + BuildConfig.VERSION_NAME + "\nAndroid Version:" + Build.VERSION.BASE_OS
+        return buildString {
+            appendLine("\n\nApp Version:" + BuildConfig.VERSION_NAME)
+            appendLine("Android Version:" + Build.VERSION.RELEASE)
+            appendLine("Brand:" + Build.BRAND)
+            appendLine("Device:" + Build.DEVICE)
+            appendLine("Model:" + Build.MODEL)
+        }
     }
 }

@@ -29,8 +29,8 @@
     <string name="terms_of_use">Kullanım Koşulları</string>
     <string name="developer">Geliştirici</string>
     <string name="terms_of_use_description">Uygulamayı kullanan herkes kullanım koşullarını kabul etmiş sayılır.\nGeliştirici, tüm hatalardan sorumlu değildir.\nUygulamadaki meal kaynakları ebook.kuran.biz adresinden alınmıştır. Herhangi bir çeviri hatasından sorumlu değiliz.\nOkuma esnasınada Kuran\'ın yanlış anlaşılması ve bu yanlış anlaşılmadan doğabilecek tüm dini davranış ve durumlardan sorumlu değiliz. Bu durumdan kişinin kendisi sorumludur.</string>
-    <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar flaticon.com adresinden alınmıştır</string>
-    <string name="developer_description">Ben Ramazan Öğünç. Yazılım Mühendisi Öğrencisiyim.\nWebsitesi: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
+    <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar \n• flaticon.com\n• svgrepo.com\n adreslerinden alınmıştır</string>
+    <string name="developer_description"><b>Ramazan Öğünç</b>\n\nWebsite: ramazanogunc.com \nGithub: <b>ramazanogunc</b> \nTwitter: oguncramazan \nEmail: ramazanogunc@hotmail.com</string>
     <string name="send">Gönder</string>
     <string name="error_message_hint">Hata mesajı</string>
     <string name="success">Başarılı</string>
