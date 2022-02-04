@@ -2,6 +2,7 @@ package com.ramo.quran.ui.settings_fragment
 
 import android.os.Bundle
 import android.view.View
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.core.ext.observe
@@ -161,8 +162,12 @@ class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>
             fontSizeDescription.text = fontSize.toString()
             textViewExample.textSize = fontSize
             fontDescription.text = pref.getCurrentFontName()
-            textViewExample.typeface =
-                getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+            try {
+                textViewExample.typeface =
+                    getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+            } catch (e: Exception) {
+                FirebaseCrashlytics.getInstance().recordException(e)
+            }
         }
     }
 

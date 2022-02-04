@@ -32,7 +32,7 @@
     <string name="error_message_hint">Error Message</string>
     <string name="terms_of_use_description">Everyone who uses the application accepts the terms of use.\nThe developer is not responsible for all errors.\nQuran resources in the application are taken from ebook.kuran.biz.\nWe are not responsible for any translation errors.\nWe are not responsible for the misunderstanding of the Qur\'an during reading and for all religious behaviors and situations that may arise from this misunderstanding.\nThe person himself is responsible for this situation.</string>
     <string name="info_description">Meals are taken from ebook.kuran.biz.\n\nSome icons in the application are taken from \n• flaticon.com\n• svgrepo.com\n</string>
-    <string name="developer_description"><b>Ramazan Öğünç</b>\n\nWebsite: ramazanogunc.com \nGithub: <b>ramazanogunc</b> \nTwitter: oguncramazan \nEmail: ramazanogunc@hotmail.com</string>
+    <string name="developer_description"><b>Ramazan Öğünç</b>\n\nWebsite: <b>ramazanogunc.com</b> \nGithub: <b>ramazanogunc</b> \nTwitter: <b>oguncramazan</b> \nEmail: <b>ramazanogunc@hotmail.com</b></string>
     <string name="success">Success</string>
     <string name="success_message">Everything is OK</string>
     <string name="error">Error</string>

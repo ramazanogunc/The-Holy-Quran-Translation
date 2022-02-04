@@ -30,7 +30,7 @@
     <string name="developer">Geliştirici</string>
     <string name="terms_of_use_description">Uygulamayı kullanan herkes kullanım koşullarını kabul etmiş sayılır.\nGeliştirici, tüm hatalardan sorumlu değildir.\nUygulamadaki meal kaynakları ebook.kuran.biz adresinden alınmıştır. Herhangi bir çeviri hatasından sorumlu değiliz.\nOkuma esnasınada Kuran\'ın yanlış anlaşılması ve bu yanlış anlaşılmadan doğabilecek tüm dini davranış ve durumlardan sorumlu değiliz. Bu durumdan kişinin kendisi sorumludur.</string>
     <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar \n• flaticon.com\n• svgrepo.com\n adreslerinden alınmıştır</string>
-    <string name="developer_description"><b>Ramazan Öğünç</b>\n\nWebsite: ramazanogunc.com \nGithub: <b>ramazanogunc</b> \nTwitter: oguncramazan \nEmail: ramazanogunc@hotmail.com</string>
+    <string name="developer_description"><b>Ramazan Öğünç</b>\n\nWebsite: <b>ramazanogunc.com</b> \nGithub: <b>ramazanogunc</b> \nTwitter: <b>oguncramazan</b> \nEmail: <b>ramazanogunc@hotmail.com</b></string>
     <string name="send">Gönder</string>
     <string name="error_message_hint">Hata mesajı</string>
     <string name="success">Başarılı</string>

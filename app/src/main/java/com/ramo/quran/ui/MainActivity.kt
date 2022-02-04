@@ -10,6 +10,8 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.ramo.quran.R
 import com.ramo.quran.core.SimpleBaseActivity
+import com.ramo.quran.core.ext.gone
+import com.ramo.quran.core.ext.visible
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +26,16 @@ class MainActivity : SimpleBaseActivity<ActivityMainBinding>() {
 
         initNavigationComponent()
         setKeepScreenOn()
+    }
+
+    fun showSurahIndicator() = withVB {
+        layoutSurahIndicator.visible()
+        bottomLine.visible()
+    }
+
+    fun hideSurahIndicator() = withVB {
+        layoutSurahIndicator.gone()
+        bottomLine.gone()
     }
 
     private fun setKeepScreenOn() {

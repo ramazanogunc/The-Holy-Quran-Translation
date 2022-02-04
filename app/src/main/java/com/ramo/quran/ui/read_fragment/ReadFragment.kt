@@ -7,7 +7,10 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.core.ext.*
@@ -34,6 +37,12 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
     lateinit var pref: AppSharedPref
 
     private var rvState: Parcelable? = null
+
+    // Surah Indicator Views
+    private var fabRight: FloatingActionButton? = null
+    private var fabLeft: FloatingActionButton? = null
+    private var versicleSize: TextView? = null
+    private var surahNumber: TextView? = null
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,7 +77,14 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
     override fun onResume() {
         super.onResume()
+        mainActivity()?.showSurahIndicator()
+        initSurahIndicator()
         binding.recyclerViewRead.layoutManager?.onRestoreInstanceState(rvState)
+    }
+
+    override fun onDestroyView() {
+        mainActivity()?.hideSurahIndicator()
+        super.onDestroyView()
     }
 
     private fun initUi() {
@@ -77,12 +93,18 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
         withVB {
             recyclerViewRead.adapter = sweetRecyclerAdapter
-
-            // fab on clicks
-            fabRight.setOnClickListener { viewModel.nextSurah() }
-            fabLeft.setOnClickListener { viewModel.previousSurah() }
         }
         viewModel.getData()
+    }
+
+    private fun initSurahIndicator() {
+        fabRight = mainActivity()?.findViewById(R.id.fabRight)
+        fabLeft = mainActivity()?.findViewById(R.id.fabLeft)
+        surahNumber = mainActivity()?.findViewById(R.id.surahNumber)
+        versicleSize = mainActivity()?.findViewById(R.id.versicleSize)
+
+        fabRight?.setOnClickListener { viewModel.nextSurah() }
+        fabLeft?.setOnClickListener { viewModel.previousSurah() }
     }
 
     private fun initObserver() {
@@ -94,7 +116,7 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
             withVB {
                 sweetRecyclerAdapter.submitList(surahVerses)
                 recyclerViewRead.scrollToPosition(pref.readPosition)
-                versicleSize.text = getString(R.string.verse_number, surahVerses.size - 1)
+                versicleSize?.text = getString(R.string.verse_number, surahVerses.size - 1)
             }
         }
         observe(viewModel.allSurahName) { allSurahName ->
@@ -121,18 +143,23 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
         // there is two set title because. There is a bug when first run.
         (requireActivity() as MainActivity).supportActionBar?.title = surahName.name
         (requireActivity() as MainActivity).title = surahName.name
-        binding.surahNumber.text = surahName.number.toString()
+        surahNumber?.text = surahName.number.toString()
     }
 
     private fun bindReadItem(view: View, item: Verse) {
         val binding = RecyclerReadItemBinding.bind(view)
 
         with(binding) {
-            val typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
-            typeface?.let { itTypeface ->
-                verseNo.setTypeface(itTypeface, Typeface.BOLD)
-                verse.typeface = itTypeface
+            try {
+                val typeface = getFontTypeFace(requireContext(), pref.getCurrentFontResourceId())
+                typeface?.let { itTypeface ->
+                    verseNo.setTypeface(itTypeface, Typeface.BOLD)
+                    verse.typeface = itTypeface
+                }
+            } catch (e: Exception) {
+                FirebaseCrashlytics.getInstance().recordException(e)
             }
+
 
 
             if (item.verseNo == 0) {
@@ -153,13 +180,15 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>() {
 
     private fun prepareFabButton(surahNo: Int) {
         withVB {
-            fabLeft.visible()
-            fabRight.visible()
+            fabLeft?.visible()
+            fabRight?.visible()
 
             if (surahNo == 114)
-                fabRight.invisible()
+                fabRight?.invisible()
             else if (surahNo == 1)
-                fabLeft.invisible()
+                fabLeft?.invisible()
         }
     }
+
+    private fun mainActivity(): MainActivity? = activity as? MainActivity
 }
