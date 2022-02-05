@@ -32,6 +32,19 @@ android {
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
 
+    signingConfigs {
+
+        create("stage") {
+            storeFile = file("../.keystone/stage_keystone.jks")
+            storePassword = "5ZiWq3Yt2oYyX9"
+            keyAlias = "key0"
+            keyPassword = "5ZiWq3Yt2oYyX9"
+
+            enableV1Signing = true
+            enableV2Signing = true
+        }
+    }
+
     buildTypes {
 
         getByName("debug") {
@@ -48,7 +61,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("stage")
         }
 
         getByName("release") {
@@ -59,6 +72,7 @@ android {
                 "proguard-rules.pro"
             )
             resValue("string", "app_name", "@string/app_name_production")
+            signingConfig = signingConfigs.getByName("stage")
         }
     }
 }
