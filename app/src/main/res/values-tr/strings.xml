@@ -53,4 +53,5 @@
     <string name="light">Açık</string>
     <string name="please_select_app_theme">Uygulama temasını seçiniz</string>
     <string name="feedback_warning">Geri bildirim boş olamaz</string>
+    <string name="search">Ara</string>
 </resources>

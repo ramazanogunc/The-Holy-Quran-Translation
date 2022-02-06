@@ -19,4 +19,8 @@
         android:id="@+id/termsOfUse"
         android:name="com.ramo.quran.ui.terms_of_use_fragment.TermsOfUseFragment"
         android:label="@string/info_and_terms_of_use" />
+    <fragment
+        android:id="@+id/search"
+        android:name="com.ramo.quran.ui.search_fragment.SearchFragment"
+        android:label="@string/search" />
 </navigation>
