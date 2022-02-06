@@ -1,12 +1,17 @@
-package com.ramo.quran.model
+package com.ramo.quran.model.db_translation
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "surahNames",
+    tableName = "configs",
     foreignKeys = [
+        ForeignKey(
+            entity = Resource::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("currentResourceId")
+        ),
         ForeignKey(
             entity = Language::class,
             parentColumns = arrayOf("id"),
@@ -14,11 +19,11 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class SurahName(
-    val number: Int,
-    val name: String,
+data class Config(
+    val currentResourceId: Int,
     val languageId: Int
 ) {
     @PrimaryKey
     var id: Int? = null
 }
+

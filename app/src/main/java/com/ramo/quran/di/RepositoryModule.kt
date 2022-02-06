@@ -23,8 +23,12 @@ object RepositoryModule {
         VerseRepository(verseDao, sharedPref)
 
     @Provides
-    fun provideSurahNameRepository(surahNameDao: SurahNameDao, sharedPref: AppSharedPref) =
-        SurahNameRepository(surahNameDao, sharedPref)
+    fun provideSurahNameRepository(
+        surahNameDao: SurahNameDao,
+        verseDao: VerseDao,
+        sharedPref: AppSharedPref
+    ) =
+        SurahNameRepository(surahNameDao, verseDao, sharedPref)
 
     @Provides
     fun provideResourceRepository(resourceDao: ResourceDao) = ResourceRepository(resourceDao)

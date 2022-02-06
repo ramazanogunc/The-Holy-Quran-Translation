@@ -22,5 +22,12 @@
     <fragment
         android:id="@+id/search"
         android:name="com.ramo.quran.ui.search_fragment.SearchFragment"
-        android:label="@string/search" />
+        android:label="@string/search">
+        <action
+            android:id="@+id/action_search_to_read"
+            app:destination="@id/read"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph.xml"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

@@ -17,8 +17,8 @@ import com.ramo.quran.core.ext.*
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentReadBinding
 import com.ramo.quran.databinding.RecyclerReadItemBinding
-import com.ramo.quran.model.SurahName
-import com.ramo.quran.model.Verse
+import com.ramo.quran.model.db_translation.SurahName
+import com.ramo.quran.model.db_translation.Verse
 import com.ramo.quran.ui.MainActivity
 import com.ramo.quran.utils.CommonDialogs
 import com.ramo.quran.utils.SelectDialogModel

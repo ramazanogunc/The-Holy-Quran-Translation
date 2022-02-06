@@ -6,7 +6,7 @@ import com.ramo.quran.core.BaseViewModel
 import com.ramo.quran.data.repository.ConfigRepository
 import com.ramo.quran.data.repository.LanguageRepository
 import com.ramo.quran.data.shared_pref.AppSharedPref
-import com.ramo.quran.model.Language
+import com.ramo.quran.model.db_translation.Language
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

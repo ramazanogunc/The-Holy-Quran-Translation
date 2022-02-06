@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ramo.quran.data.dao.*
-import com.ramo.quran.model.*
+import com.ramo.quran.model.db_translation.*
 
 @Database(
     entities = [

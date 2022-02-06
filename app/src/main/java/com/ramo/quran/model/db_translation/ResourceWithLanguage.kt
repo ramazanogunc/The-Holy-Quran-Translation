@@ -1,4 +1,4 @@
-package com.ramo.quran.model
+package com.ramo.quran.model.db_translation
 
 import androidx.room.Embedded
 import androidx.room.Relation

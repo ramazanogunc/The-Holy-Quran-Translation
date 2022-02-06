@@ -2,7 +2,7 @@ package com.ramo.quran.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.ramo.quran.model.Language
+import com.ramo.quran.model.db_translation.Language
 
 @Dao
 interface LanguageDao {

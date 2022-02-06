@@ -10,5 +10,8 @@ class VerseRepository @Inject constructor(
 ) {
     suspend fun getCurrentSurahVerses() =
         verseDao.getCurrentSurahVerses(appSharedPref.currentSurah)
+
+    suspend fun getVerse(surahNumber: Int, verseNumber: Int) =
+        verseDao.getVerse(surahNumber, verseNumber)
 }
 

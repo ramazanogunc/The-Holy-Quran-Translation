@@ -7,8 +7,8 @@ import com.ramo.quran.core.BaseViewModel
 import com.ramo.quran.data.repository.SurahNameRepository
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.data.shared_pref.AppSharedPref
-import com.ramo.quran.model.SurahName
-import com.ramo.quran.model.Verse
+import com.ramo.quran.model.db_translation.SurahName
+import com.ramo.quran.model.db_translation.Verse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

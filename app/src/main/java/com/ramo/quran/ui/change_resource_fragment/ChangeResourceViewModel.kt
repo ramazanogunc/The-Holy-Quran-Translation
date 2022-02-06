@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ramo.quran.core.BaseViewModel
 import com.ramo.quran.data.repository.ConfigRepository
 import com.ramo.quran.data.repository.ResourceRepository
-import com.ramo.quran.model.ResourceWithLanguage
+import com.ramo.quran.model.db_translation.ResourceWithLanguage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

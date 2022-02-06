@@ -9,7 +9,7 @@ import com.ramo.quran.core.ext.observe
 import com.ramo.quran.core.ext.visible
 import com.ramo.quran.databinding.FragmentChangeResourceBinding
 import com.ramo.quran.databinding.RecyclerResourceItemBinding
-import com.ramo.quran.model.ResourceWithLanguage
+import com.ramo.quran.model.db_translation.ResourceWithLanguage
 import com.ramo.quran.ui.MainActivity
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
