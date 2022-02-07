@@ -17,7 +17,7 @@ class SearchFragment : SimpleBaseFragment<FragmentSearchBinding>() {
     }
 
     private fun initView() {
-        val adapter = SearchFragmentStateAdapter(listOf("Seçim ile ara", "Yazı ile ara"), this)
+        val adapter = SearchFragmentStateAdapter(listOf("Yazı ile ara", "Seçim ile ara"), this)
         withVB {
             pager.adapter = adapter
             TabLayoutMediator(tabLayout, pager) { tab, position ->

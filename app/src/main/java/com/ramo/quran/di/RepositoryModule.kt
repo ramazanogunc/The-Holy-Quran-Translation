@@ -19,7 +19,10 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun provideVerseRepository(verseDao: VerseDao, sharedPref: AppSharedPref) =
+    fun provideVerseRepository(
+        verseDao: VerseDao,
+        sharedPref: AppSharedPref
+    ) =
         VerseRepository(verseDao, sharedPref)
 
     @Provides

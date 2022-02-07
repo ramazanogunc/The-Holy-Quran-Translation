@@ -16,6 +16,7 @@
     <string name="info_and_terms_of_use">Info and Terms of Use</string>
     <string name="change">Index</string>
     <string name="surah_number">Surah Number: %1$d</string>
+    <string name="surah_name">Surah Name: %1$s</string>
     <string name="verse_number">Verse Number: %1$d</string>
     <string name="meal_resource">Sources of Qur\'an</string>
     <string name="font_size">Font Size</string>

@@ -11,8 +11,8 @@ class SearchFragmentStateAdapter(private val titles: List<String>, fragment: Fra
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment = when (position) {
-        0 -> SearchBySelectFragment()
-        1 -> SearchByTextFragment()
+        0 -> SearchByTextFragment()
+        1 -> SearchBySelectFragment()
         else -> SearchBySelectFragment()
     }
 
