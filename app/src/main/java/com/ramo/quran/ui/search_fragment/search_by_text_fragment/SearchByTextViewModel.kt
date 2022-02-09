@@ -1,8 +1,10 @@
 package com.ramo.quran.ui.search_fragment.search_by_text_fragment
 
+import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.ramo.quran.core.BaseViewModel
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.model.VerseWithSurahName
@@ -19,7 +21,7 @@ class SearchByTextViewModel @Inject constructor(
         return Pager(PagingConfig(10)) {
             //SearchPagingSource(verseRepository, text)
             verseRepository.searchVerse(text)
-        }.flow
+        }.flow.cachedIn(viewModelScope)
     }
 
 }

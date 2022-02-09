@@ -61,7 +61,7 @@ class SearchBySelectFragment :
         CommonDialogs.selectDialog(
             context = safeContext,
             model = SelectDialogModel(
-                title = "Sure Seç",
+                title = getString(R.string.select_surah),
                 items = viewModel.surahNamesToString(data)
             ),
             onSelect = { position ->
@@ -76,7 +76,7 @@ class SearchBySelectFragment :
         CommonDialogs.selectDialog(
             context = safeContext,
             model = SelectDialogModel(
-                title = "Ayet Seç",
+                title = getString(R.string.select_verse),
                 items = selectedSurah.versicleNumbers.map { it.toString() }
             ),
             onSelect = { position ->

@@ -55,5 +55,17 @@
     <string name="light">Light</string>
     <string name="feedback_warning">Feedback cannot be empty</string>
     <string name="search">Search</string>
+    <string name="no_verse">Cannot found verse</string>
+    <string name="search_by_text">Search by text</string>
+    <string name="search_by_select">Search by select</string>
+    <string name="select_surah">Select Surah</string>
+    <string name="select_verse">Select Verse</string>
+    <string name="surah_name_title">Surah Name</string>
+    <string name="select">Select</string>
+    <string name="verse_number_title">Verse Number</string>
+    <string name="jump_to_read_page">Jump to read page</string>
+    <string name="verse">Verse</string>
+    <string name="font">Font</string>
+    <string name="general">General</string>
 
 </resources>

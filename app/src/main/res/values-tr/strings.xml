@@ -55,4 +55,16 @@
     <string name="feedback_warning">Geri bildirim boş olamaz</string>
     <string name="search">Ara</string>
     <string name="surah_name">Sure İsmi: %1$s</string>
+    <string name="no_verse">Hiç ayet bulunamadı</string>
+    <string name="search_by_text">Yazı ile ara</string>
+    <string name="search_by_select">Seçim ile ara</string>
+    <string name="select_surah">Sure Seç</string>
+    <string name="select_verse">Ayet Seç</string>
+    <string name="surah_name_title">Sure İsmi</string>
+    <string name="select">Seç</string>
+    <string name="verse_number_title">Ayet Numarası</string>
+    <string name="jump_to_read_page">Okuma sayfasında aç</string>
+    <string name="verse">Ayet</string>
+    <string name="font">Font</string>
+    <string name="general">Genel</string>
 </resources>

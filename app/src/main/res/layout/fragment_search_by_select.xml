@@ -12,15 +12,19 @@
 
         <TextView
             android:id="@+id/textViewTitleSurah"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
-            android:text="Sure İsmi"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/surah_name_title"
             android:textColor="@color/darkGray"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnSurahSelect"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,16 +34,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="Fatiha"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewTitleSurah"
             app:layout_constraintEnd_toStartOf="@+id/btnSurahSelect"
-            app:layout_constraintStart_toEndOf="@+id/textViewTitleSurah"
-            app:layout_constraintTop_toTopOf="@+id/textViewTitleSurah" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleSurah" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVerseSelect"
@@ -53,11 +56,11 @@
             android:insetBottom="0dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="Seç"
+            android:text="@string/select"
             app:backgroundTint="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="@+id/textViewVerseNumber"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewVerseNumber" />
+            app:layout_constraintTop_toTopOf="@+id/textViewTitleVerse" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSurahSelect"
@@ -71,25 +74,29 @@
             android:insetBottom="0dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="Seç"
+            android:text="@string/select"
             app:backgroundTint="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="@+id/textViewSurahName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewSurahName" />
+            app:layout_constraintTop_toTopOf="@+id/textViewTitleSurah" />
 
         <TextView
             android:id="@+id/textViewTitleVerse"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:text="Ayet Numarası"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/verse_number_title"
             android:textColor="@color/darkGray"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnVerseSelect"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitleSurah" />
+            app:layout_constraintTop_toBottomOf="@id/textViewSurahName" />
 
         <TextView
             android:id="@+id/textViewVerseNumber"
@@ -99,23 +106,21 @@
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="0"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewTitleVerse"
             app:layout_constraintEnd_toStartOf="@+id/btnVerseSelect"
-            app:layout_constraintStart_toEndOf="@+id/textViewTitleVerse"
-            app:layout_constraintTop_toTopOf="@+id/textViewTitleVerse" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleVerse" />
 
         <TextView
             android:id="@+id/textViewVerseTitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
-            android:text="Ayet"
+            android:text="@string/verse"
             android:textColor="@color/primaryColor"
-            android:textSize="22dp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textViewTitleSurah"
             app:layout_constraintTop_toBottomOf="@+id/btnJumpReadPage" />
@@ -143,18 +148,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Okuma sayfasında aç"
+            android:text="@string/jump_to_read_page"
             android:textColor="@color/const_white"
             app:icon="@drawable/ic_book"
             app:iconGravity="textStart"
             app:iconTint="@color/const_white"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitleVerse" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewVerseNumber" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

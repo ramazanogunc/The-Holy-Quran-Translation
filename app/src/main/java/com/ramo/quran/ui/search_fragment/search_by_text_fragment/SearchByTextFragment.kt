@@ -3,6 +3,8 @@ package com.ramo.quran.ui.search_fragment.search_by_text_fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ramo.quran.R
@@ -10,21 +12,24 @@ import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.core.ext.gone
 import com.ramo.quran.core.ext.visible
 import com.ramo.quran.data.repository.VerseRepository
+import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSearchByTextBinding
-import com.ramo.quran.databinding.RecyclerSearchItemBinding
 import com.ramo.quran.ext.textChangeDelayedListener
 import com.ramo.quran.model.VerseWithSurahName
-import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
+import com.ramo.quran.ui.search_fragment.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchByTextFragment : BaseFragment<FragmentSearchByTextBinding, SearchByTextViewModel>() {
 
-    private val sweetAdapter = SweetRecyclerAdapter<VerseWithSurahName>()
-    private val pagingAdapter = SearchVersePagedAdapter()
+    @Inject
+    lateinit var pref: AppSharedPref
+    private val pagingAdapter = SearchVersePagedAdapter(::onItemClick)
     private var searchJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,36 +44,44 @@ class SearchByTextFragment : BaseFragment<FragmentSearchByTextBinding, SearchByT
             searchJob?.cancel()
             searchJob = lifecycleScope.launch {
                 flow.collectLatest {
-                    if (it == null) {
-                        binding.textViewNoResult.visible()
-                        binding.rvVerses.gone()
-
-                    } else {
-                        binding.rvVerses.visible()
-                        binding.textViewNoResult.gone()
-                        pagingAdapter.submitData(it)
-                        //pagingAdapter.submitList(it)
-                    }
+                    pagingAdapter.submitData(it)
                 }
             }
         }
     }
 
     private fun initAdapter() {
-        sweetAdapter.addHolder(R.layout.recycler_search_item) { v, item ->
-            val binding = RecyclerSearchItemBinding.bind(v)
-            with(binding) {
-                verseNo.text = getString(R.string.verse_number, item.verseNo)
-                surahName.text = getString(R.string.surah_name, item.surahName)
-                verse.text = item.verse
+        binding.rvVerses.adapter = pagingAdapter
+        lifecycleScope.launchWhenCreated {
+            pagingAdapter.loadStateFlow.collect {
+                if (it.append is LoadState.NotLoading &&
+                    it.append.endOfPaginationReached &&
+                    pagingAdapter.itemCount < 1
+                ) {
+                    binding.textViewNoResult.visible()
+                    binding.rvVerses.gone()
+                } else {
+                    binding.rvVerses.visible()
+                    binding.textViewNoResult.gone()
+
+                }
             }
         }
-        binding.rvVerses.adapter = pagingAdapter
+    }
+
+    private fun onItemClick(verseWithSurahName: VerseWithSurahName) {
+        pref.readPosition = verseWithSurahName.verseNo
+        pref.currentSurah = verseWithSurahName.surahNumber
+        (parentFragment as? SearchFragment)?.findNavController()
+            ?.navigate(R.id.action_search_to_read)
     }
 }
 
 
-class SearchPagingSource(private val verseRepository: VerseRepository, private val query: String) :
+class SearchPagingSource(
+    private val verseRepository: VerseRepository,
+    private val query: String
+) :
     PagingSource<Int, VerseWithSurahName>() {
 
     private companion object {

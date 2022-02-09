@@ -9,24 +9,28 @@ import com.ramo.quran.R
 import com.ramo.quran.databinding.RecyclerSearchItemBinding
 import com.ramo.quran.model.VerseWithSurahName
 
-class SearchVersePagedAdapter() :
-    PagingDataAdapter<VerseWithSurahName, SearchVersePagedAdapter.MyViewHolder>(USER_COMPARATOR) {
+class SearchVersePagedAdapter(
+    private val onClick: (VerseWithSurahName) -> Unit
+) : PagingDataAdapter<VerseWithSurahName, SearchVersePagedAdapter.MyViewHolder>(USER_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
             RecyclerSearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        return MyViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
-    class MyViewHolder(val itemBinding: RecyclerSearchItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+    class MyViewHolder(
+        private val itemBinding: RecyclerSearchItemBinding,
+        private val onClick: (VerseWithSurahName) -> Unit
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(item: VerseWithSurahName) {
             val context = itemBinding.root.context
+            itemBinding.root.setOnClickListener { onClick.invoke(item) }
             with(itemBinding) {
                 verseNo.text = context.getString(R.string.verse_number, item.verseNo)
                 surahName.text = context.getString(R.string.surah_name, item.surahName)
