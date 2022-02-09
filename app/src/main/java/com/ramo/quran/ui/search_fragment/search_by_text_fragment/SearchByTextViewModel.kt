@@ -1,11 +1,13 @@
 package com.ramo.quran.ui.search_fragment.search_by_text_fragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.ramo.quran.core.BaseViewModel
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.model.VerseWithSurahName
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,18 +15,11 @@ class SearchByTextViewModel @Inject constructor(
     private val verseRepository: VerseRepository
 ) : BaseViewModel() {
 
-
-    private val _verses = MutableLiveData<List<VerseWithSurahName>>()
-    val verses: LiveData<List<VerseWithSurahName>> = _verses
-
-    fun search(text: String) {
-        exec(
-            showLoading = true,
-            request = { verseRepository.searchVerse(text) },
-            success = {
-                _verses.value = it
-            }
-        )
+    fun search(text: String): Flow<PagingData<VerseWithSurahName>> {
+        return Pager(PagingConfig(10)) {
+            //SearchPagingSource(verseRepository, text)
+            verseRepository.searchVerse(text)
+        }.flow
     }
 
 }

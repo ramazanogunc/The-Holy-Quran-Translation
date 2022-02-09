@@ -125,5 +125,11 @@ dependencies {
     // Gson for json convert
     implementation("com.google.code.gson:gson:2.8.9")
 
+    // for pagination
+    val pagingVersion = "3.1.0"
+
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    implementation("androidx.room:room-paging:$roomVersion")
+
 }
 

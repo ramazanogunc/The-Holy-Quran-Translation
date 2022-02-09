@@ -14,6 +14,9 @@ class VerseRepository @Inject constructor(
     suspend fun getVerse(surahNumber: Int, verseNumber: Int) =
         verseDao.getVerse(surahNumber, verseNumber)
 
-    suspend fun searchVerse(text: String) = verseDao.searchVerse(text)
+    suspend fun searchVerse(text: String, page: Int, perPage: Int) =
+        verseDao.searchVerse(text, page, perPage)
+
+    fun searchVerse(text: String) = verseDao.searchVerse(text)
 }
 
