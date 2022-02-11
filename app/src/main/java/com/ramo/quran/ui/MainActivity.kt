@@ -8,14 +8,14 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import com.ramo.core.ViewBindingActivity
 import com.ramo.quran.R
-import com.ramo.quran.core.SimpleBaseActivity
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : SimpleBaseActivity<ActivityMainBinding>() {
+class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         withVB {

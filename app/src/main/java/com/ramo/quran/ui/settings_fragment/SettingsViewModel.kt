@@ -26,7 +26,6 @@ class SettingsViewModel @Inject constructor(
 
     fun getAllLanguage() {
         exec(
-            showLoading = false,
             request = { languageRepository.getAllLanguages() },
             success = { languageList = it }
         )
@@ -34,7 +33,6 @@ class SettingsViewModel @Inject constructor(
 
     fun getCurrentLanguage() {
         exec(
-            showLoading = false,
             request = { languageRepository.getCurrentLanguage() },
             success = { _currentLanguage.value = it }
         )
@@ -42,7 +40,6 @@ class SettingsViewModel @Inject constructor(
 
     fun changeLanguage(selectedLang: Language, function: () -> Unit) {
         exec(
-            showLoading = false,
             request = { configRepository.changeLocaleWithResource(selectedLang.id!!) },
             success = { function.invoke() }
         )

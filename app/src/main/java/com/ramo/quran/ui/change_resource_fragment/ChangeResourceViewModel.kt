@@ -21,9 +21,6 @@ class ChangeResourceViewModel @Inject constructor(
     private val _currentResourceId = MutableLiveData<Int>()
     val currentResourceId: LiveData<Int> = _currentResourceId
 
-    fun getCurrentResourceId(): Int {
-        return currentResourceId.value ?: -1
-    }
 
     fun getData() {
         getResource()
@@ -32,7 +29,6 @@ class ChangeResourceViewModel @Inject constructor(
 
     fun updateCurrentResource(resourceId: Int) {
         exec(
-            showLoading = false,
             request = { configRepository.updateCurrentResource(resourceId) },
             success = { getCurrentResource() }
         )
@@ -40,7 +36,6 @@ class ChangeResourceViewModel @Inject constructor(
 
     private fun getResource() {
         exec(
-            showLoading = true,
             request = { resourceRepository.getAll() },
             success = { _resourceList.value = it }
         )
@@ -48,7 +43,6 @@ class ChangeResourceViewModel @Inject constructor(
 
     private fun getCurrentResource() {
         exec(
-            showLoading = false,
             request = { configRepository.getConfig() },
             success = { _currentResourceId.value = it.currentResourceId }
         )

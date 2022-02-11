@@ -35,7 +35,6 @@ class ReadViewModel @Inject constructor(
 
     private fun getCurrentVerses() {
         exec(
-            showLoading = true,
             request = { verseRepository.getCurrentSurahVerses() },
             success = { _verses.value = it }
         )
@@ -43,7 +42,6 @@ class ReadViewModel @Inject constructor(
 
     private fun getCurrentSurahName() {
         exec(
-            showLoading = false,
             request = { surahNameRepository.getCurrentSurahName() },
             success = { _surahName.value = it }
         )
@@ -51,7 +49,6 @@ class ReadViewModel @Inject constructor(
 
     fun getAllSurahForSelect() {
         exec(
-            showLoading = true,
             request = { surahNameRepository.getAllSurahName() },
             success = { _allSurahName.value = it }
         )

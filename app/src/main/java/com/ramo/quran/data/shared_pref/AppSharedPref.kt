@@ -2,9 +2,9 @@ package com.ramo.quran.data.shared_pref
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.ramo.core.ext.get
+import com.ramo.core.ext.set
 import com.ramo.quran.R
-import com.ramo.quran.core.ext.get
-import com.ramo.quran.core.ext.set
 import com.ramo.quran.model.AppTheme
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

@@ -11,7 +11,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.4")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
         // for analytic
         classpath("com.google.gms:google-services:4.3.10")
         // for crashlytics

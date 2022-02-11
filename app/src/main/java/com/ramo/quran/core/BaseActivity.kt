@@ -1,22 +1,25 @@
 package com.ramo.quran.core
 
+import android.app.Dialog
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
 import androidx.viewbinding.ViewBinding
-import com.ramo.quran.core.ext.findGenericWithType
+import com.ramo.core.VbAndVmActivity
+import com.ramo.core.ext.observe
+import com.ramo.quran.utils.CommonDialogs
 
-abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : SimpleBaseActivity<VB>() {
+abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : VbAndVmActivity<VB, VM>() {
 
-    protected lateinit var viewModel: VM
+    private val dialog: Dialog by lazy { CommonDialogs.loadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewModel()
+        initObserver()
     }
 
-    private fun initViewModel() {
-        val vmClass = javaClass.findGenericWithType<VM>(1)
-        viewModel = ViewModelProvider(this)[vmClass]
+    private fun initObserver() {
+        observe(viewModel.toast) { toast ->
+            Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
+        }
     }
 }

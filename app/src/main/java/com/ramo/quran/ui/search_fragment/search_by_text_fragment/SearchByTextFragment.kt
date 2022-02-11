@@ -7,10 +7,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.ramo.core.VbAndVmFragment
+import com.ramo.core.ext.gone
+import com.ramo.core.ext.visible
 import com.ramo.quran.R
-import com.ramo.quran.core.BaseFragment
-import com.ramo.quran.core.ext.gone
-import com.ramo.quran.core.ext.visible
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSearchByTextBinding
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchByTextFragment : BaseFragment<FragmentSearchByTextBinding, SearchByTextViewModel>() {
+class SearchByTextFragment : VbAndVmFragment<FragmentSearchByTextBinding, SearchByTextViewModel>() {
 
     @Inject
     lateinit var pref: AppSharedPref
@@ -40,6 +40,7 @@ class SearchByTextFragment : BaseFragment<FragmentSearchByTextBinding, SearchByT
     private fun initView() {
         initAdapter()
         binding.editTextSearch.textChangeDelayedListener(1000) { text ->
+            if (text.isBlank()) return@textChangeDelayedListener
             val flow = viewModel.search(text)
             searchJob?.cancel()
             searchJob = lifecycleScope.launch {

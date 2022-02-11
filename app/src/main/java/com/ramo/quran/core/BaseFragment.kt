@@ -1,28 +1,29 @@
 package com.ramo.quran.core
 
+import android.app.Dialog
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.view.View
+import android.widget.Toast
 import androidx.viewbinding.ViewBinding
-import com.ramo.quran.core.ext.findGenericWithType
+import com.ramo.core.VbAndVmFragment
+import com.ramo.core.ext.observe
+import com.ramo.core.ext.safeContext
+import com.ramo.quran.utils.CommonDialogs
 
-abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : SimpleBaseFragment<VB>() {
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : VbAndVmFragment<VB, VM>() {
 
-    protected lateinit var viewModel: VM
+    private val dialog: Dialog by lazy { CommonDialogs.loadingDialog(requireContext()) }
 
-    open val isSharedViewModel: Boolean = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initViewModel()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initObserver()
     }
 
-    private fun initViewModel() {
-        val vmClass = javaClass.findGenericWithType<VM>(1)
-        viewModel = ViewModelProvider(
-            if (isSharedViewModel) requireActivity()
-            else this
-        )[vmClass]
+    private fun initObserver() {
+        observe(viewModel.toast) { toastMessage ->
+            safeContext {
+                Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
-
 }

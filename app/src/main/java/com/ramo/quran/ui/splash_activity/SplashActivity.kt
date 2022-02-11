@@ -22,11 +22,13 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.detectLanguageInFirstOpen()
         ThemeHelper.setThemeMode(pref.appTheme)
+        viewModel.detectLanguageInFirstOpen{
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+
     }
 }

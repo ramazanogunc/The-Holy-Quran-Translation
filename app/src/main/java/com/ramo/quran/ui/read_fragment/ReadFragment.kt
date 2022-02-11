@@ -9,9 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.ramo.core.ext.*
 import com.ramo.quran.R
 import com.ramo.quran.core.BaseFragment
-import com.ramo.quran.core.ext.*
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentReadBinding
 import com.ramo.quran.databinding.RecyclerReadItemBinding

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name_production">Translation of the Quran</string>
-    <string name="app_name_stage">[Stage] Translation of the Quran</string>
     <string name="app_name_dev">[Dev] Translation of the Quran</string>
     <string name="change_resource">Change Resource</string>
     <string name="data_not_found">Data not found</string>

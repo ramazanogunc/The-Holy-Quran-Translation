@@ -10,9 +10,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
+import com.ramo.core.ext.safeContext
 import com.ramo.quran.BuildConfig
 import com.ramo.quran.R
-import com.ramo.quran.core.ext.safeContext
 
 class TermsOfUseFragment : Fragment() {
 

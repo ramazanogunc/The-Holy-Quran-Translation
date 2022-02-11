@@ -4,12 +4,13 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.Window
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import com.ramo.core.ext.gone
 import com.ramo.quran.R
-import com.ramo.quran.core.ext.gone
 import com.ramo.sweetrecycleradapter.SweetRecyclerAdapter
 import com.ramo.sweetrecycleradapter.ViewTypeListener
 
@@ -45,8 +46,15 @@ object CommonDialogs {
 
     }
 
+    fun loadingDialog(context: Context): Dialog {
+        val dialog =  getConfigureDialog(context, R.layout.dialog_loading)
+        dialog.setCancelable(false)
+        return dialog
+    }
+
     private fun getConfigureDialog(context: Context, @LayoutRes layoutId: Int): Dialog {
         val dialog = Dialog(context).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
             setContentView(layoutId)
             setCanceledOnTouchOutside(true)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

@@ -2,11 +2,11 @@ package com.ramo.quran.ui.change_resource_fragment
 
 import android.os.Bundle
 import android.view.View
+import com.ramo.core.VbAndVmFragment
+import com.ramo.core.ext.invisible
+import com.ramo.core.ext.observe
+import com.ramo.core.ext.visible
 import com.ramo.quran.R
-import com.ramo.quran.core.BaseFragment
-import com.ramo.quran.core.ext.invisible
-import com.ramo.quran.core.ext.observe
-import com.ramo.quran.core.ext.visible
 import com.ramo.quran.databinding.FragmentChangeResourceBinding
 import com.ramo.quran.databinding.RecyclerResourceItemBinding
 import com.ramo.quran.model.db_translation.ResourceWithLanguage
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChangeResourceFragment :
-    BaseFragment<FragmentChangeResourceBinding, ChangeResourceViewModel>() {
+    VbAndVmFragment<FragmentChangeResourceBinding, ChangeResourceViewModel>() {
 
     private val sweetRecyclerAdapter = SweetRecyclerAdapter<ResourceWithLanguage>()
 

@@ -9,20 +9,15 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
+    private val _toast = MutableLiveData<String>()
+    val toast: LiveData<String> = _toast
 
     fun <T : Any?> exec(
-        showLoading: Boolean = true,
         request: suspend () -> T,
         success: ((T) -> Unit)? = null,
         error: ((Exception) -> Unit)? = null,
     ): Job {
         return viewModelScope.launch {
-            if (showLoading) {
-                showLoading()
-            }
-
             try {
                 val result = request.invoke()
                 success?.invoke(result)
@@ -31,16 +26,11 @@ abstract class BaseViewModel : ViewModel() {
                 else handleException(exception)
 
             }
-
-            if (showLoading) {
-                hideLoading()
-            }
         }
     }
 
-    private fun handleException(exception: Exception) {}
-
-    private fun showLoading() =  _loading.postValue(true)
-
-    private fun hideLoading() =  _loading.postValue(false)
+    private fun handleException(exception: Exception) {
+        if (!exception.localizedMessage.isNullOrBlank())
+            _toast.value = exception.localizedMessage
+    }
 }

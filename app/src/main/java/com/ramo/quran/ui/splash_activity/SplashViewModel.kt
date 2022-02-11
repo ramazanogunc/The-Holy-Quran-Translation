@@ -16,13 +16,15 @@ class SplashViewModel @Inject constructor(
     private val configRepository: ConfigRepository
 ) : ViewModel() {
 
-    fun detectLanguageInFirstOpen() {
+    fun detectLanguageInFirstOpen(onComplete: () -> Unit) {
         viewModelScope.launch {
             if (pref.isFirstLogin) {
                 val localeId = LocaleHelper.getLocaleId(Locale.getDefault().language)
                 configRepository.changeLocaleWithResource(localeId)
                 pref.isFirstLogin = false
-            }
+                onComplete.invoke()
+            } else
+                onComplete.invoke()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.ramo.quran.core.ext
+package com.ramo.core.ext
 
 import android.content.SharedPreferences
 import com.google.gson.Gson

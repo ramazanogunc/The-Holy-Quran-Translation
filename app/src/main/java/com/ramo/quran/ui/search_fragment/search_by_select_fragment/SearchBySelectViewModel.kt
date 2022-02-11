@@ -51,7 +51,6 @@ class SearchBySelectViewModel @Inject constructor(
 
     private fun getSurahWithVersicleNumbers() {
         exec(
-            showLoading = true,
             request = { surahNameRepository.getAllSurahWithVersicleNumbers() },
             success = {
                 surahWithVersicleNumbers = it
@@ -65,7 +64,6 @@ class SearchBySelectViewModel @Inject constructor(
         val surah = selectedSurah.value ?: return
         val verseNumber = selectedVerseNumber.value ?: return
         exec(
-            showLoading = false,
             request = { verseRepository.getVerse(surah.surahName.number, verseNumber) },
             success = { _verse.value = it }
         )

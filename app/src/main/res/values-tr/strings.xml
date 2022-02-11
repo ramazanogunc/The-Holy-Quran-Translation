@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name_production">Kuran Meali</string>
-    <string name="app_name_stage">[Stage] Kuran Meali</string>
     <string name="app_name_dev">[Dev] Kuran Meali</string>
     <string name="change_resource">Kaynak Değiştir</string>
     <string name="data_not_found">Hiç veri bulunamadı</string>

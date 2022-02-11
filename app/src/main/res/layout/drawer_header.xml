@@ -5,14 +5,15 @@
     android:background="@drawable/drawer_header_background"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
+    android:paddingStart="10dp"
     android:paddingBottom="5dp">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/quran" />
+        android:src="@drawable/quran"
+        android:contentDescription="TODO" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.ramo.quran"
-        minSdk = 16
+        minSdk = 19
         targetSdk = 31
         versionCode = 4
         versionName = "1.3.0"
@@ -45,23 +45,10 @@ android {
         }
     }
 
-    buildTypes {
 
+    buildTypes {
         getByName("debug") {
             isDebuggable = true
-            applicationIdSuffix = ".dev"
-            resValue("string", "app_name", "@string/app_name_dev")
-        }
-
-        create("stage") {
-            isDebuggable = false
-            resValue("string", "app_name", "@string/app_name_stage")
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            signingConfig = signingConfigs.getByName("stage")
         }
 
         getByName("release") {
@@ -71,9 +58,24 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            resValue("string", "app_name", "@string/app_name_production")
             signingConfig = signingConfigs.getByName("stage")
         }
+    }
+    flavorDimensions += "version"
+    productFlavors {
+        create("dev") {
+            dimension = "version"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "@string/app_name_dev")
+        }
+        create("prod") {
+            dimension = "version"
+            resValue("string", "app_name", "@string/app_name_production")
+        }
+    }
+    lint {
+        disable("Instantiatable")
     }
 }
 
@@ -95,9 +97,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation(project(mapOf("path" to ":core")))
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    //androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    //androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     //for locale
     implementation("com.github.YarikSOffice:lingver:1.3.0")
