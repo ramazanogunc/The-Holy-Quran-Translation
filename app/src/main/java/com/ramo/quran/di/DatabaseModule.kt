@@ -19,14 +19,7 @@ object DatabaseModule {
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getDatabase(context)
     }
-/*
-    @Provides
-    @Singleton
-    fun provideAppSharedPref(@ApplicationContext context: Context): AppSharedPref {
-        return AppSharedPref(context)
-    }
 
- */
     @Provides
     fun provideSurahNameDao(appDatabase: AppDatabase): SurahNameDao = appDatabase.surahNameDao
 
