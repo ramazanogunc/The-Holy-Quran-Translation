@@ -8,3 +8,9 @@
 -keepclassmembers class **.R$layout {
     public static <fields>;
 }
+
+# For firebase feedback model
+-keepattributes Signature
+-keepclassmembers class com.ramo.quran.model.Feedback {
+    *;
+}

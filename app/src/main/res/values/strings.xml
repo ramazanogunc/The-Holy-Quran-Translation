@@ -66,5 +66,6 @@
     <string name="verse">Verse</string>
     <string name="font">Font</string>
     <string name="general">General</string>
+    <string name="thanks_feedback">Thank you for your feedback.</string>
 
 </resources>

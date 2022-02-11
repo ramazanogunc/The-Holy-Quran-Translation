@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.ui.MainActivity
+import com.ramo.quran.utils.FirebaseAnalyticsUtil
 import com.ramo.quran.utils.ThemeHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseAnalyticsUtil.screenEvent(this.javaClass)
         ThemeHelper.setThemeMode(pref.appTheme)
         viewModel.detectLanguageInFirstOpen{
             val intent = Intent(this@SplashActivity, MainActivity::class.java)

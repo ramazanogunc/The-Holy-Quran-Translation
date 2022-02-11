@@ -93,9 +93,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation(project(mapOf("path" to ":core")))
     testImplementation("junit:junit:4.13.2")
@@ -133,6 +133,9 @@ dependencies {
 
     implementation("androidx.paging:paging-runtime:$pagingVersion")
     implementation("androidx.room:room-paging:$roomVersion")
+
+    // for Feedback
+    implementation("com.google.firebase:firebase-database-ktx")
 
 }
 

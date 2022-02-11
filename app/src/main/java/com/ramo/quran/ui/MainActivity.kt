@@ -12,16 +12,15 @@ import com.ramo.core.ViewBindingActivity
 import com.ramo.quran.R
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.ActivityMainBinding
+import com.ramo.quran.utils.FirebaseAnalyticsUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        withVB {
-            setSupportActionBar(toolbar)
-        }
-
+        FirebaseAnalyticsUtil.screenEvent(this.javaClass)
+        setSupportActionBar(binding.toolbar)
         initNavigationComponent()
         setKeepScreenOn()
     }

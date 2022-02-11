@@ -1,10 +1,9 @@
-package com.ramo.quran.model
+package com.ramo.quran.model.db_translation
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.ramo.quran.R
-import com.ramo.quran.model.db_translation.Resource
 import com.ramo.sweetrecycleradapter.ViewTypeListener
 
 @Entity(
@@ -22,7 +21,7 @@ data class VerseWithSurahName(
     val surahNumber: Int,
     val verse: String,
     val resourceId: Int,
-    val surahName: String = "Deneme"
+    val surahName: String
 ) : ViewTypeListener {
 
     @PrimaryKey

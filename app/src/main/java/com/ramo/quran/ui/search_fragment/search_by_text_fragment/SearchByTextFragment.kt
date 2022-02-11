@@ -7,15 +7,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.ramo.core.VbAndVmFragment
 import com.ramo.core.ext.gone
 import com.ramo.core.ext.visible
 import com.ramo.quran.R
+import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.data.repository.VerseRepository
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSearchByTextBinding
 import com.ramo.quran.ext.textChangeDelayedListener
-import com.ramo.quran.model.VerseWithSurahName
+import com.ramo.quran.model.db_translation.VerseWithSurahName
 import com.ramo.quran.ui.search_fragment.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchByTextFragment : VbAndVmFragment<FragmentSearchByTextBinding, SearchByTextViewModel>() {
+class SearchByTextFragment : BaseFragment<FragmentSearchByTextBinding, SearchByTextViewModel>() {
 
     @Inject
     lateinit var pref: AppSharedPref

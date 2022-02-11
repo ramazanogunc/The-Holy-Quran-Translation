@@ -3,9 +3,9 @@ package com.ramo.quran.ui.settings_fragment
 import android.os.Bundle
 import android.view.View
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.ramo.core.VbAndVmFragment
 import com.ramo.core.ext.observe
 import com.ramo.quran.R
+import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSettingsBinding
 import com.ramo.quran.model.AppTheme
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingFragment : VbAndVmFragment<FragmentSettingsBinding, SettingsViewModel>() {
+class SettingFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
 
     @Inject
     lateinit var pref: AppSharedPref

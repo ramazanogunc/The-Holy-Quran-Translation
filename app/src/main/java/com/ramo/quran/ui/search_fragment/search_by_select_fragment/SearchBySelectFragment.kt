@@ -3,9 +3,9 @@ package com.ramo.quran.ui.search_fragment.search_by_select_fragment
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.ramo.core.VbAndVmFragment
 import com.ramo.core.ext.observe
 import com.ramo.quran.R
+import com.ramo.quran.core.BaseFragment
 import com.ramo.quran.data.shared_pref.AppSharedPref
 import com.ramo.quran.databinding.FragmentSearchBySelectBinding
 import com.ramo.quran.ui.search_fragment.SearchFragment
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchBySelectFragment :
-    VbAndVmFragment<FragmentSearchBySelectBinding, SearchBySelectViewModel>() {
+    BaseFragment<FragmentSearchBySelectBinding, SearchBySelectViewModel>() {
 
     @Inject
     lateinit var pref: AppSharedPref

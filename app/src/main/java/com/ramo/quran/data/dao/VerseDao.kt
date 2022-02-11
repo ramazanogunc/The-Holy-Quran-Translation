@@ -3,8 +3,8 @@ package com.ramo.quran.data.dao
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
-import com.ramo.quran.model.VerseWithSurahName
 import com.ramo.quran.model.db_translation.Verse
+import com.ramo.quran.model.db_translation.VerseWithSurahName
 
 @Dao
 interface VerseDao {

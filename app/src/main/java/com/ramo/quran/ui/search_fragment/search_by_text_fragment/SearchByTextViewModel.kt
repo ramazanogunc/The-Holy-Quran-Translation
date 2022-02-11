@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.ramo.quran.core.BaseViewModel
 import com.ramo.quran.data.repository.VerseRepository
-import com.ramo.quran.model.VerseWithSurahName
+import com.ramo.quran.model.db_translation.VerseWithSurahName
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

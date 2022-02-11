@@ -9,6 +9,7 @@ import com.ramo.core.VbAndVmFragment
 import com.ramo.core.ext.observe
 import com.ramo.core.ext.safeContext
 import com.ramo.quran.utils.CommonDialogs
+import com.ramo.quran.utils.FirebaseAnalyticsUtil
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : VbAndVmFragment<VB, VM>() {
 
@@ -21,9 +22,18 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : VbAndVmFragm
 
     private fun initObserver() {
         observe(viewModel.toast) { toastMessage ->
-            safeContext {
-                Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
-            }
+            toast(toastMessage)
         }
+    }
+
+    protected fun toast(message: String) {
+        safeContext {
+            Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        FirebaseAnalyticsUtil.screenEvent(this.javaClass)
     }
 }

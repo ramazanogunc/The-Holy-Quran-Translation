@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ramo.quran.R
 import com.ramo.quran.databinding.RecyclerSearchItemBinding
-import com.ramo.quran.model.VerseWithSurahName
+import com.ramo.quran.model.db_translation.VerseWithSurahName
 
 class SearchVersePagedAdapter(
     private val onClick: (VerseWithSurahName) -> Unit

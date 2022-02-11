@@ -3,7 +3,7 @@ package com.ramo.quran.data.repository
 import com.ramo.quran.data.dao.SurahNameDao
 import com.ramo.quran.data.dao.VerseDao
 import com.ramo.quran.data.shared_pref.AppSharedPref
-import com.ramo.quran.model.SurahWithVersicleNumbers
+import com.ramo.quran.model.db_translation.SurahWithVersicleNumbers
 import javax.inject.Inject
 
 class SurahNameRepository @Inject constructor(
