@@ -5,6 +5,12 @@
             android:id="@+id/read"
             android:icon="@drawable/ic_book"
             android:title="@string/read" />
+
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/search" />
+
         <item
             android:id="@+id/changeResource"
             android:icon="@drawable/ic_change_resource"

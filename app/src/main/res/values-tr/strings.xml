@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kuran Meali</string>
+    <string name="app_name_production">Kuran Meali</string>
+    <string name="app_name_dev">[Dev] Kuran Meali</string>
     <string name="change_resource">Kaynak Değiştir</string>
     <string name="data_not_found">Hiç veri bulunamadı</string>
     <string name="choice_surah">Bir sure seç</string>
+    <string name="change_surah">SURE DEĞİŞTİR</string>
     <string name="read">Oku</string>
     <string name="settings">Ayarlar</string>
     <string name="about">Hakkımızda</string>
@@ -11,13 +13,13 @@
     <string name="feedback">Geri Bildirim</string>
     <string name="donate">Bağış</string>
     <string name="change">İndeks</string>
-    <string name="verse_number">Ayet Sayısı:</string>
+    <string name="verse_number">Ayet Sayısı: %1$d</string>
     <string name="meal_resource">Meal Kaynakları</string>
     <string name="font_size">Yazı boyutu</string>
     <string name="app_language">Uygulama dili</string>
-    <string name="surah_number">Sure Numarası:</string>
+    <string name="surah_number">Sure Numarası: %1$d</string>
     <string name="save">Kaydet</string>
-    <string name="versicle">. Ayet</string>
+    <string name="versicle">%1$d. Ayet</string>
     <string name="watch_ads">Reklam İzle</string>
     <string name="learn_iban">Banka Bilgilerini Öğren</string>
     <string name="developed_by">Geliştirici: Ramazan Öğünç</string>
@@ -26,8 +28,8 @@
     <string name="terms_of_use">Kullanım Koşulları</string>
     <string name="developer">Geliştirici</string>
     <string name="terms_of_use_description">Uygulamayı kullanan herkes kullanım koşullarını kabul etmiş sayılır.\nGeliştirici, tüm hatalardan sorumlu değildir.\nUygulamadaki meal kaynakları ebook.kuran.biz adresinden alınmıştır. Herhangi bir çeviri hatasından sorumlu değiliz.\nOkuma esnasınada Kuran\'ın yanlış anlaşılması ve bu yanlış anlaşılmadan doğabilecek tüm dini davranış ve durumlardan sorumlu değiliz. Bu durumdan kişinin kendisi sorumludur.</string>
-    <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar flaticon.com adresinden alınmıştır</string>
-    <string name="developer_description">Ben Ramazan Öğünç. Yazılım Mühendisi Öğrencisiyim.\nWebsitesi: ramazanogunc.com\nTwitter: oguncramazan\nEmail: ramazanogunc@hotmail.com</string>
+    <string name="info_description">Mealler ebook.kuran.biz adresinden alınmıştır.\n\nUygulama içindeki bazı iconlar \n• flaticon.com\n• svgrepo.com\n adreslerinden alınmıştır</string>
+    <string name="developer_description"><b>Ramazan Öğünç</b>\n\nWebsite: <b>ramazanogunc.com</b> \nGithub: <b>ramazanogunc</b> \nTwitter: <b>oguncramazan</b> \nEmail: <b>ramazanogunc@hotmail.com</b></string>
     <string name="send">Gönder</string>
     <string name="error_message_hint">Hata mesajı</string>
     <string name="success">Başarılı</string>
@@ -35,4 +37,34 @@
     <string name="error">Hata</string>
     <string name="error_message">Bir şeyler ters gitti</string>
     <string name="font_famiy">Yazı Tipi</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="keep_screen_on">Ekranı açık tut</string>
+    <string name="please_select_read_surah">Okumak istediğiniz sureyi seçiniz</string>
+    <string name="cancel">İptal</string>
+    <string name="font_preview">Font Önizleme</string>
+    <string name="please_select_font">Okumak istediğiniz fontu seçiniz</string>
+    <string name="please_select_font_size">Font boyutunu seçiniz</string>
+    <string name="please_select_language">Uygulama dilini seçiniz</string>
+    <string name="theme">Tema</string>
+    <string name="system_default">Sistem Varsayılan</string>
+    <string name="dark">Koyu</string>
+    <string name="light">Açık</string>
+    <string name="please_select_app_theme">Uygulama temasını seçiniz</string>
+    <string name="feedback_warning">Geri bildirim boş olamaz</string>
+    <string name="search">Ara</string>
+    <string name="surah_name">Sure İsmi: %1$s</string>
+    <string name="no_verse">Hiç ayet bulunamadı</string>
+    <string name="search_by_text">Yazı ile ara</string>
+    <string name="search_by_select">Seçim ile ara</string>
+    <string name="select_surah">Sure Seç</string>
+    <string name="select_verse">Ayet Seç</string>
+    <string name="surah_name_title">Sure İsmi</string>
+    <string name="select">Seç</string>
+    <string name="verse_number_title">Ayet Numarası</string>
+    <string name="jump_to_read_page">Okuma sayfasında aç</string>
+    <string name="verse">Ayet</string>
+    <string name="font">Font</string>
+    <string name="general">Genel</string>
+    <string name="thanks_feedback">Geri bildiriminiz için teşekkür ederiz.</string>
 </resources>

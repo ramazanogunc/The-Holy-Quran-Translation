@@ -2,35 +2,51 @@ package com.ramo.quran.ui
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import android.view.WindowManager
+import androidx.annotation.DrawableRes
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
+import com.ramo.core.ViewBindingActivity
 import com.ramo.quran.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.ramo.quran.data.shared_pref.AppSharedPref
+import com.ramo.quran.databinding.ActivityMainBinding
+import com.ramo.quran.utils.FirebaseAnalyticsUtil
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class MainActivity : AppCompatActivity() {
-
-
+@AndroidEntryPoint
+class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
+        FirebaseAnalyticsUtil.screenEvent(this.javaClass)
+        setSupportActionBar(binding.toolbar)
         initNavigationComponent()
+        setKeepScreenOn()
+    }
+
+    private fun setKeepScreenOn() {
+        val isKeepScreenOn = AppSharedPref(this).isKeepScreenOn
+        if (isKeepScreenOn) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun initNavigationComponent() {
         val navController = findNavController(R.id.navHostFragment)
-        findViewById<NavigationView>(R.id.nav_view)
-            .setupWithNavController(navController)
-        // toolbar
-        findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController, drawerLayout)
+        withVB {
+            navView.setupWithNavController(navController)
+            setSupportActionBar(toolbar)
+            toolbar.setupWithNavController(navController, drawerLayout)
+        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.read -> changeToolbarIcon(R.drawable.ic_navigation)
+                else -> changeToolbarIcon(R.drawable.ic_back)
+            }
+        }
     }
+
+    private fun changeToolbarIcon(@DrawableRes iconId: Int) =
+        binding.toolbar.setNavigationIcon(iconId)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.navHostFragment)
@@ -38,10 +54,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.close()
-        else
-            super.onBackPressed()
+        withVB {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                drawerLayout.close()
+            else
+                super.onBackPressed()
+        }
     }
 
 }

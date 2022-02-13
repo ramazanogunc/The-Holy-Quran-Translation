@@ -2,11 +2,11 @@ package com.ramo.quran.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.ramo.quran.model.ResourceWithLanguage
+import com.ramo.quran.model.db_translation.ResourceWithLanguage
 
 @Dao
 interface ResourceDao {
 
     @Query("SELECT * FROM resources")
-    fun getAllResourcesWithLanguage(): List<ResourceWithLanguage>
+    suspend fun getAllResourcesWithLanguage(): List<ResourceWithLanguage>
 }

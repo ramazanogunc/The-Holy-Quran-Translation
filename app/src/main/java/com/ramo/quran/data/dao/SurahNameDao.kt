@@ -2,14 +2,14 @@ package com.ramo.quran.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.ramo.quran.model.SurahName
+import com.ramo.quran.model.db_translation.SurahName
 
 @Dao
 interface SurahNameDao {
 
     @Query("SELECT * FROM surahNames WHERE languageId=(SELECT language FROM configs, resources as r WHERE r.id=currentResourceId) AND number=:surahNumber")
-    fun getCurrentSurahName(surahNumber: Int): SurahName
+    suspend fun getCurrentSurahName(surahNumber: Int): SurahName
 
     @Query("SELECT * FROM surahNames WHERE languageId=(SELECT language FROM configs, resources as r WHERE r.id=currentResourceId)")
-    fun getAllSurahName(): List<SurahName>
+    suspend fun getAllSurahName(): List<SurahName>
 }
