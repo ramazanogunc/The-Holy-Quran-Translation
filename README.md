@@ -27,7 +27,7 @@ The Holy Quran Translation is a open source, native android Quran Translation ap
 
 # Screenshots
 
-<img src="https://raw.githubusercontent.com/ramazanogunc/yazilim_sinama_xp_ve_scrum/main/ss/1.png" width="210"  alt="The-Holy-Quran-Translation 1"/> <img src="https://raw.githubusercontent.com/ramazanogunc/yazilim_sinama_xp_ve_scrum/main/ss/1.png" width="210"  alt="The-Holy-Quran-Translation 1"/> <img src="https://raw.githubusercontent.com/ramazanogunc/yazilim_sinama_xp_ve_scrum/main/ss/1.png" width="210"  alt="The-Holy-Quran-Translation 1"/> <img src="https://raw.githubusercontent.com/ramazanogunc/yazilim_sinama_xp_ve_scrum/main/ss/1.png" width="210"  alt="The-Holy-Quran-Translation 1"/> <img src="https://raw.githubusercontent.com/ramazanogunc/yazilim_sinama_xp_ve_scrum/main/ss/1.png" width="210"  alt="The-Holy-Quran-Translation 1"/>
+<img src="https://raw.githubusercontent.com/ramazanogunc/The-Holy-Quran-Translation/develop/ss/1.png" width="210"  alt="The-Holy-Quran-Translation 1"/> <img src="https://raw.githubusercontent.com/ramazanogunc/The-Holy-Quran-Translation/develop/ss/2.png" width="210"  alt="The-Holy-Quran-Translation 2"/> <img src="https://raw.githubusercontent.com/ramazanogunc/The-Holy-Quran-Translation/develop/ss/3.png" width="210"  alt="The-Holy-Quran-Translation 3"/> <img src="https://raw.githubusercontent.com/ramazanogunc/The-Holy-Quran-Translation/develop/ss/4.png" width="210"  alt="The-Holy-Quran-Translation 4"/> <img src="https://raw.githubusercontent.com/ramazanogunc/The-Holy-Quran-Translation/develop/ss/5.png" width="210"  alt="The-Holy-Quran-Translation 5"/>
 
 # License
 Unless covered under some other license, all content in this repository is shared under an GPL-3 license. See [license.md](./license.md) for details.
