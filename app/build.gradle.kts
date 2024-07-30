@@ -77,9 +77,9 @@ android {
             resValue("string", "app_name", "@string/app_name_production")
         }
     }
-//    lint {
-//        disable("Instantiatable")
-//    }
+    lint {
+        disable += "Instantiatable"
+    }
 
     buildFeatures {
         buildConfig = true

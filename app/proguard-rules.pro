@@ -14,3 +14,8 @@
 -keepclassmembers class com.ramo.quran.model.Feedback {
     *;
 }
+
+-dontwarn com.ramo.core.VbAndVmFragment
+-dontwarn com.ramo.core.ViewBindingActivity
+-dontwarn com.ramo.core.ViewBindingFragment
+-dontwarn com.ramo.core.ext.SharedPreferencesExtKt
