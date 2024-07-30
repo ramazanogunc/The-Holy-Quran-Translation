@@ -3,6 +3,7 @@ package com.ramo.quran.ui
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
+import androidx.activity.addCallback
 import androidx.annotation.DrawableRes
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
@@ -23,6 +24,7 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
         setSupportActionBar(binding.toolbar)
         initNavigationComponent()
         setKeepScreenOn()
+        initBackPress()
     }
 
     private fun setKeepScreenOn() {
@@ -53,12 +55,14 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() {
-        withVB {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START))
-                drawerLayout.close()
-            else
-                super.onBackPressed()
+    private fun initBackPress(){
+        onBackPressedDispatcher.addCallback {
+            withVB {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                    drawerLayout.close()
+                else
+                    onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 
