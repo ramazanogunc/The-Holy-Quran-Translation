@@ -28,8 +28,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_1_8)
-        targetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility(JavaVersion.VERSION_17)
+        targetCompatibility(JavaVersion.VERSION_17)
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     signingConfigs {
@@ -74,9 +77,10 @@ android {
             resValue("string", "app_name", "@string/app_name_production")
         }
     }
-    lint {
-        disable("Instantiatable")
-    }
+//    lint {
+//        disable("Instantiatable")
+//    }
+    namespace = "com.ramo.quran"
 }
 
 kapt {
