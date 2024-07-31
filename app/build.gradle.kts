@@ -18,8 +18,6 @@ android {
         versionCode = 5
         versionName = "1.3.1"
 
-        multiDexEnabled = true
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
