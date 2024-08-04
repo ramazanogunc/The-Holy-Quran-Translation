@@ -353,3 +353,4 @@ Thumbs.db
 /.idea/deploymentTargetSelector.xml
 /.idea/kotlinc.xml
 /.idea/migrations.xml
+/.kotlin/sessions/*
