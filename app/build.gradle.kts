@@ -7,6 +7,13 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
+val major = 1
+val minor = 3
+val patch = 3
+
+val generatedCode = major * 10000 + minor * 100 + patch
+val generatedName = "${major}.${minor}.${patch}"
+
 android {
     namespace = "com.ramo.quran"
     compileSdk = 34
@@ -15,8 +22,8 @@ android {
         applicationId = "com.ramo.quran"
         minSdk = 21
         targetSdk = 34
-        versionCode = 5
-        versionName = "1.3.2"
+        versionCode = generatedCode
+        versionName = generatedName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
