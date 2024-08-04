@@ -3,7 +3,7 @@ package com.ramo.quran.ui
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.DrawableRes
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseAnalyticsUtil.screenEvent(this.javaClass)
@@ -55,15 +56,19 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
+
     private fun initBackPress(){
-        onBackPressedDispatcher.addCallback {
-            withVB {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START))
-                    drawerLayout.close()
-                else
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.close()
+                } else {
+                    this.remove()
                     onBackPressedDispatcher.onBackPressed()
+                    onBackPressedDispatcher.addCallback(this)
+                }
             }
-        }
+        })
     }
 
 }

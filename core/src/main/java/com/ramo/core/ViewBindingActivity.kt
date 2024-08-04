@@ -30,4 +30,9 @@ abstract class ViewBindingActivity<VB : ViewBinding> : AppCompatActivity() {
             LayoutInflater::class.java,
         )
     }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 }
