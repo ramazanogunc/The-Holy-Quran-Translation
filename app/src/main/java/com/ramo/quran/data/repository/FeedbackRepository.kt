@@ -1,7 +1,7 @@
 package com.ramo.quran.data.repository
 
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import com.ramo.quran.AppConstants
 import com.ramo.quran.model.Feedback
 import java.util.*
