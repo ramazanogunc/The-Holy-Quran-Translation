@@ -9,7 +9,7 @@ plugins {
 
 val major = 1
 val minor = 3
-val patch = 4
+val patch = 5
 
 val generatedCode = major * 10000 + minor * 100 + patch
 val generatedName = "${major}.${minor}.${patch}"
